@@ -51,6 +51,7 @@ namespace ChromaWave
 
         private void loadAudioSources()
         {
+            comboBoxSource.Items.Clear();
             audioSources = new List<AudioSource>();
             for (int i = -1; i < WaveOut.DeviceCount; i++)
             {
@@ -136,7 +137,15 @@ namespace ChromaWave
                     loopbackCapture.Dispose();
                 };
 
-                loopbackCapture.StartRecording();
+                try
+                {
+                    loopbackCapture.StartRecording();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show($"An error ocurred when we try to start the loopback capture. Error message: {e.Message}", "Attention",  MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    stopLoopbackCapture();
+                }
             }
         }
 
@@ -149,11 +158,34 @@ namespace ChromaWave
         private void stopLoopbackCapture()
         {
             loopbackCapture.StopRecording();
+            loopbackCapture = null;
         }
 
         private void ComboBoxSource_SelectedIndexChanged(object sender, EventArgs e)
         {
             startLoopbackCapture();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            if (loopbackCapture != null) {
+                if (loopbackCapture.CaptureState == CaptureState.Capturing)
+                    labelLoopbackStatus.Text = "Capturing";
+                else if (loopbackCapture.CaptureState == CaptureState.Capturing)
+                    labelLoopbackStatus.Text = "Capturing";
+                else if (loopbackCapture.CaptureState == CaptureState.Starting)
+                    labelLoopbackStatus.Text = "Starting";
+                else if (loopbackCapture.CaptureState == CaptureState.Stopped)
+                    labelLoopbackStatus.Text = "Stopped";
+                else if (loopbackCapture.CaptureState == CaptureState.Stopping)
+                    labelLoopbackStatus.Text = "Stopping";
+            } 
+             
+        }
+
+        private void ButtonReload_Click(object sender, EventArgs e)
+        {
+            loadAudioSources();
         }
     }
 
