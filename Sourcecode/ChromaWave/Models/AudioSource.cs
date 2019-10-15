@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChromaWave
+namespace ChromaWave.Models
 {
     internal class AudioSource
     {
         public string Name { get; set; }
         public int DeviceNumber { get; set; }
+
+        public int Channels { get; set; }
     }
 }

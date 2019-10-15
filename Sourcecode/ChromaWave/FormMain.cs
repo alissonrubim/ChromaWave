@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ChromaWave.Models;
 
 namespace ChromaWave
 {
@@ -16,37 +17,16 @@ namespace ChromaWave
     {
         private List<AudioSource> audioSources;
         private WasapiLoopbackCapture loopbackCapture;
-        private List<SampleFrequency> sampleFrequencys = new List<SampleFrequency>();
+        
         public FormMain()
         {
             InitializeComponent();
             loadAudioSources();
 
-            sampleFrequencys.Add(new SampleFrequency
-            {
-                Frequency = 32
-            });
-
-            sampleFrequencys.Add(new SampleFrequency
-            {
-                Frequency = 250
-            });
-
-            sampleFrequencys.Add(new SampleFrequency
-            {
-                Frequency = 1000
-            });
-
-            sampleFrequencys.Add(new SampleFrequency
-            {
-                Frequency = 4000
-            });
-
-            sampleFrequencys.Add(new SampleFrequency
-            {
-                Frequency = 8000
-            });
-
+            volumeMeterLeft.Value = 0;
+            volumeMeterRight.Value = 0;
+            volumeMeterFrequency1K.Value = 0;
+            volumeMeterFrequency500.Value = 0;
         }
 
         private void loadAudioSources()
@@ -59,15 +39,16 @@ namespace ChromaWave
                 AudioSource source = new AudioSource()
                 {
                     Name = capabilitie.ProductName,
-                    DeviceNumber = i
+                    DeviceNumber = i,
+                    Channels = capabilitie.Channels,
                 };
                 audioSources.Add(source);
                 comboBoxSource.Items.Add(source.Name);
             }
         }
-
         private void startLoopbackCapture()
         {
+            //Only start in the current loopback is null or already stopped.
             if (loopbackCapture != null && loopbackCapture.CaptureState != NAudio.CoreAudioApi.CaptureState.Stopped)
             {
                 stopLoopbackCapture();
@@ -75,59 +56,18 @@ namespace ChromaWave
             else
             {
                 loopbackCapture = new WasapiLoopbackCapture();
-                loopbackCapture.DataAvailable += (s, args) =>
+                loopbackCapture.DataAvailable += (Sender, Args) =>
                 {
-                    int bitsPerSample = loopbackCapture.WaveFormat.BitsPerSample;
-                    if (bitsPerSample == 32)
+                    if (loopbackCapture.WaveFormat.BitsPerSample == 32) 
                     {
-                        WaveBuffer wavebuffer = new WaveBuffer(args.Buffer);
-
-                        List<float> bufferLeft = new List<float>();
-                        for (int i = 0; i < wavebuffer.MaxSize / 8; i += 8)
+                        if (loopbackCapture.WaveFormat.Channels == 2) 
                         {
-                            bufferLeft.Add(wavebuffer.FloatBuffer[i]);
-                            bufferLeft.Add(wavebuffer.FloatBuffer[i+1]);
-                            bufferLeft.Add(wavebuffer.FloatBuffer[i+2]);
-                            bufferLeft.Add(wavebuffer.FloatBuffer[i+3]);
+                            WaveBuffer wavebuffer = new WaveBuffer(Args.Buffer);
+
+                            Random a = new Random();
+                            volumeMeterLeft.Value = a.Next(0, 100);
+                            volumeMeterFrequency500.Value = a.Next(0, 100);
                         }
-
-                        for (int sampleFrequencyIndex = 0; sampleFrequencyIndex < sampleFrequencys.Count(); sampleFrequencyIndex++)
-                        {
-                            int min = sampleFrequencyIndex == 0 ? 0 : sampleFrequencys[sampleFrequencyIndex - 1].Frequency;
-                            int max = sampleFrequencys[sampleFrequencyIndex].Frequency;
-
-                            double maxValue = 0;
-                            for (int i = min; i < max; i++)
-                                if (i < bufferLeft.Count())
-                                {
-                                    var sample = Math.Abs(bufferLeft[i]);
-                                    if (sample > maxValue) maxValue = sample;
-                                }
-
-
-                            sampleFrequencys[sampleFrequencyIndex].LeftValue = maxValue;
-                        }
-
-                        this.Invoke(new Action(() =>
-                        {
-                            foreach (SampleFrequency sampleFrequency in sampleFrequencys)
-                            {
-                                if (sampleFrequency.Frequency == 32)
-                                    setProgressBarValue(progressBarWave32, sampleFrequency.LeftValue);
-
-                                if (sampleFrequency.Frequency == 250)
-                                    setProgressBarValue(progressBarWave250, sampleFrequency.LeftValue);
-
-                                if (sampleFrequency.Frequency == 1000)
-                                    setProgressBarValue(progressBarWave1k, sampleFrequency.LeftValue);
-
-                                if (sampleFrequency.Frequency == 4000)
-                                    setProgressBarValue(progressBarWave4k, sampleFrequency.LeftValue);
-
-                                if (sampleFrequency.Frequency == 8000)
-                                    setProgressBarValue(progressBarWave16k, sampleFrequency.LeftValue);
-                            }
-                        }));
                     }
                     
                 };
@@ -149,12 +89,6 @@ namespace ChromaWave
             }
         }
 
-        private void setProgressBarValue(ProgressBar progessBar, double value)
-        {
-            value = value * 200;
-            value = value > progessBar.Maximum ? progessBar.Maximum : value;
-            progessBar.Value = Convert.ToInt32(value);
-        }
         private void stopLoopbackCapture()
         {
             loopbackCapture.StopRecording();
@@ -166,34 +100,19 @@ namespace ChromaWave
             startLoopbackCapture();
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            if (loopbackCapture != null) {
-                if (loopbackCapture.CaptureState == CaptureState.Capturing)
-                    labelLoopbackStatus.Text = "Capturing";
-                else if (loopbackCapture.CaptureState == CaptureState.Capturing)
-                    labelLoopbackStatus.Text = "Capturing";
-                else if (loopbackCapture.CaptureState == CaptureState.Starting)
-                    labelLoopbackStatus.Text = "Starting";
-                else if (loopbackCapture.CaptureState == CaptureState.Stopped)
-                    labelLoopbackStatus.Text = "Stopped";
-                else if (loopbackCapture.CaptureState == CaptureState.Stopping)
-                    labelLoopbackStatus.Text = "Stopping";
-            } 
-             
-        }
-
         private void ButtonReload_Click(object sender, EventArgs e)
         {
             loadAudioSources();
         }
-    }
 
-    public class SampleFrequency
-    {
-        public int Frequency { get; set; }
-        public double LeftValue { get; set; }
-        public double RightValue { get; set; }
-    }
+        private void TrackBarAmplitudeLeft_Scroll(object sender, EventArgs e)
+        {
+            trackBarAmplitudeRight.Value = trackBarAmplitudeLeft.Value;
+        }
 
+        private void TrackBarAmplitudeRight_Scroll(object sender, EventArgs e)
+        {
+            trackBarAmplitudeLeft.Value = trackBarAmplitudeRight.Value;
+        }
+    }
 }

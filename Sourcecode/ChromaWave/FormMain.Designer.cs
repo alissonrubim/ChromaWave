@@ -28,238 +28,277 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.comboBoxSource = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.progressBarWave16k = new System.Windows.Forms.ProgressBar();
-            this.progressBarWave1k = new System.Windows.Forms.ProgressBar();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.progressBarWave32 = new System.Windows.Forms.ProgressBar();
-            this.progressBarWave250 = new System.Windows.Forms.ProgressBar();
-            this.progressBarWave4k = new System.Windows.Forms.ProgressBar();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.groupBoxDetails = new System.Windows.Forms.GroupBox();
-            this.groupBoxDebug = new System.Windows.Forms.GroupBox();
-            this.labelLoopbackStatus = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.timer = new System.Windows.Forms.Timer(this.components);
-            this.buttonReload = new System.Windows.Forms.Button();
-            this.groupBoxDetails.SuspendLayout();
-            this.groupBoxDebug.SuspendLayout();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
+            this.comboBoxSource = new DarkUI.Controls.DarkComboBox();
+            this.buttonReload = new DarkUI.Controls.DarkButton();
+            this.labelSource = new DarkUI.Controls.DarkLabel();
+            this.groupBoxVolume = new DarkUI.Controls.DarkGroupBox();
+            this.trackBarAmplitudeRight = new System.Windows.Forms.TrackBar();
+            this.labelAmplitude = new DarkUI.Controls.DarkLabel();
+            this.trackBarAmplitudeLeft = new System.Windows.Forms.TrackBar();
+            this.labelChannelRight = new DarkUI.Controls.DarkLabel();
+            this.labelChannelLeft = new DarkUI.Controls.DarkLabel();
+            this.darkGroupBox1 = new DarkUI.Controls.DarkGroupBox();
+            this.labelFrequency500 = new DarkUI.Controls.DarkLabel();
+            this.labelFrequency1k = new DarkUI.Controls.DarkLabel();
+            this.volumeMeterFrequency500 = new ChromaWave.Helpers.VolumeMeter();
+            this.volumeMeterFrequency1K = new ChromaWave.Helpers.VolumeMeter();
+            this.volumeMeterRight = new ChromaWave.Helpers.VolumeMeter();
+            this.volumeMeterLeft = new ChromaWave.Helpers.VolumeMeter();
+            this.groupBoxVolume.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarAmplitudeRight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarAmplitudeLeft)).BeginInit();
+            this.darkGroupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboBoxSource
             // 
-            this.comboBoxSource.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxSource.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(73)))), ((int)(((byte)(74)))));
+            this.comboBoxSource.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.comboBoxSource.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid;
+            this.comboBoxSource.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(43)))), ((int)(((byte)(43)))));
+            this.comboBoxSource.ButtonIcon = ((System.Drawing.Bitmap)(resources.GetObject("comboBoxSource.ButtonIcon")));
+            this.comboBoxSource.DrawDropdownHoverOutline = false;
+            this.comboBoxSource.DrawFocusRectangle = false;
+            this.comboBoxSource.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.comboBoxSource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSource.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBoxSource.ForeColor = System.Drawing.Color.Gainsboro;
             this.comboBoxSource.FormattingEnabled = true;
-            this.comboBoxSource.Location = new System.Drawing.Point(96, 16);
+            this.comboBoxSource.Location = new System.Drawing.Point(96, 19);
             this.comboBoxSource.Name = "comboBoxSource";
-            this.comboBoxSource.Size = new System.Drawing.Size(884, 21);
-            this.comboBoxSource.TabIndex = 0;
+            this.comboBoxSource.Size = new System.Drawing.Size(462, 21);
+            this.comboBoxSource.TabIndex = 16;
+            this.comboBoxSource.Text = null;
+            this.comboBoxSource.TextPadding = new System.Windows.Forms.Padding(2);
             this.comboBoxSource.SelectedIndexChanged += new System.EventHandler(this.ComboBoxSource_SelectedIndexChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Sound Source:";
-            // 
-            // progressBarWave16k
-            // 
-            this.progressBarWave16k.Location = new System.Drawing.Point(52, 31);
-            this.progressBarWave16k.Name = "progressBarWave16k";
-            this.progressBarWave16k.Size = new System.Drawing.Size(974, 23);
-            this.progressBarWave16k.TabIndex = 2;
-            // 
-            // progressBarWave1k
-            // 
-            this.progressBarWave1k.Location = new System.Drawing.Point(52, 92);
-            this.progressBarWave1k.Name = "progressBarWave1k";
-            this.progressBarWave1k.Size = new System.Drawing.Size(974, 23);
-            this.progressBarWave1k.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 38);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(25, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "16k";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 98);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(19, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "1k";
-            // 
-            // progressBarWave32
-            // 
-            this.progressBarWave32.Location = new System.Drawing.Point(52, 150);
-            this.progressBarWave32.Name = "progressBarWave32";
-            this.progressBarWave32.Size = new System.Drawing.Size(974, 23);
-            this.progressBarWave32.TabIndex = 6;
-            // 
-            // progressBarWave250
-            // 
-            this.progressBarWave250.Location = new System.Drawing.Point(52, 121);
-            this.progressBarWave250.Name = "progressBarWave250";
-            this.progressBarWave250.Size = new System.Drawing.Size(974, 23);
-            this.progressBarWave250.TabIndex = 7;
-            // 
-            // progressBarWave4k
-            // 
-            this.progressBarWave4k.Location = new System.Drawing.Point(52, 60);
-            this.progressBarWave4k.Name = "progressBarWave4k";
-            this.progressBarWave4k.Size = new System.Drawing.Size(974, 23);
-            this.progressBarWave4k.TabIndex = 8;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(18, 160);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(19, 13);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "32";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(17, 70);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(20, 13);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "4K";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(18, 121);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(25, 13);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "250";
-            // 
-            // groupBoxDetails
-            // 
-            this.groupBoxDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBoxDetails.Controls.Add(this.progressBarWave32);
-            this.groupBoxDetails.Controls.Add(this.label6);
-            this.groupBoxDetails.Controls.Add(this.progressBarWave16k);
-            this.groupBoxDetails.Controls.Add(this.label5);
-            this.groupBoxDetails.Controls.Add(this.progressBarWave1k);
-            this.groupBoxDetails.Controls.Add(this.label4);
-            this.groupBoxDetails.Controls.Add(this.label2);
-            this.groupBoxDetails.Controls.Add(this.progressBarWave4k);
-            this.groupBoxDetails.Controls.Add(this.label3);
-            this.groupBoxDetails.Controls.Add(this.progressBarWave250);
-            this.groupBoxDetails.Location = new System.Drawing.Point(12, 43);
-            this.groupBoxDetails.Name = "groupBoxDetails";
-            this.groupBoxDetails.Size = new System.Drawing.Size(1049, 200);
-            this.groupBoxDetails.TabIndex = 12;
-            this.groupBoxDetails.TabStop = false;
-            this.groupBoxDetails.Text = "Details";
-            // 
-            // groupBoxDebug
-            // 
-            this.groupBoxDebug.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBoxDebug.Controls.Add(this.labelLoopbackStatus);
-            this.groupBoxDebug.Controls.Add(this.label7);
-            this.groupBoxDebug.Location = new System.Drawing.Point(12, 249);
-            this.groupBoxDebug.Name = "groupBoxDebug";
-            this.groupBoxDebug.Size = new System.Drawing.Size(1049, 271);
-            this.groupBoxDebug.TabIndex = 12;
-            this.groupBoxDebug.TabStop = false;
-            this.groupBoxDebug.Text = "Debug";
-            // 
-            // labelLoopbackStatus
-            // 
-            this.labelLoopbackStatus.AutoSize = true;
-            this.labelLoopbackStatus.Location = new System.Drawing.Point(160, 36);
-            this.labelLoopbackStatus.Name = "labelLoopbackStatus";
-            this.labelLoopbackStatus.Size = new System.Drawing.Size(10, 13);
-            this.labelLoopbackStatus.TabIndex = 13;
-            this.labelLoopbackStatus.Text = "-";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(18, 36);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(136, 13);
-            this.label7.TabIndex = 12;
-            this.label7.Text = "Lookback recording status:";
-            // 
-            // timer
-            // 
-            this.timer.Enabled = true;
-            this.timer.Tick += new System.EventHandler(this.Timer_Tick);
             // 
             // buttonReload
             // 
-            this.buttonReload.Location = new System.Drawing.Point(986, 14);
+            this.buttonReload.Location = new System.Drawing.Point(569, 19);
             this.buttonReload.Name = "buttonReload";
-            this.buttonReload.Size = new System.Drawing.Size(75, 23);
-            this.buttonReload.TabIndex = 13;
+            this.buttonReload.Padding = new System.Windows.Forms.Padding(5);
+            this.buttonReload.Size = new System.Drawing.Size(75, 21);
+            this.buttonReload.TabIndex = 17;
             this.buttonReload.Text = "Reload";
-            this.buttonReload.UseVisualStyleBackColor = true;
             this.buttonReload.Click += new System.EventHandler(this.ButtonReload_Click);
+            // 
+            // labelSource
+            // 
+            this.labelSource.AutoSize = true;
+            this.labelSource.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.labelSource.Location = new System.Drawing.Point(12, 22);
+            this.labelSource.Name = "labelSource";
+            this.labelSource.Size = new System.Drawing.Size(78, 13);
+            this.labelSource.TabIndex = 18;
+            this.labelSource.Text = "Sound Source:";
+            // 
+            // groupBoxVolume
+            // 
+            this.groupBoxVolume.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.groupBoxVolume.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.groupBoxVolume.Controls.Add(this.volumeMeterRight);
+            this.groupBoxVolume.Controls.Add(this.trackBarAmplitudeRight);
+            this.groupBoxVolume.Controls.Add(this.labelAmplitude);
+            this.groupBoxVolume.Controls.Add(this.trackBarAmplitudeLeft);
+            this.groupBoxVolume.Controls.Add(this.labelChannelRight);
+            this.groupBoxVolume.Controls.Add(this.labelChannelLeft);
+            this.groupBoxVolume.Controls.Add(this.volumeMeterLeft);
+            this.groupBoxVolume.ForeColor = System.Drawing.Color.Gainsboro;
+            this.groupBoxVolume.Location = new System.Drawing.Point(15, 60);
+            this.groupBoxVolume.Name = "groupBoxVolume";
+            this.groupBoxVolume.Size = new System.Drawing.Size(166, 345);
+            this.groupBoxVolume.TabIndex = 19;
+            this.groupBoxVolume.TabStop = false;
+            this.groupBoxVolume.Text = "Volume";
+            // 
+            // trackBarAmplitudeRight
+            // 
+            this.trackBarAmplitudeRight.Location = new System.Drawing.Point(81, 45);
+            this.trackBarAmplitudeRight.Maximum = 100;
+            this.trackBarAmplitudeRight.Name = "trackBarAmplitudeRight";
+            this.trackBarAmplitudeRight.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBarAmplitudeRight.Size = new System.Drawing.Size(45, 256);
+            this.trackBarAmplitudeRight.TabIndex = 22;
+            this.trackBarAmplitudeRight.TickFrequency = 5;
+            this.trackBarAmplitudeRight.Value = 50;
+            this.trackBarAmplitudeRight.Scroll += new System.EventHandler(this.TrackBarAmplitudeRight_Scroll);
+            // 
+            // labelAmplitude
+            // 
+            this.labelAmplitude.AutoSize = true;
+            this.labelAmplitude.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAmplitude.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.labelAmplitude.Location = new System.Drawing.Point(60, 33);
+            this.labelAmplitude.Name = "labelAmplitude";
+            this.labelAmplitude.Size = new System.Drawing.Size(47, 12);
+            this.labelAmplitude.TabIndex = 21;
+            this.labelAmplitude.Text = "Amplitude";
+            // 
+            // trackBarAmplitudeLeft
+            // 
+            this.trackBarAmplitudeLeft.Location = new System.Drawing.Point(53, 45);
+            this.trackBarAmplitudeLeft.Maximum = 100;
+            this.trackBarAmplitudeLeft.Name = "trackBarAmplitudeLeft";
+            this.trackBarAmplitudeLeft.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBarAmplitudeLeft.Size = new System.Drawing.Size(45, 256);
+            this.trackBarAmplitudeLeft.TabIndex = 20;
+            this.trackBarAmplitudeLeft.TickFrequency = 5;
+            this.trackBarAmplitudeLeft.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.trackBarAmplitudeLeft.Value = 50;
+            this.trackBarAmplitudeLeft.Scroll += new System.EventHandler(this.TrackBarAmplitudeLeft_Scroll);
+            // 
+            // labelChannelRight
+            // 
+            this.labelChannelRight.AutoSize = true;
+            this.labelChannelRight.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.labelChannelRight.Location = new System.Drawing.Point(120, 311);
+            this.labelChannelRight.Name = "labelChannelRight";
+            this.labelChannelRight.Size = new System.Drawing.Size(32, 13);
+            this.labelChannelRight.TabIndex = 3;
+            this.labelChannelRight.Text = "Right";
+            // 
+            // labelChannelLeft
+            // 
+            this.labelChannelLeft.AutoSize = true;
+            this.labelChannelLeft.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.labelChannelLeft.Location = new System.Drawing.Point(18, 311);
+            this.labelChannelLeft.Name = "labelChannelLeft";
+            this.labelChannelLeft.Size = new System.Drawing.Size(25, 13);
+            this.labelChannelLeft.TabIndex = 1;
+            this.labelChannelLeft.Text = "Left";
+            // 
+            // darkGroupBox1
+            // 
+            this.darkGroupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.darkGroupBox1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.darkGroupBox1.Controls.Add(this.volumeMeterFrequency500);
+            this.darkGroupBox1.Controls.Add(this.labelFrequency500);
+            this.darkGroupBox1.Controls.Add(this.labelFrequency1k);
+            this.darkGroupBox1.Controls.Add(this.volumeMeterFrequency1K);
+            this.darkGroupBox1.ForeColor = System.Drawing.Color.Gainsboro;
+            this.darkGroupBox1.Location = new System.Drawing.Point(187, 60);
+            this.darkGroupBox1.Name = "darkGroupBox1";
+            this.darkGroupBox1.Size = new System.Drawing.Size(457, 345);
+            this.darkGroupBox1.TabIndex = 23;
+            this.darkGroupBox1.TabStop = false;
+            this.darkGroupBox1.Text = "Frequencies";
+            // 
+            // labelFrequency500
+            // 
+            this.labelFrequency500.AutoSize = true;
+            this.labelFrequency500.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFrequency500.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.labelFrequency500.Location = new System.Drawing.Point(53, 311);
+            this.labelFrequency500.Name = "labelFrequency500";
+            this.labelFrequency500.Size = new System.Drawing.Size(32, 12);
+            this.labelFrequency500.TabIndex = 3;
+            this.labelFrequency500.Text = "500Hz";
+            // 
+            // labelFrequency1k
+            // 
+            this.labelFrequency1k.AutoSize = true;
+            this.labelFrequency1k.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFrequency1k.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.labelFrequency1k.Location = new System.Drawing.Point(17, 311);
+            this.labelFrequency1k.Name = "labelFrequency1k";
+            this.labelFrequency1k.Size = new System.Drawing.Size(28, 12);
+            this.labelFrequency1k.TabIndex = 1;
+            this.labelFrequency1k.Text = "1KHz";
+            // 
+            // volumeMeterFrequency500
+            // 
+            this.volumeMeterFrequency500.BackColor = System.Drawing.Color.Transparent;
+            this.volumeMeterFrequency500.BackgroundColor = System.Drawing.Color.Transparent;
+            this.volumeMeterFrequency500.BarColor = System.Drawing.Color.White;
+            this.volumeMeterFrequency500.BorderColor = System.Drawing.Color.White;
+            this.volumeMeterFrequency500.BorderWidth = 10;
+            this.volumeMeterFrequency500.Location = new System.Drawing.Point(56, 32);
+            this.volumeMeterFrequency500.Name = "volumeMeterFrequency500";
+            this.volumeMeterFrequency500.Size = new System.Drawing.Size(24, 276);
+            this.volumeMeterFrequency500.TabIndex = 2;
+            this.volumeMeterFrequency500.Value = 50;
+            // 
+            // volumeMeterFrequency1K
+            // 
+            this.volumeMeterFrequency1K.BackColor = System.Drawing.Color.Transparent;
+            this.volumeMeterFrequency1K.BackgroundColor = System.Drawing.Color.Transparent;
+            this.volumeMeterFrequency1K.BarColor = System.Drawing.Color.White;
+            this.volumeMeterFrequency1K.BorderColor = System.Drawing.Color.White;
+            this.volumeMeterFrequency1K.BorderWidth = 5;
+            this.volumeMeterFrequency1K.Location = new System.Drawing.Point(19, 32);
+            this.volumeMeterFrequency1K.Name = "volumeMeterFrequency1K";
+            this.volumeMeterFrequency1K.Size = new System.Drawing.Size(24, 276);
+            this.volumeMeterFrequency1K.TabIndex = 0;
+            this.volumeMeterFrequency1K.Value = 50;
+            // 
+            // volumeMeterRight
+            // 
+            this.volumeMeterRight.BackColor = System.Drawing.Color.Transparent;
+            this.volumeMeterRight.BackgroundColor = System.Drawing.Color.Transparent;
+            this.volumeMeterRight.BarColor = System.Drawing.Color.White;
+            this.volumeMeterRight.BorderColor = System.Drawing.Color.White;
+            this.volumeMeterRight.BorderWidth = 3;
+            this.volumeMeterRight.Location = new System.Drawing.Point(121, 32);
+            this.volumeMeterRight.Name = "volumeMeterRight";
+            this.volumeMeterRight.Size = new System.Drawing.Size(24, 276);
+            this.volumeMeterRight.TabIndex = 2;
+            this.volumeMeterRight.Value = 50;
+            // 
+            // volumeMeterLeft
+            // 
+            this.volumeMeterLeft.BackColor = System.Drawing.Color.Transparent;
+            this.volumeMeterLeft.BackgroundColor = System.Drawing.Color.Transparent;
+            this.volumeMeterLeft.BarColor = System.Drawing.Color.White;
+            this.volumeMeterLeft.BorderColor = System.Drawing.Color.White;
+            this.volumeMeterLeft.BorderWidth = 1;
+            this.volumeMeterLeft.Location = new System.Drawing.Point(19, 32);
+            this.volumeMeterLeft.Name = "volumeMeterLeft";
+            this.volumeMeterLeft.Size = new System.Drawing.Size(24, 276);
+            this.volumeMeterLeft.TabIndex = 0;
+            this.volumeMeterLeft.Value = 50;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1073, 604);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.ClientSize = new System.Drawing.Size(664, 425);
+            this.Controls.Add(this.darkGroupBox1);
+            this.Controls.Add(this.groupBoxVolume);
+            this.Controls.Add(this.labelSource);
             this.Controls.Add(this.buttonReload);
-            this.Controls.Add(this.groupBoxDebug);
-            this.Controls.Add(this.groupBoxDetails);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBoxSource);
             this.Name = "FormMain";
             this.Text = "ChromaWave";
-            this.groupBoxDetails.ResumeLayout(false);
-            this.groupBoxDetails.PerformLayout();
-            this.groupBoxDebug.ResumeLayout(false);
-            this.groupBoxDebug.PerformLayout();
+            this.groupBoxVolume.ResumeLayout(false);
+            this.groupBoxVolume.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarAmplitudeRight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarAmplitudeLeft)).EndInit();
+            this.darkGroupBox1.ResumeLayout(false);
+            this.darkGroupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ComboBox comboBoxSource;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ProgressBar progressBarWave16k;
-        private System.Windows.Forms.ProgressBar progressBarWave1k;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ProgressBar progressBarWave32;
-        private System.Windows.Forms.ProgressBar progressBarWave250;
-        private System.Windows.Forms.ProgressBar progressBarWave4k;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.GroupBox groupBoxDetails;
-        private System.Windows.Forms.GroupBox groupBoxDebug;
-        private System.Windows.Forms.Label labelLoopbackStatus;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Timer timer;
-        private System.Windows.Forms.Button buttonReload;
+        private DarkUI.Controls.DarkComboBox comboBoxSource;
+        private DarkUI.Controls.DarkButton buttonReload;
+        private DarkUI.Controls.DarkLabel labelSource;
+        private DarkUI.Controls.DarkGroupBox groupBoxVolume;
+        private Helpers.VolumeMeter volumeMeterLeft;
+        private System.Windows.Forms.TrackBar trackBarAmplitudeLeft;
+        private DarkUI.Controls.DarkLabel labelChannelRight;
+        private Helpers.VolumeMeter volumeMeterRight;
+        private DarkUI.Controls.DarkLabel labelChannelLeft;
+        private DarkUI.Controls.DarkLabel labelAmplitude;
+        private System.Windows.Forms.TrackBar trackBarAmplitudeRight;
+        private DarkUI.Controls.DarkGroupBox darkGroupBox1;
+        private Helpers.VolumeMeter volumeMeterFrequency500;
+        private DarkUI.Controls.DarkLabel labelFrequency500;
+        private DarkUI.Controls.DarkLabel labelFrequency1k;
+        private Helpers.VolumeMeter volumeMeterFrequency1K;
     }
 }
 
