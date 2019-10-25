@@ -55,12 +55,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\DeviceController.cs" />
+    <Compile Include="Controller\LoopbackCaptureController.cs" />
     <Compile Include="Helpers\VolumeMeter.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Helpers\VolumeMeter.Designer.cs">
       <DependentUpon>VolumeMeter.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\AudioChannelSample.cs" />
     <Compile Include="Models\AudioSource.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
@@ -100,8 +103,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controller\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

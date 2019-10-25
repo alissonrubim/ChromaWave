@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NAudio.Wave;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace ChromaWave.Models
 {
-    internal class AudioSource
+    public class AudioDevice
     {
+        public string Id { get; set; }
         public string Name { get; set; }
-        public int DeviceNumber { get; set; }
-
         public int Channels { get; set; }
     }
 }

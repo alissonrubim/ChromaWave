@@ -29,49 +29,49 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            this.comboBoxSource = new DarkUI.Controls.DarkComboBox();
+            this.comboBoxAudioDevices = new DarkUI.Controls.DarkComboBox();
             this.buttonReload = new DarkUI.Controls.DarkButton();
             this.labelSource = new DarkUI.Controls.DarkLabel();
             this.groupBoxVolume = new DarkUI.Controls.DarkGroupBox();
+            this.volumeMeterRight = new ChromaWave.Helpers.VolumeMeter();
             this.trackBarAmplitudeRight = new System.Windows.Forms.TrackBar();
             this.labelAmplitude = new DarkUI.Controls.DarkLabel();
             this.trackBarAmplitudeLeft = new System.Windows.Forms.TrackBar();
             this.labelChannelRight = new DarkUI.Controls.DarkLabel();
             this.labelChannelLeft = new DarkUI.Controls.DarkLabel();
+            this.volumeMeterLeft = new ChromaWave.Helpers.VolumeMeter();
             this.darkGroupBox1 = new DarkUI.Controls.DarkGroupBox();
+            this.volumeMeterFrequency500 = new ChromaWave.Helpers.VolumeMeter();
             this.labelFrequency500 = new DarkUI.Controls.DarkLabel();
             this.labelFrequency1k = new DarkUI.Controls.DarkLabel();
-            this.volumeMeterFrequency500 = new ChromaWave.Helpers.VolumeMeter();
             this.volumeMeterFrequency1K = new ChromaWave.Helpers.VolumeMeter();
-            this.volumeMeterRight = new ChromaWave.Helpers.VolumeMeter();
-            this.volumeMeterLeft = new ChromaWave.Helpers.VolumeMeter();
             this.groupBoxVolume.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAmplitudeRight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAmplitudeLeft)).BeginInit();
             this.darkGroupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // comboBoxSource
+            // comboBoxAudioDevices
             // 
-            this.comboBoxSource.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(73)))), ((int)(((byte)(74)))));
-            this.comboBoxSource.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            this.comboBoxSource.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid;
-            this.comboBoxSource.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(43)))), ((int)(((byte)(43)))));
-            this.comboBoxSource.ButtonIcon = ((System.Drawing.Bitmap)(resources.GetObject("comboBoxSource.ButtonIcon")));
-            this.comboBoxSource.DrawDropdownHoverOutline = false;
-            this.comboBoxSource.DrawFocusRectangle = false;
-            this.comboBoxSource.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.comboBoxSource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxSource.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBoxSource.ForeColor = System.Drawing.Color.Gainsboro;
-            this.comboBoxSource.FormattingEnabled = true;
-            this.comboBoxSource.Location = new System.Drawing.Point(96, 19);
-            this.comboBoxSource.Name = "comboBoxSource";
-            this.comboBoxSource.Size = new System.Drawing.Size(462, 21);
-            this.comboBoxSource.TabIndex = 16;
-            this.comboBoxSource.Text = null;
-            this.comboBoxSource.TextPadding = new System.Windows.Forms.Padding(2);
-            this.comboBoxSource.SelectedIndexChanged += new System.EventHandler(this.ComboBoxSource_SelectedIndexChanged);
+            this.comboBoxAudioDevices.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(73)))), ((int)(((byte)(74)))));
+            this.comboBoxAudioDevices.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.comboBoxAudioDevices.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid;
+            this.comboBoxAudioDevices.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(43)))), ((int)(((byte)(43)))));
+            this.comboBoxAudioDevices.ButtonIcon = ((System.Drawing.Bitmap)(resources.GetObject("comboBoxAudioDevices.ButtonIcon")));
+            this.comboBoxAudioDevices.DrawDropdownHoverOutline = false;
+            this.comboBoxAudioDevices.DrawFocusRectangle = false;
+            this.comboBoxAudioDevices.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.comboBoxAudioDevices.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxAudioDevices.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBoxAudioDevices.ForeColor = System.Drawing.Color.Gainsboro;
+            this.comboBoxAudioDevices.FormattingEnabled = true;
+            this.comboBoxAudioDevices.Location = new System.Drawing.Point(96, 19);
+            this.comboBoxAudioDevices.Name = "comboBoxAudioDevices";
+            this.comboBoxAudioDevices.Size = new System.Drawing.Size(462, 21);
+            this.comboBoxAudioDevices.TabIndex = 16;
+            this.comboBoxAudioDevices.Text = null;
+            this.comboBoxAudioDevices.TextPadding = new System.Windows.Forms.Padding(2);
+            this.comboBoxAudioDevices.SelectedIndexChanged += new System.EventHandler(this.ComboBoxAudioDevices_SelectedIndexChanged);
             // 
             // buttonReload
             // 
@@ -111,6 +111,19 @@
             this.groupBoxVolume.TabIndex = 19;
             this.groupBoxVolume.TabStop = false;
             this.groupBoxVolume.Text = "Volume";
+            // 
+            // volumeMeterRight
+            // 
+            this.volumeMeterRight.BackColor = System.Drawing.Color.Transparent;
+            this.volumeMeterRight.BackgroundColor = System.Drawing.Color.Transparent;
+            this.volumeMeterRight.BarColor = System.Drawing.Color.White;
+            this.volumeMeterRight.BorderColor = System.Drawing.Color.White;
+            this.volumeMeterRight.BorderWidth = 3;
+            this.volumeMeterRight.Location = new System.Drawing.Point(121, 32);
+            this.volumeMeterRight.Name = "volumeMeterRight";
+            this.volumeMeterRight.Size = new System.Drawing.Size(24, 276);
+            this.volumeMeterRight.TabIndex = 2;
+            this.volumeMeterRight.Value = 50;
             // 
             // trackBarAmplitudeRight
             // 
@@ -168,6 +181,19 @@
             this.labelChannelLeft.TabIndex = 1;
             this.labelChannelLeft.Text = "Left";
             // 
+            // volumeMeterLeft
+            // 
+            this.volumeMeterLeft.BackColor = System.Drawing.Color.Transparent;
+            this.volumeMeterLeft.BackgroundColor = System.Drawing.Color.Transparent;
+            this.volumeMeterLeft.BarColor = System.Drawing.Color.White;
+            this.volumeMeterLeft.BorderColor = System.Drawing.Color.White;
+            this.volumeMeterLeft.BorderWidth = 1;
+            this.volumeMeterLeft.Location = new System.Drawing.Point(19, 32);
+            this.volumeMeterLeft.Name = "volumeMeterLeft";
+            this.volumeMeterLeft.Size = new System.Drawing.Size(24, 276);
+            this.volumeMeterLeft.TabIndex = 0;
+            this.volumeMeterLeft.Value = 50;
+            // 
             // darkGroupBox1
             // 
             this.darkGroupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
@@ -183,6 +209,19 @@
             this.darkGroupBox1.TabIndex = 23;
             this.darkGroupBox1.TabStop = false;
             this.darkGroupBox1.Text = "Frequencies";
+            // 
+            // volumeMeterFrequency500
+            // 
+            this.volumeMeterFrequency500.BackColor = System.Drawing.Color.Transparent;
+            this.volumeMeterFrequency500.BackgroundColor = System.Drawing.Color.Transparent;
+            this.volumeMeterFrequency500.BarColor = System.Drawing.Color.White;
+            this.volumeMeterFrequency500.BorderColor = System.Drawing.Color.White;
+            this.volumeMeterFrequency500.BorderWidth = 10;
+            this.volumeMeterFrequency500.Location = new System.Drawing.Point(56, 32);
+            this.volumeMeterFrequency500.Name = "volumeMeterFrequency500";
+            this.volumeMeterFrequency500.Size = new System.Drawing.Size(24, 276);
+            this.volumeMeterFrequency500.TabIndex = 2;
+            this.volumeMeterFrequency500.Value = 50;
             // 
             // labelFrequency500
             // 
@@ -206,19 +245,6 @@
             this.labelFrequency1k.TabIndex = 1;
             this.labelFrequency1k.Text = "1KHz";
             // 
-            // volumeMeterFrequency500
-            // 
-            this.volumeMeterFrequency500.BackColor = System.Drawing.Color.Transparent;
-            this.volumeMeterFrequency500.BackgroundColor = System.Drawing.Color.Transparent;
-            this.volumeMeterFrequency500.BarColor = System.Drawing.Color.White;
-            this.volumeMeterFrequency500.BorderColor = System.Drawing.Color.White;
-            this.volumeMeterFrequency500.BorderWidth = 10;
-            this.volumeMeterFrequency500.Location = new System.Drawing.Point(56, 32);
-            this.volumeMeterFrequency500.Name = "volumeMeterFrequency500";
-            this.volumeMeterFrequency500.Size = new System.Drawing.Size(24, 276);
-            this.volumeMeterFrequency500.TabIndex = 2;
-            this.volumeMeterFrequency500.Value = 50;
-            // 
             // volumeMeterFrequency1K
             // 
             this.volumeMeterFrequency1K.BackColor = System.Drawing.Color.Transparent;
@@ -232,43 +258,17 @@
             this.volumeMeterFrequency1K.TabIndex = 0;
             this.volumeMeterFrequency1K.Value = 50;
             // 
-            // volumeMeterRight
-            // 
-            this.volumeMeterRight.BackColor = System.Drawing.Color.Transparent;
-            this.volumeMeterRight.BackgroundColor = System.Drawing.Color.Transparent;
-            this.volumeMeterRight.BarColor = System.Drawing.Color.White;
-            this.volumeMeterRight.BorderColor = System.Drawing.Color.White;
-            this.volumeMeterRight.BorderWidth = 3;
-            this.volumeMeterRight.Location = new System.Drawing.Point(121, 32);
-            this.volumeMeterRight.Name = "volumeMeterRight";
-            this.volumeMeterRight.Size = new System.Drawing.Size(24, 276);
-            this.volumeMeterRight.TabIndex = 2;
-            this.volumeMeterRight.Value = 50;
-            // 
-            // volumeMeterLeft
-            // 
-            this.volumeMeterLeft.BackColor = System.Drawing.Color.Transparent;
-            this.volumeMeterLeft.BackgroundColor = System.Drawing.Color.Transparent;
-            this.volumeMeterLeft.BarColor = System.Drawing.Color.White;
-            this.volumeMeterLeft.BorderColor = System.Drawing.Color.White;
-            this.volumeMeterLeft.BorderWidth = 1;
-            this.volumeMeterLeft.Location = new System.Drawing.Point(19, 32);
-            this.volumeMeterLeft.Name = "volumeMeterLeft";
-            this.volumeMeterLeft.Size = new System.Drawing.Size(24, 276);
-            this.volumeMeterLeft.TabIndex = 0;
-            this.volumeMeterLeft.Value = 50;
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.ClientSize = new System.Drawing.Size(664, 425);
+            this.ClientSize = new System.Drawing.Size(661, 425);
             this.Controls.Add(this.darkGroupBox1);
             this.Controls.Add(this.groupBoxVolume);
             this.Controls.Add(this.labelSource);
             this.Controls.Add(this.buttonReload);
-            this.Controls.Add(this.comboBoxSource);
+            this.Controls.Add(this.comboBoxAudioDevices);
             this.Name = "FormMain";
             this.Text = "ChromaWave";
             this.groupBoxVolume.ResumeLayout(false);
@@ -283,7 +283,7 @@
         }
 
         #endregion
-        private DarkUI.Controls.DarkComboBox comboBoxSource;
+        private DarkUI.Controls.DarkComboBox comboBoxAudioDevices;
         private DarkUI.Controls.DarkButton buttonReload;
         private DarkUI.Controls.DarkLabel labelSource;
         private DarkUI.Controls.DarkGroupBox groupBoxVolume;

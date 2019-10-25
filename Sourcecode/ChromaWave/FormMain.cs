@@ -10,99 +10,41 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ChromaWave.Models;
+using ChromaWave.Controller;
 
 namespace ChromaWave
 {
     public partial class FormMain : Form
     {
-        private List<AudioSource> audioSources;
-        private WasapiLoopbackCapture loopbackCapture;
-        
+        private List<AudioDevice> audioDevices = new List<AudioDevice>();
+        private LoopbackCaptureController loopbackCaptureController;
+
         public FormMain()
         {
             InitializeComponent();
-            loadAudioSources();
+            loadAudioDevices();
 
-            volumeMeterLeft.Value = 0;
-            volumeMeterRight.Value = 0;
-            volumeMeterFrequency1K.Value = 0;
-            volumeMeterFrequency500.Value = 0;
+            loopbackCaptureController = new LoopbackCaptureController();
         }
 
-        private void loadAudioSources()
+        public void StartCapturing()
         {
-            comboBoxSource.Items.Clear();
-            audioSources = new List<AudioSource>();
-            for (int i = -1; i < WaveOut.DeviceCount; i++)
-            {
-                WaveOutCapabilities capabilitie = WaveOut.GetCapabilities(i);
-                AudioSource source = new AudioSource()
-                {
-                    Name = capabilitie.ProductName,
-                    DeviceNumber = i,
-                    Channels = capabilitie.Channels,
-                };
-                audioSources.Add(source);
-                comboBoxSource.Items.Add(source.Name);
-            }
-        }
-        private void startLoopbackCapture()
-        {
-            //Only start in the current loopback is null or already stopped.
-            if (loopbackCapture != null && loopbackCapture.CaptureState != NAudio.CoreAudioApi.CaptureState.Stopped)
-            {
-                stopLoopbackCapture();
-            }
-            else
-            {
-                loopbackCapture = new WasapiLoopbackCapture();
-                loopbackCapture.DataAvailable += (Sender, Args) =>
-                {
-                    if (loopbackCapture.WaveFormat.BitsPerSample == 32) 
-                    {
-                        if (loopbackCapture.WaveFormat.Channels == 2) 
-                        {
-                            WaveBuffer wavebuffer = new WaveBuffer(Args.Buffer);
-
-                            Random a = new Random();
-                            volumeMeterLeft.Value = a.Next(0, 100);
-                            volumeMeterFrequency500.Value = a.Next(0, 100);
-                        }
-                    }
-                    
-                };
-
-                loopbackCapture.RecordingStopped += (s, a) =>
-                {
-                    loopbackCapture.Dispose();
-                };
-
-                try
-                {
-                    loopbackCapture.StartRecording();
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show($"An error ocurred when we try to start the loopback capture. Error message: {e.Message}", "Attention",  MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    stopLoopbackCapture();
-                }
-            }
+            if (loopbackCaptureController.State != CaptureState.Stopped)
+                loopbackCaptureController.Stop();
+            loopbackCaptureController.Start(audioDevices[comboBoxAudioDevices.SelectedIndex]);
         }
 
-        private void stopLoopbackCapture()
+        private void loadAudioDevices()
         {
-            loopbackCapture.StopRecording();
-            loopbackCapture = null;
-        }
-
-        private void ComboBoxSource_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            startLoopbackCapture();
+            comboBoxAudioDevices.Items.Clear();
+            audioDevices = AudioDeviceController.GetAllAudioDevices();
+            foreach (AudioDevice audioDevice in audioDevices)
+                comboBoxAudioDevices.Items.Add(audioDevice.Name);
         }
 
         private void ButtonReload_Click(object sender, EventArgs e)
         {
-            loadAudioSources();
+            loadAudioDevices();
         }
 
         private void TrackBarAmplitudeLeft_Scroll(object sender, EventArgs e)
@@ -113,6 +55,11 @@ namespace ChromaWave
         private void TrackBarAmplitudeRight_Scroll(object sender, EventArgs e)
         {
             trackBarAmplitudeLeft.Value = trackBarAmplitudeRight.Value;
+        }
+
+        private void ComboBoxAudioDevices_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            StartCapturing();
         }
     }
 }
