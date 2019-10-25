@@ -33,18 +33,19 @@
             this.buttonReload = new DarkUI.Controls.DarkButton();
             this.labelSource = new DarkUI.Controls.DarkLabel();
             this.groupBoxVolume = new DarkUI.Controls.DarkGroupBox();
-            this.volumeMeterRight = new ChromaWave.Helpers.VolumeMeter();
             this.trackBarAmplitudeRight = new System.Windows.Forms.TrackBar();
             this.labelAmplitude = new DarkUI.Controls.DarkLabel();
             this.trackBarAmplitudeLeft = new System.Windows.Forms.TrackBar();
             this.labelChannelRight = new DarkUI.Controls.DarkLabel();
             this.labelChannelLeft = new DarkUI.Controls.DarkLabel();
-            this.volumeMeterLeft = new ChromaWave.Helpers.VolumeMeter();
             this.darkGroupBox1 = new DarkUI.Controls.DarkGroupBox();
-            this.volumeMeterFrequency500 = new ChromaWave.Helpers.VolumeMeter();
             this.labelFrequency500 = new DarkUI.Controls.DarkLabel();
             this.labelFrequency1k = new DarkUI.Controls.DarkLabel();
+            this.checkBoxSync = new DarkUI.Controls.DarkCheckBox();
+            this.volumeMeterFrequency500 = new ChromaWave.Helpers.VolumeMeter();
             this.volumeMeterFrequency1K = new ChromaWave.Helpers.VolumeMeter();
+            this.volumeMeterRight = new ChromaWave.Helpers.VolumeMeter();
+            this.volumeMeterLeft = new ChromaWave.Helpers.VolumeMeter();
             this.groupBoxVolume.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAmplitudeRight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAmplitudeLeft)).BeginInit();
@@ -97,6 +98,7 @@
             // 
             this.groupBoxVolume.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.groupBoxVolume.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.groupBoxVolume.Controls.Add(this.checkBoxSync);
             this.groupBoxVolume.Controls.Add(this.volumeMeterRight);
             this.groupBoxVolume.Controls.Add(this.trackBarAmplitudeRight);
             this.groupBoxVolume.Controls.Add(this.labelAmplitude);
@@ -112,29 +114,18 @@
             this.groupBoxVolume.TabStop = false;
             this.groupBoxVolume.Text = "Volume";
             // 
-            // volumeMeterRight
-            // 
-            this.volumeMeterRight.BackColor = System.Drawing.Color.Transparent;
-            this.volumeMeterRight.BackgroundColor = System.Drawing.Color.Transparent;
-            this.volumeMeterRight.BarColor = System.Drawing.Color.White;
-            this.volumeMeterRight.BorderColor = System.Drawing.Color.White;
-            this.volumeMeterRight.BorderWidth = 3;
-            this.volumeMeterRight.Location = new System.Drawing.Point(121, 32);
-            this.volumeMeterRight.Name = "volumeMeterRight";
-            this.volumeMeterRight.Size = new System.Drawing.Size(24, 276);
-            this.volumeMeterRight.TabIndex = 2;
-            this.volumeMeterRight.Value = 50;
-            // 
             // trackBarAmplitudeRight
             // 
+            this.trackBarAmplitudeRight.LargeChange = 10;
             this.trackBarAmplitudeRight.Location = new System.Drawing.Point(81, 45);
             this.trackBarAmplitudeRight.Maximum = 100;
+            this.trackBarAmplitudeRight.Minimum = -100;
             this.trackBarAmplitudeRight.Name = "trackBarAmplitudeRight";
             this.trackBarAmplitudeRight.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBarAmplitudeRight.Size = new System.Drawing.Size(45, 256);
+            this.trackBarAmplitudeRight.SmallChange = 10;
             this.trackBarAmplitudeRight.TabIndex = 22;
-            this.trackBarAmplitudeRight.TickFrequency = 5;
-            this.trackBarAmplitudeRight.Value = 50;
+            this.trackBarAmplitudeRight.TickFrequency = 10;
             this.trackBarAmplitudeRight.Scroll += new System.EventHandler(this.TrackBarAmplitudeRight_Scroll);
             // 
             // labelAmplitude
@@ -150,15 +141,17 @@
             // 
             // trackBarAmplitudeLeft
             // 
+            this.trackBarAmplitudeLeft.LargeChange = 10;
             this.trackBarAmplitudeLeft.Location = new System.Drawing.Point(53, 45);
             this.trackBarAmplitudeLeft.Maximum = 100;
+            this.trackBarAmplitudeLeft.Minimum = -100;
             this.trackBarAmplitudeLeft.Name = "trackBarAmplitudeLeft";
             this.trackBarAmplitudeLeft.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBarAmplitudeLeft.Size = new System.Drawing.Size(45, 256);
+            this.trackBarAmplitudeLeft.SmallChange = 10;
             this.trackBarAmplitudeLeft.TabIndex = 20;
-            this.trackBarAmplitudeLeft.TickFrequency = 5;
+            this.trackBarAmplitudeLeft.TickFrequency = 10;
             this.trackBarAmplitudeLeft.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
-            this.trackBarAmplitudeLeft.Value = 50;
             this.trackBarAmplitudeLeft.Scroll += new System.EventHandler(this.TrackBarAmplitudeLeft_Scroll);
             // 
             // labelChannelRight
@@ -181,19 +174,6 @@
             this.labelChannelLeft.TabIndex = 1;
             this.labelChannelLeft.Text = "Left";
             // 
-            // volumeMeterLeft
-            // 
-            this.volumeMeterLeft.BackColor = System.Drawing.Color.Transparent;
-            this.volumeMeterLeft.BackgroundColor = System.Drawing.Color.Transparent;
-            this.volumeMeterLeft.BarColor = System.Drawing.Color.White;
-            this.volumeMeterLeft.BorderColor = System.Drawing.Color.White;
-            this.volumeMeterLeft.BorderWidth = 1;
-            this.volumeMeterLeft.Location = new System.Drawing.Point(19, 32);
-            this.volumeMeterLeft.Name = "volumeMeterLeft";
-            this.volumeMeterLeft.Size = new System.Drawing.Size(24, 276);
-            this.volumeMeterLeft.TabIndex = 0;
-            this.volumeMeterLeft.Value = 50;
-            // 
             // darkGroupBox1
             // 
             this.darkGroupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
@@ -209,19 +189,6 @@
             this.darkGroupBox1.TabIndex = 23;
             this.darkGroupBox1.TabStop = false;
             this.darkGroupBox1.Text = "Frequencies";
-            // 
-            // volumeMeterFrequency500
-            // 
-            this.volumeMeterFrequency500.BackColor = System.Drawing.Color.Transparent;
-            this.volumeMeterFrequency500.BackgroundColor = System.Drawing.Color.Transparent;
-            this.volumeMeterFrequency500.BarColor = System.Drawing.Color.White;
-            this.volumeMeterFrequency500.BorderColor = System.Drawing.Color.White;
-            this.volumeMeterFrequency500.BorderWidth = 10;
-            this.volumeMeterFrequency500.Location = new System.Drawing.Point(56, 32);
-            this.volumeMeterFrequency500.Name = "volumeMeterFrequency500";
-            this.volumeMeterFrequency500.Size = new System.Drawing.Size(24, 276);
-            this.volumeMeterFrequency500.TabIndex = 2;
-            this.volumeMeterFrequency500.Value = 50;
             // 
             // labelFrequency500
             // 
@@ -245,18 +212,67 @@
             this.labelFrequency1k.TabIndex = 1;
             this.labelFrequency1k.Text = "1KHz";
             // 
+            // checkBoxSync
+            // 
+            this.checkBoxSync.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkBoxSync.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxSync.Location = new System.Drawing.Point(62, 298);
+            this.checkBoxSync.Name = "checkBoxSync";
+            this.checkBoxSync.Size = new System.Drawing.Size(47, 25);
+            this.checkBoxSync.TabIndex = 23;
+            this.checkBoxSync.Text = "Sync";
+            // 
+            // volumeMeterFrequency500
+            // 
+            this.volumeMeterFrequency500.BackColor = System.Drawing.Color.Transparent;
+            this.volumeMeterFrequency500.BackgroundColor = System.Drawing.Color.Transparent;
+            this.volumeMeterFrequency500.BarColor = System.Drawing.Color.White;
+            this.volumeMeterFrequency500.BorderColor = System.Drawing.Color.White;
+            this.volumeMeterFrequency500.BorderWidth = 1;
+            this.volumeMeterFrequency500.Location = new System.Drawing.Point(56, 32);
+            this.volumeMeterFrequency500.Name = "volumeMeterFrequency500";
+            this.volumeMeterFrequency500.Size = new System.Drawing.Size(24, 276);
+            this.volumeMeterFrequency500.TabIndex = 2;
+            this.volumeMeterFrequency500.Value = 0;
+            // 
             // volumeMeterFrequency1K
             // 
             this.volumeMeterFrequency1K.BackColor = System.Drawing.Color.Transparent;
             this.volumeMeterFrequency1K.BackgroundColor = System.Drawing.Color.Transparent;
             this.volumeMeterFrequency1K.BarColor = System.Drawing.Color.White;
             this.volumeMeterFrequency1K.BorderColor = System.Drawing.Color.White;
-            this.volumeMeterFrequency1K.BorderWidth = 5;
+            this.volumeMeterFrequency1K.BorderWidth = 1;
             this.volumeMeterFrequency1K.Location = new System.Drawing.Point(19, 32);
             this.volumeMeterFrequency1K.Name = "volumeMeterFrequency1K";
             this.volumeMeterFrequency1K.Size = new System.Drawing.Size(24, 276);
             this.volumeMeterFrequency1K.TabIndex = 0;
-            this.volumeMeterFrequency1K.Value = 50;
+            this.volumeMeterFrequency1K.Value = 0;
+            // 
+            // volumeMeterRight
+            // 
+            this.volumeMeterRight.BackColor = System.Drawing.Color.Transparent;
+            this.volumeMeterRight.BackgroundColor = System.Drawing.Color.Transparent;
+            this.volumeMeterRight.BarColor = System.Drawing.Color.White;
+            this.volumeMeterRight.BorderColor = System.Drawing.Color.White;
+            this.volumeMeterRight.BorderWidth = 1;
+            this.volumeMeterRight.Location = new System.Drawing.Point(121, 32);
+            this.volumeMeterRight.Name = "volumeMeterRight";
+            this.volumeMeterRight.Size = new System.Drawing.Size(24, 276);
+            this.volumeMeterRight.TabIndex = 1;
+            this.volumeMeterRight.Value = 50;
+            // 
+            // volumeMeterLeft
+            // 
+            this.volumeMeterLeft.BackColor = System.Drawing.Color.Transparent;
+            this.volumeMeterLeft.BackgroundColor = System.Drawing.Color.Transparent;
+            this.volumeMeterLeft.BarColor = System.Drawing.Color.White;
+            this.volumeMeterLeft.BorderColor = System.Drawing.Color.White;
+            this.volumeMeterLeft.BorderWidth = 1;
+            this.volumeMeterLeft.Location = new System.Drawing.Point(19, 32);
+            this.volumeMeterLeft.Name = "volumeMeterLeft";
+            this.volumeMeterLeft.Size = new System.Drawing.Size(24, 276);
+            this.volumeMeterLeft.TabIndex = 0;
+            this.volumeMeterLeft.Value = 50;
             // 
             // FormMain
             // 
@@ -299,6 +315,7 @@
         private DarkUI.Controls.DarkLabel labelFrequency500;
         private DarkUI.Controls.DarkLabel labelFrequency1k;
         private Helpers.VolumeMeter volumeMeterFrequency1K;
+        private DarkUI.Controls.DarkCheckBox checkBoxSync;
     }
 }
 

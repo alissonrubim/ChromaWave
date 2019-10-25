@@ -72,22 +72,36 @@ namespace ChromaWave.Controller
                         //Transform the WaveProvider in a SampleProvider 
                         ISampleProvider sampleProvider = bufferedWaveProvider.ToSampleProvider().ToStereo(1, 1);
 
+                        //Calculating the Bytes per frame (Not Bits) inclusing the channels division
                         var bytesPerFrame = loopbackCapture.WaveFormat.BitsPerSample / 8 * loopbackCapture.WaveFormat.Channels;
-                        var bufferedFrames = bufferedWaveProvider.BufferedBytes / bytesPerFrame;
-                        var frames = new float[bufferedFrames];
-                        sampleProvider.Read(frames, 0, bufferedFrames);
 
-                        float[] left = new float[frames.Length / 2];
-                        for (var i = 0; i < frames.Length / 2 - 1; i += 2)
+                        //Calculating the size of the Byte buffer
+                        var bufferedFrames = bufferedWaveProvider.BufferedBytes / bytesPerFrame;
+
+                        //Reading all the flames in a sample
+                        var allSampleFrames = new float[bufferedFrames];
+                        sampleProvider.Read(allSampleFrames, 0, bufferedFrames);
+
+                        //Separating the channels
+                        float[] leftFrames = new float[allSampleFrames.Length / loopbackCapture.WaveFormat.Channels];
+                        float[] rightFrames = new float[allSampleFrames.Length / loopbackCapture.WaveFormat.Channels];
+                        for (var i = 0; i < allSampleFrames.Length / loopbackCapture.WaveFormat.Channels - 1; i += loopbackCapture.WaveFormat.Channels)
                         {
-                            left[i/2] = frames[i];
+                            leftFrames[i/2] = allSampleFrames[i];
+                            rightFrames[i / 2] = allSampleFrames[i + 1];
                         }
 
+                        //Separating the Channels
                         List<AudioChannelSample> audioChannelSamples = new List<AudioChannelSample>();
                         audioChannelSamples.Add(new AudioChannelSample()
                         {
                             ChannelNumber = 1,
-                            Samples = left
+                            Samples = leftFrames
+                        });
+                        audioChannelSamples.Add(new AudioChannelSample()
+                        {
+                            ChannelNumber = 2,
+                            Samples = rightFrames
                         });
 
                         OnCapture?.Invoke(audioChannelSamples);

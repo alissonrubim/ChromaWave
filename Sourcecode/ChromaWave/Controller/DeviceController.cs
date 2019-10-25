@@ -19,11 +19,13 @@ namespace ChromaWave.Controller
             MMDeviceCollection devices = new MMDeviceEnumerator().EnumerateAudioEndPoints(DataFlow.All, DeviceState.All);
 
             //Get all the friendly devices registered in the Audio Controller of the Windows;
-            WaveOutCapabilities capabilitie = WaveOut.GetCapabilities(i);
+            List<WaveOutCapabilities> capabilities = new List<WaveOutCapabilities>();
+            for (int i = 0; i < WaveOut.DeviceCount - 1; i++)
+                capabilities.Add(WaveOut.GetCapabilities(i));
 
             foreach (MMDevice device in devices)
             {
-                for (int i = 0; i < WaveOut.DeviceCount - 1; i++)
+                foreach (WaveOutCapabilities capabilitie in capabilities)
                 {
                     //Find the devices that have the same name. Note: impossible of a device has a same name as other, so compare IndexOf it's not so bad.
                     if (device.FriendlyName.IndexOf(capabilitie.ProductName) == 0)
