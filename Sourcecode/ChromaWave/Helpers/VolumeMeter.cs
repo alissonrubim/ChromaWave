@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace ChromaWave.Helpers
 {
+    public enum VolumeMeterRenderMethod { Linear, Blocks }
     public partial class VolumeMeter : UserControl
     {
         private Color borderColor = Color.White;
@@ -17,6 +18,8 @@ namespace ChromaWave.Helpers
         private int value;
         private Color backgroundColor = Color.Transparent;
         private Color barColor = Color.White;
+        private VolumeMeterRenderMethod renderMethod = VolumeMeterRenderMethod.Linear;
+        private int BlockSize = 20;
 
         #region Properties
         [Description("The color of the border."), Category("Aparência")]
@@ -81,6 +84,21 @@ namespace ChromaWave.Helpers
                 SetBarColor(value);
             }
         }
+
+        [Browsable(true)]
+        [DisplayName("Render Method")]
+        [Description("The render method that will be used to generate the bar."), Category("Aparência")]
+        public VolumeMeterRenderMethod RenderMethod
+        {
+            get
+            {
+                return renderMethod;
+            }
+            set
+            {
+                SetRenderMethod(value);
+            }
+        }
         #endregion
 
         public VolumeMeter()
@@ -105,19 +123,43 @@ namespace ChromaWave.Helpers
 
             //BackGround
             SolidBrush backgroundColor = new SolidBrush(this.backgroundColor);
-            Rectangle background = new Rectangle(new Point(borderOffset, borderOffset), new Size(this.Width - ((this.borderWidth) + 1), this.Height - ((this.borderWidth) + 1)));
+            Rectangle background = new Rectangle(new Point(borderOffset, borderOffset), new Size(this.Width - ((this.borderWidth) + 1), this.Height - (this.borderWidth + 1)));
             graphics.FillRectangle(backgroundColor, background);
 
             //Bar
             int StartPointLeft = borderOffset;
             int StartPointTop = (this.Height - barHeight) + borderOffset;
             SolidBrush barColor = new SolidBrush(this.barColor);
-            Rectangle bar = new Rectangle(new Point(StartPointLeft, StartPointTop), new Size(this.Width - ((this.borderWidth) + 1), barHeight - ((this.borderWidth) + 1)));
-            graphics.FillRectangle(barColor, bar);
+
+            if (renderMethod == VolumeMeterRenderMethod.Linear)
+            {
+                Rectangle bar = new Rectangle(new Point(StartPointLeft, StartPointTop), new Size(this.Width - ((this.borderWidth) + 1), barHeight - (this.borderWidth + 1)));
+                graphics.FillRectangle(barColor, bar);
+            }
+            else
+            {
+                int numberOfBlocks = (value*this.BlockSize/100);
+                int blockHeight = ((this.Height - (borderOffset * 2)) / this.BlockSize) + 1;
+                int separatorHeight = 1;
+                for(var i = 0; i < this.BlockSize; i++)
+                {
+                    if (i >= this.BlockSize - numberOfBlocks)
+                    {
+                        int height = blockHeight - separatorHeight;
+                        if (i == this.BlockSize - 1)
+                            height = blockHeight;
+                        
+                        Rectangle bar = new Rectangle(new Point(StartPointLeft, blockHeight * i), new Size(this.Width - ((this.borderWidth) + 1), height));
+                        graphics.FillRectangle(barColor, bar);
+                    }
+                }
+            }
         }
 
         private void SetValue(int value)
         {
+            if (value < 0 || value > 100)
+                throw new Exception("The VolumeMeter value should be between 0 and 100.");
             this.value = value;
             Invalidate();
         }
@@ -143,6 +185,12 @@ namespace ChromaWave.Helpers
         private void SetBarColor(Color barColor)
         {
             this.barColor = barColor;
+            Invalidate();
+        }
+
+        private void SetRenderMethod(VolumeMeterRenderMethod renderMethod)
+        {
+            this.renderMethod = renderMethod;
             Invalidate();
         }
     }

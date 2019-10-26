@@ -18,6 +18,9 @@ namespace ChromaWave
     {
         private List<AudioDevice> audioDevices = new List<AudioDevice>();
         private LoopbackCaptureController loopbackCaptureController;
+        private float lastSampleChannelLeft;
+        private float lastSampleChannelRight;
+
         public int AmplitudePercentageRight;
         public int AmplitudePercentageLeft;
         public FormMain()
@@ -30,6 +33,8 @@ namespace ChromaWave
 
             AmplitudePercentageLeft = 100 + trackBarAmplitudeLeft.Value;
             AmplitudePercentageRight = 100 + trackBarAmplitudeRight.Value;
+
+            timerUIUpdate.Interval = 1000 / 30; //60fps
         }
 
         public void StartCapturing()
@@ -95,8 +100,19 @@ namespace ChromaWave
 
         private void loopbackCaptureController_OnCapture(IEnumerable<AudioChannelSample> samples)
         {
-            volumeMeterLeft.Value = Convert.ToInt32((CalculateSample_MaxValue(samples.ToArray()[0].Samples) * 1000 * AmplitudePercentageLeft / 100));
-            volumeMeterRight.Value = Convert.ToInt32((CalculateSample_MaxValue(samples.ToArray()[1].Samples) * 1000 * AmplitudePercentageRight / 100));
+            lastSampleChannelLeft = CalculateSample_MaxValue(samples.ToArray()[0].Samples);
+            lastSampleChannelRight = CalculateSample_MaxValue(samples.ToArray()[1].Samples);
+        }
+
+        private void TimerUIUpdate_Tick(object sender, EventArgs e)
+        {
+            this.SuspendLayout();
+            int valueLeft = Convert.ToInt32(lastSampleChannelLeft * 1000 * AmplitudePercentageLeft / 100);
+            volumeMeterLeft.Value = valueLeft > 100 ? 100 : valueLeft;
+
+            int valueRight = Convert.ToInt32(lastSampleChannelRight * 1000 * AmplitudePercentageRight / 100);
+            volumeMeterRight.Value = valueRight > 100 ? 100 : valueRight;
+            this.ResumeLayout();
         }
     }
 }

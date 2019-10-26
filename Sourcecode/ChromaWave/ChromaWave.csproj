@@ -57,6 +57,12 @@
   <ItemGroup>
     <Compile Include="Controller\DeviceController.cs" />
     <Compile Include="Controller\LoopbackCaptureController.cs" />
+    <Compile Include="Helpers\ChromaVisualizer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Helpers\ChromaVisualizer.Designer.cs">
+      <DependentUpon>ChromaVisualizer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\VolumeMeter.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -75,6 +81,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Helpers\ChromaVisualizer.resx">
+      <DependentUpon>ChromaVisualizer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Helpers\VolumeMeter.resx">
       <DependentUpon>VolumeMeter.cs</DependentUpon>
