@@ -36,6 +36,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "ChromaVisualizer";
             this.Size = new System.Drawing.Size(679, 189);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.ChromaVisualizer_Paint);
             this.ResumeLayout(false);
 
         }
