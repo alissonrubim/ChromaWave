@@ -11,11 +11,20 @@ using System.Drawing.Drawing2D;
 
 namespace ChromaWave.Helpers
 {
+    public enum ChromaVisualizerDirection { Forward, Backward }
+    public enum ChromaVisualizerVelocity { SuperFast, Fast, Medium, Slow, SuperSlow };
+
     public partial class ChromaVisualizer : UserControl
     {
+        private float pStep = 0.001f;
+        private float pOffset = 0f;
+        private ChromaVisualizerDirection pDirection = ChromaVisualizerDirection.Forward;
+        private ChromaVisualizerVelocity pVelocity = ChromaVisualizerVelocity.Slow;
+
         public ChromaVisualizer()
         {
             InitializeComponent();
+            this.DoubleBuffered = true;
         }
 
         private void ChromaVisualizer_Paint(object sender, PaintEventArgs e)
@@ -39,18 +48,39 @@ namespace ChromaWave.Helpers
                 1
             };
             colorBlend.Colors = new Color[colorBlend.Positions.Length];
-            float nextColor = 0.27f;
+
+            float startOffset = pOffset;
+
+
             float colorOffset = 1f / colorBlend.Positions.Length;
             for (int i = 0; i < colorBlend.Positions.Length; i++)
             {
-                colorBlend.Colors[i] = ColorHelper.HSLConvert(nextColor, 1, 0.5);
-                nextColor += colorOffset;
-                if (nextColor > 1)
-                    nextColor = 0;
+                colorBlend.Colors[i] = ColorHelper.HSLConvert(startOffset, 1, 0.5);
+                startOffset += colorOffset;
+                if (startOffset > 1)
+                        startOffset = 0;
+            }
+
+            if (pDirection == ChromaVisualizerDirection.Forward)
+            {
+                pOffset -= pStep;
+                if (pOffset < 0)
+                    pOffset = 1;
+            }
+            else
+            {
+                pOffset += pStep;
+                if (pOffset > 1)
+                    pOffset = 0;
             }
 
             gradientBrush.InterpolationColors = colorBlend;
             graphics.FillRectangle(gradientBrush, drawRectangle);
+        }
+
+        public new virtual void Update()
+        {
+            Invalidate();
         }
     }
 }

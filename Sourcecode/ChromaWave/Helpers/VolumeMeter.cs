@@ -13,13 +13,14 @@ namespace ChromaWave.Helpers
     public enum VolumeMeterRenderMethod { Linear, Blocks }
     public partial class VolumeMeter : UserControl
     {
-        private Color borderColor = Color.White;
-        public int borderWidth = 1;
-        private int value;
-        private Color backgroundColor = Color.Transparent;
-        private Color barColor = Color.White;
-        private VolumeMeterRenderMethod renderMethod = VolumeMeterRenderMethod.Linear;
-        private int BlockSize = 20;
+        private Color pBorderColor = Color.White;
+        private int pBorderWidth = 1;
+        private int pValue;
+        private Color pBackgroundColor = Color.Transparent;
+        private Color pBarColor = Color.White;
+        private VolumeMeterRenderMethod pRenderMethod = VolumeMeterRenderMethod.Linear;
+        private int pBlockSize = 20;
+        private bool pAutoUpdate = false;
 
         #region Properties
         [Description("The color of the border."), Category("Aparência")]
@@ -27,7 +28,7 @@ namespace ChromaWave.Helpers
         {
             get
             {
-                return borderColor;
+                return pBorderColor;
             }
             set
             {
@@ -40,7 +41,7 @@ namespace ChromaWave.Helpers
         {
             get
             {
-                return borderWidth;
+                return pBorderWidth;
             }
             set
             {
@@ -52,7 +53,7 @@ namespace ChromaWave.Helpers
         public Color BackgroundColor {
             get
             {
-                return backgroundColor;
+                return pBackgroundColor;
             }
             set
             {
@@ -64,7 +65,7 @@ namespace ChromaWave.Helpers
         public int Value {
             get
             {
-                return value;
+                return pValue;
             }
             set
             {
@@ -77,7 +78,7 @@ namespace ChromaWave.Helpers
         {
             get
             {
-                return barColor;
+                return pBarColor;
             }
             set
             {
@@ -92,7 +93,7 @@ namespace ChromaWave.Helpers
         {
             get
             {
-                return renderMethod;
+                return pRenderMethod;
             }
             set
             {
@@ -104,52 +105,53 @@ namespace ChromaWave.Helpers
         public VolumeMeter()
         {
             InitializeComponent();
+            this.DoubleBuffered = true;
         }
 
         private void VolumeMeter_Paint(object sender, PaintEventArgs e)
         {
             Graphics graphics = e.Graphics;
-            int barHeight = Convert.ToInt32(this.Height * value / 100);
-            int borderOffset = this.borderWidth / 2 + (this.borderWidth % 2 == 0 ? 0 : 1);
+            int barHeight = Convert.ToInt32(this.Height * pValue / 100);
+            int borderOffset = this.pBorderWidth / 2 + (this.pBorderWidth % 2 == 0 ? 0 : 1);
 
             //Border
-            if (borderWidth > 0)
+            if (pBorderWidth > 0)
             {
                 Pen borderPen = new Pen(this.BorderColor);
-                borderPen.Width = this.borderWidth;
+                borderPen.Width = this.pBorderWidth;
                 Rectangle border = new Rectangle(new Point(0, 0), new Size(this.Width - 1, this.Height - 1));
                 graphics.DrawRectangle(borderPen, border);
             }
 
             //BackGround
-            SolidBrush backgroundColor = new SolidBrush(this.backgroundColor);
-            Rectangle background = new Rectangle(new Point(borderOffset, borderOffset), new Size(this.Width - ((this.borderWidth) + 1), this.Height - (this.borderWidth + 1)));
+            SolidBrush backgroundColor = new SolidBrush(this.pBackgroundColor);
+            Rectangle background = new Rectangle(new Point(borderOffset, borderOffset), new Size(this.Width - ((this.pBorderWidth) + 1), this.Height - (this.pBorderWidth + 1)));
             graphics.FillRectangle(backgroundColor, background);
 
             //Bar
             int StartPointLeft = borderOffset;
             int StartPointTop = (this.Height - barHeight) + borderOffset;
-            SolidBrush barColor = new SolidBrush(this.barColor);
+            SolidBrush barColor = new SolidBrush(this.pBarColor);
 
-            if (renderMethod == VolumeMeterRenderMethod.Linear)
+            if (pRenderMethod == VolumeMeterRenderMethod.Linear)
             {
-                Rectangle bar = new Rectangle(new Point(StartPointLeft, StartPointTop), new Size(this.Width - ((this.borderWidth) + 1), barHeight - (this.borderWidth + 1)));
+                Rectangle bar = new Rectangle(new Point(StartPointLeft, StartPointTop), new Size(this.Width - ((this.pBorderWidth) + 1), barHeight - (this.pBorderWidth + 1)));
                 graphics.FillRectangle(barColor, bar);
             }
-            else
+            else if(pRenderMethod == VolumeMeterRenderMethod.Blocks)
             {
-                int numberOfBlocks = (value*this.BlockSize/100);
-                int blockHeight = ((this.Height - (borderOffset * 2)) / this.BlockSize) + 1;
+                int numberOfBlocks = (pValue*this.pBlockSize/100);
+                int blockHeight = ((this.Height - (borderOffset * 2)) / this.pBlockSize) + 1;
                 int separatorHeight = 1;
-                for(var i = 0; i < this.BlockSize; i++)
+                for(var i = 0; i < this.pBlockSize; i++)
                 {
-                    if (i >= this.BlockSize - numberOfBlocks)
+                    if (i >= this.pBlockSize - numberOfBlocks)
                     {
                         int height = blockHeight - separatorHeight;
-                        if (i == this.BlockSize - 1)
+                        if (i == this.pBlockSize - 1)
                             height = blockHeight;
                         
-                        Rectangle bar = new Rectangle(new Point(StartPointLeft, blockHeight * i), new Size(this.Width - ((this.borderWidth) + 1), height));
+                        Rectangle bar = new Rectangle(new Point(StartPointLeft, blockHeight * i), new Size(this.Width - ((this.pBorderWidth) + 1), height));
                         graphics.FillRectangle(barColor, bar);
                     }
                 }
@@ -160,37 +162,48 @@ namespace ChromaWave.Helpers
         {
             if (value < 0 || value > 100)
                 throw new Exception("The VolumeMeter value should be between 0 and 100.");
-            this.value = value;
-            Invalidate();
+            this.pValue = value;
+            if (this.pAutoUpdate)
+                Invalidate();
         }
 
         private void SetBorderColor(Color borderColor)
         {
-            this.borderColor = borderColor;
-            Invalidate();
+            this.pBorderColor = borderColor;
+            if (this.pAutoUpdate)
+                Invalidate();
         }
 
         private void SetBorderWidth(int borderWidth)
         {
-            this.borderWidth = borderWidth;
-            Invalidate();
+            this.pBorderWidth = borderWidth;
+            if (this.pAutoUpdate)
+                Invalidate();
         }
 
         private void SetBackgroundColor(Color backgroundColor)
         {
-            this.backgroundColor = backgroundColor;
-            Invalidate();
+            this.pBackgroundColor = backgroundColor;
+            if (this.pAutoUpdate)
+                Invalidate();
         }
 
         private void SetBarColor(Color barColor)
         {
-            this.barColor = barColor;
-            Invalidate();
+            this.pBarColor = barColor;
+            if (this.pAutoUpdate)
+                Invalidate();
         }
 
         private void SetRenderMethod(VolumeMeterRenderMethod renderMethod)
         {
-            this.renderMethod = renderMethod;
+            this.pRenderMethod = renderMethod;
+            if(this.pAutoUpdate)
+                Invalidate();
+        }
+
+        public new virtual void Update()
+        {
             Invalidate();
         }
     }

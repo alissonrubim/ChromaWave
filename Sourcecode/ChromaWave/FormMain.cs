@@ -34,7 +34,7 @@ namespace ChromaWave
             AmplitudePercentageLeft = 100 + trackBarAmplitudeLeft.Value;
             AmplitudePercentageRight = 100 + trackBarAmplitudeRight.Value;
 
-            timerUIUpdate.Interval = 1000 / 30; //60fps
+            timerUIUpdate.Interval = 1000 / 30; //fps
         }
 
         public void StartCapturing()
@@ -81,7 +81,6 @@ namespace ChromaWave
         {
             StartCapturing();
         }
-    
 
         public float CalculateSample_MaxValue(float[] sample)
         {
@@ -112,6 +111,12 @@ namespace ChromaWave
 
             int valueRight = Convert.ToInt32(lastSampleChannelRight * 1000 * AmplitudePercentageRight / 100);
             volumeMeterRight.Value = valueRight > 100 ? 100 : valueRight;
+
+            //Re-draw controls
+            volumeMeterLeft.Update();
+            volumeMeterRight.Update();
+            chromaVisualizer.Update();
+
             this.ResumeLayout();
         }
     }

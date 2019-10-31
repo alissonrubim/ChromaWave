@@ -64,7 +64,7 @@
             this.labelFrequency1k = new DarkUI.Controls.DarkLabel();
             this.volumeMeterFrequency1K = new ChromaWave.Helpers.VolumeMeter();
             this.timerUIUpdate = new System.Windows.Forms.Timer(this.components);
-            this.chromaVisualizer1 = new ChromaWave.Helpers.ChromaVisualizer();
+            this.chromaVisualizer = new ChromaWave.Helpers.ChromaVisualizer();
             this.groupBoxVolume.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAmplitudeRight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAmplitudeLeft)).BeginInit();
@@ -461,7 +461,7 @@
             this.volumeMeter1.RenderMethod = ChromaWave.Helpers.VolumeMeterRenderMethod.Linear;
             this.volumeMeter1.Size = new System.Drawing.Size(24, 276);
             this.volumeMeter1.TabIndex = 4;
-            this.volumeMeter1.Value = 0;
+            this.volumeMeter1.Value = 50;
             // 
             // volumeMeterFrequency500
             // 
@@ -518,13 +518,13 @@
             this.timerUIUpdate.Enabled = true;
             this.timerUIUpdate.Tick += new System.EventHandler(this.TimerUIUpdate_Tick);
             // 
-            // chromaVisualizer1
+            // chromaVisualizer
             // 
-            this.chromaVisualizer1.BackColor = System.Drawing.Color.White;
-            this.chromaVisualizer1.Location = new System.Drawing.Point(15, 425);
-            this.chromaVisualizer1.Name = "chromaVisualizer1";
-            this.chromaVisualizer1.Size = new System.Drawing.Size(629, 189);
-            this.chromaVisualizer1.TabIndex = 24;
+            this.chromaVisualizer.BackColor = System.Drawing.Color.White;
+            this.chromaVisualizer.Location = new System.Drawing.Point(15, 425);
+            this.chromaVisualizer.Name = "chromaVisualizer";
+            this.chromaVisualizer.Size = new System.Drawing.Size(629, 23);
+            this.chromaVisualizer.TabIndex = 24;
             // 
             // FormMain
             // 
@@ -532,7 +532,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.ClientSize = new System.Drawing.Size(659, 627);
-            this.Controls.Add(this.chromaVisualizer1);
+            this.Controls.Add(this.chromaVisualizer);
             this.Controls.Add(this.darkGroupBox1);
             this.Controls.Add(this.groupBoxVolume);
             this.Controls.Add(this.labelSource);
@@ -569,7 +569,7 @@
         private DarkUI.Controls.DarkLabel labelFrequency1k;
         private Helpers.VolumeMeter volumeMeterFrequency1K;
         private DarkUI.Controls.DarkCheckBox checkBoxSync;
-        private Helpers.ChromaVisualizer chromaVisualizer1;
+        private Helpers.ChromaVisualizer chromaVisualizer;
         private DarkUI.Controls.DarkLabel darkLabel7;
         private Helpers.VolumeMeter volumeMeter8;
         private DarkUI.Controls.DarkLabel darkLabel6;
