@@ -16,10 +16,24 @@ namespace ChromaWave.Helpers
 
     public partial class ChromaVisualizer : UserControl
     {
-        private float pStep = 0.001f;
+        private float pStep = 0.01f;
         private float pOffset = 0f;
         private ChromaVisualizerDirection pDirection = ChromaVisualizerDirection.Forward;
         private ChromaVisualizerVelocity pVelocity = ChromaVisualizerVelocity.Slow;
+
+        #region Properties
+        public float Offset
+        {
+            get
+            {
+                return this.pOffset;
+            }
+            set
+            {
+                this.pOffset = value;
+            }
+        }
+        #endregion
 
         public ChromaVisualizer()
         {
@@ -33,34 +47,25 @@ namespace ChromaWave.Helpers
             Rectangle drawRectangle = new Rectangle(new Point(0, 0), this.ClientSize);
             LinearGradientBrush gradientBrush = new LinearGradientBrush(drawRectangle, Color.White, Color.Black, 0.0f);
             ColorBlend colorBlend = new ColorBlend();
-            colorBlend.Positions = new float[]
-            {
-                0,
-                0.1f,
-                0.2f,
-                0.3f,
-                0.4f,
-                0.5f,
-                0.6f,
-                0.7f,
-                0.8f,
-                0.9f,
-                1
-            };
+
+            int numberOfColors = 128;
+            List<float> positions = new List<float>();
+            for (var i = 0; i < numberOfColors-1; i++)
+                positions.Add(Convert.ToSingle(1f / (numberOfColors - 1)) * i);
+            positions.Add(1f);
+            colorBlend.Positions = positions.ToArray();
+
             colorBlend.Colors = new Color[colorBlend.Positions.Length];
-
             float startOffset = pOffset;
-
-
             float colorOffset = 1f / colorBlend.Positions.Length;
             for (int i = 0; i < colorBlend.Positions.Length; i++)
             {
-                colorBlend.Colors[i] = ColorHelper.HSLConvert(startOffset, 1, 0.5);
-                startOffset += colorOffset;
                 if (startOffset > 1)
-                        startOffset = 0;
+                    startOffset = 0;
+                colorBlend.Colors[i] = ColorHelper.ColorFromHSL(startOffset, 1, 0.5);
+                startOffset += colorOffset;
             }
-
+        
             if (pDirection == ChromaVisualizerDirection.Forward)
             {
                 pOffset -= pStep;
