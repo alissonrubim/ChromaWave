@@ -1,4 +1,4 @@
-﻿namespace ChromaWave.Helpers
+﻿namespace ChromaWave.Views
 {
     partial class VolumeMeter
     {

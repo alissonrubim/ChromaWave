@@ -9,17 +9,20 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 
-namespace ChromaWave.Helpers
+namespace ChromaWave.Views
 {
     public enum ChromaVisualizerDirection { Forward, Backward }
     public enum ChromaVisualizerVelocity { SuperFast, Fast, Medium, Slow, SuperSlow };
 
     public partial class ChromaVisualizer : UserControl
     {
+        private DateTime pLastPaintDateTime;
         private float pStep = 0.01f;
+        private int pSaturation = 50;
         private float pOffset = 0f;
         private ChromaVisualizerDirection pDirection = ChromaVisualizerDirection.Forward;
         private ChromaVisualizerVelocity pVelocity = ChromaVisualizerVelocity.Slow;
+        private int pBrightness = 100;
 
         #region Properties
         public float Offset
@@ -33,12 +36,80 @@ namespace ChromaWave.Helpers
                 this.pOffset = value;
             }
         }
+
+        public ChromaVisualizerDirection Direction
+        {
+            get
+            {
+                return this.pDirection;
+            }
+            set
+            {
+                this.pDirection = value;
+            }
+        }
+
+        public ChromaVisualizerVelocity Velocity
+        {
+            get
+            {
+                return this.pVelocity;
+            }
+            set
+            {
+                this.pVelocity = value;
+            }
+        }
+
+        public int Brightness
+        {
+            get
+            {
+                return this.pBrightness;
+            }
+            set
+            {
+                this.pBrightness = value;
+            }
+        }
+
+        public int Saturation
+        {
+            get
+            {
+                return this.pSaturation;
+            }
+            set
+            {
+                this.pSaturation = value;
+            }
+        }
         #endregion
 
         public ChromaVisualizer()
         {
             InitializeComponent();
             this.DoubleBuffered = true;
+            this.pLastPaintDateTime = DateTime.Now;
+        }
+
+        private float GetVelocityMultiplier()
+        {
+            switch (this.pVelocity)
+            {
+                case ChromaVisualizerVelocity.SuperSlow:
+                    return 1/10f;
+                case ChromaVisualizerVelocity.Slow:
+                    return 1/5f;
+                case ChromaVisualizerVelocity.Medium:
+                    return 1/2f;
+                case ChromaVisualizerVelocity.Fast:
+                    return 1f;
+                case ChromaVisualizerVelocity.SuperFast:
+                    return 1/0.3f;
+                default:
+                    return 1f;
+            }
         }
 
         private void ChromaVisualizer_Paint(object sender, PaintEventArgs e)
@@ -62,25 +133,29 @@ namespace ChromaWave.Helpers
             {
                 if (startOffset > 1)
                     startOffset = 0;
-                colorBlend.Colors[i] = ColorHelper.ColorFromHSL(startOffset, 1, 0.5);
+                colorBlend.Colors[i] = ColorHelper.ColorFromHSL(startOffset, pSaturation / 100f, pBrightness / 100f);
                 startOffset += colorOffset;
             }
-        
+
+            float velocity = GetVelocityMultiplier();
+            TimeSpan timeDiff = DateTime.Now - pLastPaintDateTime;
             if (pDirection == ChromaVisualizerDirection.Forward)
             {
-                pOffset -= pStep;
+                pOffset -= pStep * velocity * (timeDiff.Milliseconds / 10);
                 if (pOffset < 0)
                     pOffset = 1;
             }
             else
             {
-                pOffset += pStep;
+                pOffset += pStep * velocity * (timeDiff.Milliseconds / 10);
                 if (pOffset > 1)
                     pOffset = 0;
             }
-
+            
             gradientBrush.InterpolationColors = colorBlend;
             graphics.FillRectangle(gradientBrush, drawRectangle);
+
+            pLastPaintDateTime = DateTime.Now;
         }
 
         public new virtual void Update()

@@ -11,6 +11,12 @@ namespace ChromaWave.Controller
 {
     public class AudioDeviceController
     {
+        public static AudioDevice GetAudioDeviceByName(string name)
+        {
+            List<AudioDevice> devices = GetAllAudioDevices();
+            return devices.Where(x => x.Name.Equals(name)).FirstOrDefault();
+        }
+
         public static List<AudioDevice> GetAllAudioDevices()
         {
             List<AudioDevice> audioSources = new List<AudioDevice>();

@@ -42,6 +42,9 @@
     <Reference Include="NAudio, Version=1.9.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NAudio.1.9.0\lib\net35\NAudio.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3-beta2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -55,19 +58,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\DeviceController.cs" />
+    <Compile Include="Controller\AudioDeviceController.cs" />
     <Compile Include="Controller\LoopbackCaptureController.cs" />
-    <Compile Include="Helpers\ChromaVisualizer.cs">
+    <Compile Include="Controller\SettingsController.cs" />
+    <Compile Include="Helpers\AudioProcessingHelper.cs" />
+    <Compile Include="Models\Settings.cs" />
+    <Compile Include="Views\ChromaVisualizer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Helpers\ChromaVisualizer.Designer.cs">
+    <Compile Include="Views\ChromaVisualizer.Designer.cs">
       <DependentUpon>ChromaVisualizer.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ColorHelper.cs" />
-    <Compile Include="Helpers\VolumeMeter.cs">
+    <Compile Include="Views\VolumeMeter.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Helpers\VolumeMeter.Designer.cs">
+    <Compile Include="Views\VolumeMeter.Designer.cs">
       <DependentUpon>VolumeMeter.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\AudioChannelSample.cs" />
@@ -83,10 +89,10 @@
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Helpers\ChromaVisualizer.resx">
+    <EmbeddedResource Include="Views\ChromaVisualizer.resx">
       <DependentUpon>ChromaVisualizer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Helpers\VolumeMeter.resx">
+    <EmbeddedResource Include="Views\VolumeMeter.resx">
       <DependentUpon>VolumeMeter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChromaWave.Helpers
+namespace ChromaWave.Views
 {
     public class ColorHelper
     {

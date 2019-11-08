@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ChromaWave.Helpers
+namespace ChromaWave.Views
 {
     public enum VolumeMeterRenderMethod { Linear, Blocks }
     public partial class VolumeMeter : UserControl

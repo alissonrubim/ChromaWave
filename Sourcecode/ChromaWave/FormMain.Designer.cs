@@ -35,40 +35,54 @@
             this.labelSource = new DarkUI.Controls.DarkLabel();
             this.groupBoxVolume = new DarkUI.Controls.DarkGroupBox();
             this.checkBoxSync = new DarkUI.Controls.DarkCheckBox();
-            this.volumeMeterRight = new ChromaWave.Helpers.VolumeMeter();
             this.trackBarAmplitudeRight = new System.Windows.Forms.TrackBar();
             this.labelAmplitude = new DarkUI.Controls.DarkLabel();
             this.trackBarAmplitudeLeft = new System.Windows.Forms.TrackBar();
             this.labelChannelRight = new DarkUI.Controls.DarkLabel();
             this.labelChannelLeft = new DarkUI.Controls.DarkLabel();
-            this.volumeMeterLeft = new ChromaWave.Helpers.VolumeMeter();
             this.darkGroupBox1 = new DarkUI.Controls.DarkGroupBox();
             this.darkLabel7 = new DarkUI.Controls.DarkLabel();
-            this.volumeMeter8 = new ChromaWave.Helpers.VolumeMeter();
             this.darkLabel6 = new DarkUI.Controls.DarkLabel();
-            this.volumeMeter7 = new ChromaWave.Helpers.VolumeMeter();
             this.darkLabel5 = new DarkUI.Controls.DarkLabel();
-            this.volumeMeter6 = new ChromaWave.Helpers.VolumeMeter();
             this.darkLabel4 = new DarkUI.Controls.DarkLabel();
             this.darkLabel3 = new DarkUI.Controls.DarkLabel();
             this.darkLabel2 = new DarkUI.Controls.DarkLabel();
             this.darkLabel1 = new DarkUI.Controls.DarkLabel();
             this.labelFrequency2k = new DarkUI.Controls.DarkLabel();
-            this.volumeMeter5 = new ChromaWave.Helpers.VolumeMeter();
-            this.volumeMeter4 = new ChromaWave.Helpers.VolumeMeter();
-            this.volumeMeter3 = new ChromaWave.Helpers.VolumeMeter();
-            this.volumeMeter2 = new ChromaWave.Helpers.VolumeMeter();
-            this.volumeMeter1 = new ChromaWave.Helpers.VolumeMeter();
-            this.volumeMeterFrequency500 = new ChromaWave.Helpers.VolumeMeter();
             this.labelFrequency500 = new DarkUI.Controls.DarkLabel();
             this.labelFrequency1k = new DarkUI.Controls.DarkLabel();
-            this.volumeMeterFrequency1K = new ChromaWave.Helpers.VolumeMeter();
             this.timerUIUpdate = new System.Windows.Forms.Timer(this.components);
-            this.chromaVisualizer = new ChromaWave.Helpers.ChromaVisualizer();
+            this.groupBoxChromaVisualizer = new DarkUI.Controls.DarkGroupBox();
+            this.labelSaturation = new DarkUI.Controls.DarkLabel();
+            this.trackBarSaturation = new System.Windows.Forms.TrackBar();
+            this.darkLabel8 = new DarkUI.Controls.DarkLabel();
+            this.trackBarBrightness = new System.Windows.Forms.TrackBar();
+            this.comboBoxWaveVelocity = new DarkUI.Controls.DarkComboBox();
+            this.labelWaveVelocity = new DarkUI.Controls.DarkLabel();
+            this.labelWaveDirection = new DarkUI.Controls.DarkLabel();
+            this.comboBoxWaveDirection = new DarkUI.Controls.DarkComboBox();
+            this.buttonSave = new DarkUI.Controls.DarkButton();
+            this.chromaMusicVisualizer = new ChromaWave.Views.ChromaVisualizer();
+            this.chromaVisualizer = new ChromaWave.Views.ChromaVisualizer();
+            this.volumeMeter8 = new ChromaWave.Views.VolumeMeter();
+            this.volumeMeter7 = new ChromaWave.Views.VolumeMeter();
+            this.volumeMeter6 = new ChromaWave.Views.VolumeMeter();
+            this.volumeMeter5 = new ChromaWave.Views.VolumeMeter();
+            this.volumeMeter4 = new ChromaWave.Views.VolumeMeter();
+            this.volumeMeter3 = new ChromaWave.Views.VolumeMeter();
+            this.volumeMeter2 = new ChromaWave.Views.VolumeMeter();
+            this.volumeMeter1 = new ChromaWave.Views.VolumeMeter();
+            this.volumeMeterFrequency500 = new ChromaWave.Views.VolumeMeter();
+            this.volumeMeterFrequency1K = new ChromaWave.Views.VolumeMeter();
+            this.volumeMeterRight = new ChromaWave.Views.VolumeMeter();
+            this.volumeMeterLeft = new ChromaWave.Views.VolumeMeter();
             this.groupBoxVolume.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAmplitudeRight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAmplitudeLeft)).BeginInit();
             this.darkGroupBox1.SuspendLayout();
+            this.groupBoxChromaVisualizer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarSaturation)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarBrightness)).BeginInit();
             this.SuspendLayout();
             // 
             // comboBoxAudioDevices
@@ -143,22 +157,9 @@
             this.checkBoxSync.TabIndex = 23;
             this.checkBoxSync.Text = "Sync";
             // 
-            // volumeMeterRight
-            // 
-            this.volumeMeterRight.BackColor = System.Drawing.Color.Transparent;
-            this.volumeMeterRight.BackgroundColor = System.Drawing.Color.Transparent;
-            this.volumeMeterRight.BarColor = System.Drawing.Color.White;
-            this.volumeMeterRight.BorderColor = System.Drawing.Color.White;
-            this.volumeMeterRight.BorderWidth = 1;
-            this.volumeMeterRight.Location = new System.Drawing.Point(121, 32);
-            this.volumeMeterRight.Name = "volumeMeterRight";
-            this.volumeMeterRight.RenderMethod = ChromaWave.Helpers.VolumeMeterRenderMethod.Linear;
-            this.volumeMeterRight.Size = new System.Drawing.Size(24, 276);
-            this.volumeMeterRight.TabIndex = 1;
-            this.volumeMeterRight.Value = 50;
-            // 
             // trackBarAmplitudeRight
             // 
+            this.trackBarAmplitudeRight.AutoSize = false;
             this.trackBarAmplitudeRight.LargeChange = 10;
             this.trackBarAmplitudeRight.Location = new System.Drawing.Point(81, 45);
             this.trackBarAmplitudeRight.Maximum = 100;
@@ -217,20 +218,6 @@
             this.labelChannelLeft.TabIndex = 1;
             this.labelChannelLeft.Text = "Left";
             // 
-            // volumeMeterLeft
-            // 
-            this.volumeMeterLeft.BackColor = System.Drawing.Color.Transparent;
-            this.volumeMeterLeft.BackgroundColor = System.Drawing.Color.Transparent;
-            this.volumeMeterLeft.BarColor = System.Drawing.Color.White;
-            this.volumeMeterLeft.BorderColor = System.Drawing.Color.White;
-            this.volumeMeterLeft.BorderWidth = 1;
-            this.volumeMeterLeft.Location = new System.Drawing.Point(19, 32);
-            this.volumeMeterLeft.Name = "volumeMeterLeft";
-            this.volumeMeterLeft.RenderMethod = ChromaWave.Helpers.VolumeMeterRenderMethod.Blocks;
-            this.volumeMeterLeft.Size = new System.Drawing.Size(24, 276);
-            this.volumeMeterLeft.TabIndex = 0;
-            this.volumeMeterLeft.Value = 50;
-            // 
             // darkGroupBox1
             // 
             this.darkGroupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
@@ -274,20 +261,6 @@
             this.darkLabel7.TabIndex = 19;
             this.darkLabel7.Text = "16KHz";
             // 
-            // volumeMeter8
-            // 
-            this.volumeMeter8.BackColor = System.Drawing.Color.Transparent;
-            this.volumeMeter8.BackgroundColor = System.Drawing.Color.Transparent;
-            this.volumeMeter8.BarColor = System.Drawing.Color.White;
-            this.volumeMeter8.BorderColor = System.Drawing.Color.White;
-            this.volumeMeter8.BorderWidth = 1;
-            this.volumeMeter8.Location = new System.Drawing.Point(416, 32);
-            this.volumeMeter8.Name = "volumeMeter8";
-            this.volumeMeter8.RenderMethod = ChromaWave.Helpers.VolumeMeterRenderMethod.Linear;
-            this.volumeMeter8.Size = new System.Drawing.Size(24, 276);
-            this.volumeMeter8.TabIndex = 18;
-            this.volumeMeter8.Value = 0;
-            // 
             // darkLabel6
             // 
             this.darkLabel6.AutoSize = true;
@@ -299,20 +272,6 @@
             this.darkLabel6.TabIndex = 17;
             this.darkLabel6.Text = "8KHz";
             // 
-            // volumeMeter7
-            // 
-            this.volumeMeter7.BackColor = System.Drawing.Color.Transparent;
-            this.volumeMeter7.BackgroundColor = System.Drawing.Color.Transparent;
-            this.volumeMeter7.BarColor = System.Drawing.Color.White;
-            this.volumeMeter7.BorderColor = System.Drawing.Color.White;
-            this.volumeMeter7.BorderWidth = 1;
-            this.volumeMeter7.Location = new System.Drawing.Point(373, 32);
-            this.volumeMeter7.Name = "volumeMeter7";
-            this.volumeMeter7.RenderMethod = ChromaWave.Helpers.VolumeMeterRenderMethod.Linear;
-            this.volumeMeter7.Size = new System.Drawing.Size(24, 276);
-            this.volumeMeter7.TabIndex = 16;
-            this.volumeMeter7.Value = 0;
-            // 
             // darkLabel5
             // 
             this.darkLabel5.AutoSize = true;
@@ -323,20 +282,6 @@
             this.darkLabel5.Size = new System.Drawing.Size(28, 12);
             this.darkLabel5.TabIndex = 15;
             this.darkLabel5.Text = "4KHz";
-            // 
-            // volumeMeter6
-            // 
-            this.volumeMeter6.BackColor = System.Drawing.Color.Transparent;
-            this.volumeMeter6.BackgroundColor = System.Drawing.Color.Transparent;
-            this.volumeMeter6.BarColor = System.Drawing.Color.White;
-            this.volumeMeter6.BorderColor = System.Drawing.Color.White;
-            this.volumeMeter6.BorderWidth = 1;
-            this.volumeMeter6.Location = new System.Drawing.Point(331, 32);
-            this.volumeMeter6.Name = "volumeMeter6";
-            this.volumeMeter6.RenderMethod = ChromaWave.Helpers.VolumeMeterRenderMethod.Linear;
-            this.volumeMeter6.Size = new System.Drawing.Size(24, 276);
-            this.volumeMeter6.TabIndex = 14;
-            this.volumeMeter6.Value = 0;
             // 
             // darkLabel4
             // 
@@ -393,90 +338,6 @@
             this.labelFrequency2k.TabIndex = 9;
             this.labelFrequency2k.Text = "2KHz";
             // 
-            // volumeMeter5
-            // 
-            this.volumeMeter5.BackColor = System.Drawing.Color.Transparent;
-            this.volumeMeter5.BackgroundColor = System.Drawing.Color.Transparent;
-            this.volumeMeter5.BarColor = System.Drawing.Color.White;
-            this.volumeMeter5.BorderColor = System.Drawing.Color.White;
-            this.volumeMeter5.BorderWidth = 1;
-            this.volumeMeter5.Location = new System.Drawing.Point(287, 32);
-            this.volumeMeter5.Name = "volumeMeter5";
-            this.volumeMeter5.RenderMethod = ChromaWave.Helpers.VolumeMeterRenderMethod.Linear;
-            this.volumeMeter5.Size = new System.Drawing.Size(24, 276);
-            this.volumeMeter5.TabIndex = 8;
-            this.volumeMeter5.Value = 0;
-            // 
-            // volumeMeter4
-            // 
-            this.volumeMeter4.BackColor = System.Drawing.Color.Transparent;
-            this.volumeMeter4.BackgroundColor = System.Drawing.Color.Transparent;
-            this.volumeMeter4.BarColor = System.Drawing.Color.White;
-            this.volumeMeter4.BorderColor = System.Drawing.Color.White;
-            this.volumeMeter4.BorderWidth = 1;
-            this.volumeMeter4.Location = new System.Drawing.Point(148, 32);
-            this.volumeMeter4.Name = "volumeMeter4";
-            this.volumeMeter4.RenderMethod = ChromaWave.Helpers.VolumeMeterRenderMethod.Linear;
-            this.volumeMeter4.Size = new System.Drawing.Size(24, 276);
-            this.volumeMeter4.TabIndex = 7;
-            this.volumeMeter4.Value = 0;
-            // 
-            // volumeMeter3
-            // 
-            this.volumeMeter3.BackColor = System.Drawing.Color.Transparent;
-            this.volumeMeter3.BackgroundColor = System.Drawing.Color.Transparent;
-            this.volumeMeter3.BarColor = System.Drawing.Color.White;
-            this.volumeMeter3.BorderColor = System.Drawing.Color.White;
-            this.volumeMeter3.BorderWidth = 1;
-            this.volumeMeter3.Location = new System.Drawing.Point(102, 32);
-            this.volumeMeter3.Name = "volumeMeter3";
-            this.volumeMeter3.RenderMethod = ChromaWave.Helpers.VolumeMeterRenderMethod.Linear;
-            this.volumeMeter3.Size = new System.Drawing.Size(24, 276);
-            this.volumeMeter3.TabIndex = 6;
-            this.volumeMeter3.Value = 0;
-            // 
-            // volumeMeter2
-            // 
-            this.volumeMeter2.BackColor = System.Drawing.Color.Transparent;
-            this.volumeMeter2.BackgroundColor = System.Drawing.Color.Transparent;
-            this.volumeMeter2.BarColor = System.Drawing.Color.White;
-            this.volumeMeter2.BorderColor = System.Drawing.Color.White;
-            this.volumeMeter2.BorderWidth = 1;
-            this.volumeMeter2.Location = new System.Drawing.Point(61, 32);
-            this.volumeMeter2.Name = "volumeMeter2";
-            this.volumeMeter2.RenderMethod = ChromaWave.Helpers.VolumeMeterRenderMethod.Linear;
-            this.volumeMeter2.Size = new System.Drawing.Size(24, 276);
-            this.volumeMeter2.TabIndex = 5;
-            this.volumeMeter2.Value = 0;
-            // 
-            // volumeMeter1
-            // 
-            this.volumeMeter1.BackColor = System.Drawing.Color.Transparent;
-            this.volumeMeter1.BackgroundColor = System.Drawing.Color.Transparent;
-            this.volumeMeter1.BarColor = System.Drawing.Color.White;
-            this.volumeMeter1.BorderColor = System.Drawing.Color.White;
-            this.volumeMeter1.BorderWidth = 1;
-            this.volumeMeter1.Location = new System.Drawing.Point(22, 32);
-            this.volumeMeter1.Name = "volumeMeter1";
-            this.volumeMeter1.RenderMethod = ChromaWave.Helpers.VolumeMeterRenderMethod.Linear;
-            this.volumeMeter1.Size = new System.Drawing.Size(24, 276);
-            this.volumeMeter1.TabIndex = 4;
-            this.volumeMeter1.Value = 50;
-            // 
-            // volumeMeterFrequency500
-            // 
-            this.volumeMeterFrequency500.BackColor = System.Drawing.Color.Transparent;
-            this.volumeMeterFrequency500.BackgroundColor = System.Drawing.Color.Transparent;
-            this.volumeMeterFrequency500.BarColor = System.Drawing.Color.White;
-            this.volumeMeterFrequency500.BorderColor = System.Drawing.Color.White;
-            this.volumeMeterFrequency500.BorderWidth = 1;
-            this.volumeMeterFrequency500.Location = new System.Drawing.Point(196, 32);
-            this.volumeMeterFrequency500.Name = "volumeMeterFrequency500";
-            this.volumeMeterFrequency500.RenderMethod = ChromaWave.Helpers.VolumeMeterRenderMethod.Linear;
-            this.volumeMeterFrequency500.Size = new System.Drawing.Size(24, 276);
-            this.volumeMeterFrequency500.TabIndex = 2;
-            this.volumeMeterFrequency500.Value = 0;
-            // 
             // labelFrequency500
             // 
             this.labelFrequency500.AutoSize = true;
@@ -499,6 +360,303 @@
             this.labelFrequency1k.TabIndex = 1;
             this.labelFrequency1k.Text = "1KHz";
             // 
+            // timerUIUpdate
+            // 
+            this.timerUIUpdate.Enabled = true;
+            this.timerUIUpdate.Tick += new System.EventHandler(this.TimerUIUpdate_Tick);
+            // 
+            // groupBoxChromaVisualizer
+            // 
+            this.groupBoxChromaVisualizer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.groupBoxChromaVisualizer.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.groupBoxChromaVisualizer.Controls.Add(this.chromaMusicVisualizer);
+            this.groupBoxChromaVisualizer.Controls.Add(this.labelSaturation);
+            this.groupBoxChromaVisualizer.Controls.Add(this.trackBarSaturation);
+            this.groupBoxChromaVisualizer.Controls.Add(this.darkLabel8);
+            this.groupBoxChromaVisualizer.Controls.Add(this.trackBarBrightness);
+            this.groupBoxChromaVisualizer.Controls.Add(this.comboBoxWaveVelocity);
+            this.groupBoxChromaVisualizer.Controls.Add(this.labelWaveVelocity);
+            this.groupBoxChromaVisualizer.Controls.Add(this.labelWaveDirection);
+            this.groupBoxChromaVisualizer.Controls.Add(this.comboBoxWaveDirection);
+            this.groupBoxChromaVisualizer.Controls.Add(this.chromaVisualizer);
+            this.groupBoxChromaVisualizer.ForeColor = System.Drawing.Color.Gainsboro;
+            this.groupBoxChromaVisualizer.Location = new System.Drawing.Point(15, 411);
+            this.groupBoxChromaVisualizer.Name = "groupBoxChromaVisualizer";
+            this.groupBoxChromaVisualizer.Size = new System.Drawing.Size(629, 238);
+            this.groupBoxChromaVisualizer.TabIndex = 25;
+            this.groupBoxChromaVisualizer.TabStop = false;
+            this.groupBoxChromaVisualizer.Text = "Vizualizer";
+            // 
+            // labelSaturation
+            // 
+            this.labelSaturation.AutoSize = true;
+            this.labelSaturation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.labelSaturation.Location = new System.Drawing.Point(342, 61);
+            this.labelSaturation.Name = "labelSaturation";
+            this.labelSaturation.Size = new System.Drawing.Size(64, 13);
+            this.labelSaturation.TabIndex = 32;
+            this.labelSaturation.Text = "Saturantion:";
+            // 
+            // trackBarSaturation
+            // 
+            this.trackBarSaturation.AutoSize = false;
+            this.trackBarSaturation.Location = new System.Drawing.Point(407, 61);
+            this.trackBarSaturation.Maximum = 100;
+            this.trackBarSaturation.Name = "trackBarSaturation";
+            this.trackBarSaturation.Size = new System.Drawing.Size(205, 21);
+            this.trackBarSaturation.TabIndex = 31;
+            this.trackBarSaturation.TickFrequency = 5;
+            this.trackBarSaturation.Value = 50;
+            this.trackBarSaturation.ValueChanged += new System.EventHandler(this.TrackBarSaturation_ValueChanged);
+            // 
+            // darkLabel8
+            // 
+            this.darkLabel8.AutoSize = true;
+            this.darkLabel8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.darkLabel8.Location = new System.Drawing.Point(45, 61);
+            this.darkLabel8.Name = "darkLabel8";
+            this.darkLabel8.Size = new System.Drawing.Size(59, 13);
+            this.darkLabel8.TabIndex = 30;
+            this.darkLabel8.Text = "Brightness:";
+            // 
+            // trackBarBrightness
+            // 
+            this.trackBarBrightness.AutoSize = false;
+            this.trackBarBrightness.Location = new System.Drawing.Point(104, 61);
+            this.trackBarBrightness.Maximum = 100;
+            this.trackBarBrightness.Name = "trackBarBrightness";
+            this.trackBarBrightness.Size = new System.Drawing.Size(205, 21);
+            this.trackBarBrightness.TabIndex = 29;
+            this.trackBarBrightness.TickFrequency = 5;
+            this.trackBarBrightness.Value = 50;
+            this.trackBarBrightness.ValueChanged += new System.EventHandler(this.TrackBarBrightness_ValueChanged);
+            // 
+            // comboBoxWaveVelocity
+            // 
+            this.comboBoxWaveVelocity.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(73)))), ((int)(((byte)(74)))));
+            this.comboBoxWaveVelocity.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.comboBoxWaveVelocity.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid;
+            this.comboBoxWaveVelocity.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(43)))), ((int)(((byte)(43)))));
+            this.comboBoxWaveVelocity.ButtonIcon = ((System.Drawing.Bitmap)(resources.GetObject("comboBoxWaveVelocity.ButtonIcon")));
+            this.comboBoxWaveVelocity.DrawDropdownHoverOutline = false;
+            this.comboBoxWaveVelocity.DrawFocusRectangle = false;
+            this.comboBoxWaveVelocity.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.comboBoxWaveVelocity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxWaveVelocity.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBoxWaveVelocity.ForeColor = System.Drawing.Color.Gainsboro;
+            this.comboBoxWaveVelocity.FormattingEnabled = true;
+            this.comboBoxWaveVelocity.Location = new System.Drawing.Point(412, 30);
+            this.comboBoxWaveVelocity.Name = "comboBoxWaveVelocity";
+            this.comboBoxWaveVelocity.Size = new System.Drawing.Size(200, 21);
+            this.comboBoxWaveVelocity.TabIndex = 28;
+            this.comboBoxWaveVelocity.Text = null;
+            this.comboBoxWaveVelocity.TextPadding = new System.Windows.Forms.Padding(2);
+            this.comboBoxWaveVelocity.SelectedIndexChanged += new System.EventHandler(this.ComboBoxWaveVelocity_SelectedIndexChanged);
+            // 
+            // labelWaveVelocity
+            // 
+            this.labelWaveVelocity.AutoSize = true;
+            this.labelWaveVelocity.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.labelWaveVelocity.Location = new System.Drawing.Point(323, 33);
+            this.labelWaveVelocity.Name = "labelWaveVelocity";
+            this.labelWaveVelocity.Size = new System.Drawing.Size(78, 13);
+            this.labelWaveVelocity.TabIndex = 27;
+            this.labelWaveVelocity.Text = "Wave velocity:";
+            // 
+            // labelWaveDirection
+            // 
+            this.labelWaveDirection.AutoSize = true;
+            this.labelWaveDirection.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.labelWaveDirection.Location = new System.Drawing.Point(22, 33);
+            this.labelWaveDirection.Name = "labelWaveDirection";
+            this.labelWaveDirection.Size = new System.Drawing.Size(82, 13);
+            this.labelWaveDirection.TabIndex = 26;
+            this.labelWaveDirection.Text = "Wave direction:";
+            // 
+            // comboBoxWaveDirection
+            // 
+            this.comboBoxWaveDirection.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(73)))), ((int)(((byte)(74)))));
+            this.comboBoxWaveDirection.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.comboBoxWaveDirection.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid;
+            this.comboBoxWaveDirection.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(43)))), ((int)(((byte)(43)))));
+            this.comboBoxWaveDirection.ButtonIcon = ((System.Drawing.Bitmap)(resources.GetObject("comboBoxWaveDirection.ButtonIcon")));
+            this.comboBoxWaveDirection.DrawDropdownHoverOutline = false;
+            this.comboBoxWaveDirection.DrawFocusRectangle = false;
+            this.comboBoxWaveDirection.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.comboBoxWaveDirection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxWaveDirection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBoxWaveDirection.ForeColor = System.Drawing.Color.Gainsboro;
+            this.comboBoxWaveDirection.FormattingEnabled = true;
+            this.comboBoxWaveDirection.Location = new System.Drawing.Point(110, 30);
+            this.comboBoxWaveDirection.Name = "comboBoxWaveDirection";
+            this.comboBoxWaveDirection.Size = new System.Drawing.Size(194, 21);
+            this.comboBoxWaveDirection.TabIndex = 25;
+            this.comboBoxWaveDirection.Text = null;
+            this.comboBoxWaveDirection.TextPadding = new System.Windows.Forms.Padding(2);
+            this.comboBoxWaveDirection.SelectedIndexChanged += new System.EventHandler(this.ComboBoxWaveDirection_SelectedIndexChanged);
+            // 
+            // buttonSave
+            // 
+            this.buttonSave.Location = new System.Drawing.Point(518, 655);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Padding = new System.Windows.Forms.Padding(5);
+            this.buttonSave.Size = new System.Drawing.Size(126, 23);
+            this.buttonSave.TabIndex = 26;
+            this.buttonSave.Text = "Save Settings";
+            this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
+            // 
+            // chromaMusicVisualizer
+            // 
+            this.chromaMusicVisualizer.BackColor = System.Drawing.Color.White;
+            this.chromaMusicVisualizer.Brightness = 100;
+            this.chromaMusicVisualizer.Direction = ChromaWave.Views.ChromaVisualizerDirection.Forward;
+            this.chromaMusicVisualizer.Location = new System.Drawing.Point(19, 159);
+            this.chromaMusicVisualizer.Name = "chromaMusicVisualizer";
+            this.chromaMusicVisualizer.Offset = 0.5420001F;
+            this.chromaMusicVisualizer.Saturation = 50;
+            this.chromaMusicVisualizer.Size = new System.Drawing.Size(593, 55);
+            this.chromaMusicVisualizer.TabIndex = 33;
+            this.chromaMusicVisualizer.Velocity = ChromaWave.Views.ChromaVisualizerVelocity.Slow;
+            // 
+            // chromaVisualizer
+            // 
+            this.chromaVisualizer.BackColor = System.Drawing.Color.White;
+            this.chromaVisualizer.Brightness = 100;
+            this.chromaVisualizer.Direction = ChromaWave.Views.ChromaVisualizerDirection.Forward;
+            this.chromaVisualizer.Location = new System.Drawing.Point(19, 98);
+            this.chromaVisualizer.Name = "chromaVisualizer";
+            this.chromaVisualizer.Offset = 0.1759999F;
+            this.chromaVisualizer.Saturation = 50;
+            this.chromaVisualizer.Size = new System.Drawing.Size(593, 55);
+            this.chromaVisualizer.TabIndex = 24;
+            this.chromaVisualizer.Velocity = ChromaWave.Views.ChromaVisualizerVelocity.Slow;
+            // 
+            // volumeMeter8
+            // 
+            this.volumeMeter8.BackColor = System.Drawing.Color.Transparent;
+            this.volumeMeter8.BackgroundColor = System.Drawing.Color.Transparent;
+            this.volumeMeter8.BarColor = System.Drawing.Color.White;
+            this.volumeMeter8.BorderColor = System.Drawing.Color.White;
+            this.volumeMeter8.BorderWidth = 1;
+            this.volumeMeter8.Location = new System.Drawing.Point(416, 32);
+            this.volumeMeter8.Name = "volumeMeter8";
+            this.volumeMeter8.RenderMethod = ChromaWave.Views.VolumeMeterRenderMethod.Linear;
+            this.volumeMeter8.Size = new System.Drawing.Size(24, 276);
+            this.volumeMeter8.TabIndex = 18;
+            this.volumeMeter8.Value = 0;
+            // 
+            // volumeMeter7
+            // 
+            this.volumeMeter7.BackColor = System.Drawing.Color.Transparent;
+            this.volumeMeter7.BackgroundColor = System.Drawing.Color.Transparent;
+            this.volumeMeter7.BarColor = System.Drawing.Color.White;
+            this.volumeMeter7.BorderColor = System.Drawing.Color.White;
+            this.volumeMeter7.BorderWidth = 1;
+            this.volumeMeter7.Location = new System.Drawing.Point(373, 32);
+            this.volumeMeter7.Name = "volumeMeter7";
+            this.volumeMeter7.RenderMethod = ChromaWave.Views.VolumeMeterRenderMethod.Linear;
+            this.volumeMeter7.Size = new System.Drawing.Size(24, 276);
+            this.volumeMeter7.TabIndex = 16;
+            this.volumeMeter7.Value = 0;
+            // 
+            // volumeMeter6
+            // 
+            this.volumeMeter6.BackColor = System.Drawing.Color.Transparent;
+            this.volumeMeter6.BackgroundColor = System.Drawing.Color.Transparent;
+            this.volumeMeter6.BarColor = System.Drawing.Color.White;
+            this.volumeMeter6.BorderColor = System.Drawing.Color.White;
+            this.volumeMeter6.BorderWidth = 1;
+            this.volumeMeter6.Location = new System.Drawing.Point(331, 32);
+            this.volumeMeter6.Name = "volumeMeter6";
+            this.volumeMeter6.RenderMethod = ChromaWave.Views.VolumeMeterRenderMethod.Linear;
+            this.volumeMeter6.Size = new System.Drawing.Size(24, 276);
+            this.volumeMeter6.TabIndex = 14;
+            this.volumeMeter6.Value = 0;
+            // 
+            // volumeMeter5
+            // 
+            this.volumeMeter5.BackColor = System.Drawing.Color.Transparent;
+            this.volumeMeter5.BackgroundColor = System.Drawing.Color.Transparent;
+            this.volumeMeter5.BarColor = System.Drawing.Color.White;
+            this.volumeMeter5.BorderColor = System.Drawing.Color.White;
+            this.volumeMeter5.BorderWidth = 1;
+            this.volumeMeter5.Location = new System.Drawing.Point(287, 32);
+            this.volumeMeter5.Name = "volumeMeter5";
+            this.volumeMeter5.RenderMethod = ChromaWave.Views.VolumeMeterRenderMethod.Linear;
+            this.volumeMeter5.Size = new System.Drawing.Size(24, 276);
+            this.volumeMeter5.TabIndex = 8;
+            this.volumeMeter5.Value = 0;
+            // 
+            // volumeMeter4
+            // 
+            this.volumeMeter4.BackColor = System.Drawing.Color.Transparent;
+            this.volumeMeter4.BackgroundColor = System.Drawing.Color.Transparent;
+            this.volumeMeter4.BarColor = System.Drawing.Color.White;
+            this.volumeMeter4.BorderColor = System.Drawing.Color.White;
+            this.volumeMeter4.BorderWidth = 1;
+            this.volumeMeter4.Location = new System.Drawing.Point(148, 32);
+            this.volumeMeter4.Name = "volumeMeter4";
+            this.volumeMeter4.RenderMethod = ChromaWave.Views.VolumeMeterRenderMethod.Linear;
+            this.volumeMeter4.Size = new System.Drawing.Size(24, 276);
+            this.volumeMeter4.TabIndex = 7;
+            this.volumeMeter4.Value = 0;
+            // 
+            // volumeMeter3
+            // 
+            this.volumeMeter3.BackColor = System.Drawing.Color.Transparent;
+            this.volumeMeter3.BackgroundColor = System.Drawing.Color.Transparent;
+            this.volumeMeter3.BarColor = System.Drawing.Color.White;
+            this.volumeMeter3.BorderColor = System.Drawing.Color.White;
+            this.volumeMeter3.BorderWidth = 1;
+            this.volumeMeter3.Location = new System.Drawing.Point(102, 32);
+            this.volumeMeter3.Name = "volumeMeter3";
+            this.volumeMeter3.RenderMethod = ChromaWave.Views.VolumeMeterRenderMethod.Linear;
+            this.volumeMeter3.Size = new System.Drawing.Size(24, 276);
+            this.volumeMeter3.TabIndex = 6;
+            this.volumeMeter3.Value = 0;
+            // 
+            // volumeMeter2
+            // 
+            this.volumeMeter2.BackColor = System.Drawing.Color.Transparent;
+            this.volumeMeter2.BackgroundColor = System.Drawing.Color.Transparent;
+            this.volumeMeter2.BarColor = System.Drawing.Color.White;
+            this.volumeMeter2.BorderColor = System.Drawing.Color.White;
+            this.volumeMeter2.BorderWidth = 1;
+            this.volumeMeter2.Location = new System.Drawing.Point(61, 32);
+            this.volumeMeter2.Name = "volumeMeter2";
+            this.volumeMeter2.RenderMethod = ChromaWave.Views.VolumeMeterRenderMethod.Linear;
+            this.volumeMeter2.Size = new System.Drawing.Size(24, 276);
+            this.volumeMeter2.TabIndex = 5;
+            this.volumeMeter2.Value = 0;
+            // 
+            // volumeMeter1
+            // 
+            this.volumeMeter1.BackColor = System.Drawing.Color.Transparent;
+            this.volumeMeter1.BackgroundColor = System.Drawing.Color.Transparent;
+            this.volumeMeter1.BarColor = System.Drawing.Color.White;
+            this.volumeMeter1.BorderColor = System.Drawing.Color.White;
+            this.volumeMeter1.BorderWidth = 1;
+            this.volumeMeter1.Location = new System.Drawing.Point(22, 32);
+            this.volumeMeter1.Name = "volumeMeter1";
+            this.volumeMeter1.RenderMethod = ChromaWave.Views.VolumeMeterRenderMethod.Linear;
+            this.volumeMeter1.Size = new System.Drawing.Size(24, 276);
+            this.volumeMeter1.TabIndex = 4;
+            this.volumeMeter1.Value = 0;
+            // 
+            // volumeMeterFrequency500
+            // 
+            this.volumeMeterFrequency500.BackColor = System.Drawing.Color.Transparent;
+            this.volumeMeterFrequency500.BackgroundColor = System.Drawing.Color.Transparent;
+            this.volumeMeterFrequency500.BarColor = System.Drawing.Color.White;
+            this.volumeMeterFrequency500.BorderColor = System.Drawing.Color.White;
+            this.volumeMeterFrequency500.BorderWidth = 1;
+            this.volumeMeterFrequency500.Location = new System.Drawing.Point(196, 32);
+            this.volumeMeterFrequency500.Name = "volumeMeterFrequency500";
+            this.volumeMeterFrequency500.RenderMethod = ChromaWave.Views.VolumeMeterRenderMethod.Linear;
+            this.volumeMeterFrequency500.Size = new System.Drawing.Size(24, 276);
+            this.volumeMeterFrequency500.TabIndex = 2;
+            this.volumeMeterFrequency500.Value = 0;
+            // 
             // volumeMeterFrequency1K
             // 
             this.volumeMeterFrequency1K.BackColor = System.Drawing.Color.Transparent;
@@ -508,31 +666,47 @@
             this.volumeMeterFrequency1K.BorderWidth = 1;
             this.volumeMeterFrequency1K.Location = new System.Drawing.Point(240, 32);
             this.volumeMeterFrequency1K.Name = "volumeMeterFrequency1K";
-            this.volumeMeterFrequency1K.RenderMethod = ChromaWave.Helpers.VolumeMeterRenderMethod.Linear;
+            this.volumeMeterFrequency1K.RenderMethod = ChromaWave.Views.VolumeMeterRenderMethod.Linear;
             this.volumeMeterFrequency1K.Size = new System.Drawing.Size(24, 276);
             this.volumeMeterFrequency1K.TabIndex = 0;
             this.volumeMeterFrequency1K.Value = 0;
             // 
-            // timerUIUpdate
+            // volumeMeterRight
             // 
-            this.timerUIUpdate.Enabled = true;
-            this.timerUIUpdate.Tick += new System.EventHandler(this.TimerUIUpdate_Tick);
+            this.volumeMeterRight.BackColor = System.Drawing.Color.Transparent;
+            this.volumeMeterRight.BackgroundColor = System.Drawing.Color.Transparent;
+            this.volumeMeterRight.BarColor = System.Drawing.Color.White;
+            this.volumeMeterRight.BorderColor = System.Drawing.Color.White;
+            this.volumeMeterRight.BorderWidth = 1;
+            this.volumeMeterRight.Location = new System.Drawing.Point(121, 32);
+            this.volumeMeterRight.Name = "volumeMeterRight";
+            this.volumeMeterRight.RenderMethod = ChromaWave.Views.VolumeMeterRenderMethod.Blocks;
+            this.volumeMeterRight.Size = new System.Drawing.Size(24, 276);
+            this.volumeMeterRight.TabIndex = 1;
+            this.volumeMeterRight.Value = 50;
             // 
-            // chromaVisualizer
+            // volumeMeterLeft
             // 
-            this.chromaVisualizer.BackColor = System.Drawing.Color.White;
-            this.chromaVisualizer.Location = new System.Drawing.Point(15, 425);
-            this.chromaVisualizer.Name = "chromaVisualizer";
-            this.chromaVisualizer.Size = new System.Drawing.Size(629, 23);
-            this.chromaVisualizer.TabIndex = 24;
+            this.volumeMeterLeft.BackColor = System.Drawing.Color.Transparent;
+            this.volumeMeterLeft.BackgroundColor = System.Drawing.Color.Transparent;
+            this.volumeMeterLeft.BarColor = System.Drawing.Color.White;
+            this.volumeMeterLeft.BorderColor = System.Drawing.Color.White;
+            this.volumeMeterLeft.BorderWidth = 1;
+            this.volumeMeterLeft.Location = new System.Drawing.Point(19, 32);
+            this.volumeMeterLeft.Name = "volumeMeterLeft";
+            this.volumeMeterLeft.RenderMethod = ChromaWave.Views.VolumeMeterRenderMethod.Blocks;
+            this.volumeMeterLeft.Size = new System.Drawing.Size(24, 276);
+            this.volumeMeterLeft.TabIndex = 0;
+            this.volumeMeterLeft.Value = 50;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.ClientSize = new System.Drawing.Size(659, 627);
-            this.Controls.Add(this.chromaVisualizer);
+            this.ClientSize = new System.Drawing.Size(653, 687);
+            this.Controls.Add(this.buttonSave);
+            this.Controls.Add(this.groupBoxChromaVisualizer);
             this.Controls.Add(this.darkGroupBox1);
             this.Controls.Add(this.groupBoxVolume);
             this.Controls.Add(this.labelSource);
@@ -546,6 +720,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAmplitudeLeft)).EndInit();
             this.darkGroupBox1.ResumeLayout(false);
             this.darkGroupBox1.PerformLayout();
+            this.groupBoxChromaVisualizer.ResumeLayout(false);
+            this.groupBoxChromaVisualizer.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarSaturation)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarBrightness)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -556,37 +734,48 @@
         private DarkUI.Controls.DarkButton buttonReload;
         private DarkUI.Controls.DarkLabel labelSource;
         private DarkUI.Controls.DarkGroupBox groupBoxVolume;
-        private Helpers.VolumeMeter volumeMeterLeft;
+        private Views.VolumeMeter volumeMeterLeft;
         private System.Windows.Forms.TrackBar trackBarAmplitudeLeft;
         private DarkUI.Controls.DarkLabel labelChannelRight;
-        private Helpers.VolumeMeter volumeMeterRight;
+        private Views.VolumeMeter volumeMeterRight;
         private DarkUI.Controls.DarkLabel labelChannelLeft;
         private DarkUI.Controls.DarkLabel labelAmplitude;
         private System.Windows.Forms.TrackBar trackBarAmplitudeRight;
         private DarkUI.Controls.DarkGroupBox darkGroupBox1;
-        private Helpers.VolumeMeter volumeMeterFrequency500;
+        private Views.VolumeMeter volumeMeterFrequency500;
         private DarkUI.Controls.DarkLabel labelFrequency500;
         private DarkUI.Controls.DarkLabel labelFrequency1k;
-        private Helpers.VolumeMeter volumeMeterFrequency1K;
+        private Views.VolumeMeter volumeMeterFrequency1K;
         private DarkUI.Controls.DarkCheckBox checkBoxSync;
-        private Helpers.ChromaVisualizer chromaVisualizer;
+        private Views.ChromaVisualizer chromaVisualizer;
         private DarkUI.Controls.DarkLabel darkLabel7;
-        private Helpers.VolumeMeter volumeMeter8;
+        private Views.VolumeMeter volumeMeter8;
         private DarkUI.Controls.DarkLabel darkLabel6;
-        private Helpers.VolumeMeter volumeMeter7;
+        private Views.VolumeMeter volumeMeter7;
         private DarkUI.Controls.DarkLabel darkLabel5;
-        private Helpers.VolumeMeter volumeMeter6;
+        private Views.VolumeMeter volumeMeter6;
         private DarkUI.Controls.DarkLabel darkLabel4;
         private DarkUI.Controls.DarkLabel darkLabel3;
         private DarkUI.Controls.DarkLabel darkLabel2;
         private DarkUI.Controls.DarkLabel darkLabel1;
         private DarkUI.Controls.DarkLabel labelFrequency2k;
-        private Helpers.VolumeMeter volumeMeter5;
-        private Helpers.VolumeMeter volumeMeter4;
-        private Helpers.VolumeMeter volumeMeter3;
-        private Helpers.VolumeMeter volumeMeter2;
-        private Helpers.VolumeMeter volumeMeter1;
+        private Views.VolumeMeter volumeMeter5;
+        private Views.VolumeMeter volumeMeter4;
+        private Views.VolumeMeter volumeMeter3;
+        private Views.VolumeMeter volumeMeter2;
+        private Views.VolumeMeter volumeMeter1;
         private System.Windows.Forms.Timer timerUIUpdate;
+        private DarkUI.Controls.DarkGroupBox groupBoxChromaVisualizer;
+        private DarkUI.Controls.DarkComboBox comboBoxWaveVelocity;
+        private DarkUI.Controls.DarkLabel labelWaveVelocity;
+        private DarkUI.Controls.DarkLabel labelWaveDirection;
+        private DarkUI.Controls.DarkComboBox comboBoxWaveDirection;
+        private DarkUI.Controls.DarkLabel darkLabel8;
+        private System.Windows.Forms.TrackBar trackBarBrightness;
+        private DarkUI.Controls.DarkLabel labelSaturation;
+        private System.Windows.Forms.TrackBar trackBarSaturation;
+        private Views.ChromaVisualizer chromaMusicVisualizer;
+        private DarkUI.Controls.DarkButton buttonSave;
     }
 }
 
