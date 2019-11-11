@@ -40,10 +40,10 @@ namespace ChromaWave.Controller
         {
             if (loopbackCapture == null || loopbackCapture.CaptureState == NAudio.CoreAudioApi.CaptureState.Stopped) {
                 //Start a capturing using a specific device
-                loopbackCapture = new WasapiLoopbackCapture(new MMDeviceEnumerator().GetDevice(audioDevice.Id)); 
-                loopbackCapture.DataAvailable += loopbackCapture_DataAvailable;
                 try
                 {
+                    loopbackCapture = new WasapiLoopbackCapture(new MMDeviceEnumerator().GetDevice(audioDevice.Id)); 
+                    loopbackCapture.DataAvailable += loopbackCapture_DataAvailable;
                     loopbackCapture.StartRecording();
                 }
                 catch (Exception e)

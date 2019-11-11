@@ -26,7 +26,7 @@ namespace ChromaWave.Controller
 
             //Get all the friendly devices registered in the Audio Controller of the Windows;
             List<WaveOutCapabilities> capabilities = new List<WaveOutCapabilities>();
-            for (int i = 0; i < WaveOut.DeviceCount - 1; i++)
+            for (int i = 0; i < WaveOut.DeviceCount; i++)
                 capabilities.Add(WaveOut.GetCapabilities(i));
 
             foreach (MMDevice device in devices)
