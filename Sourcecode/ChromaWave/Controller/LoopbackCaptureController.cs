@@ -1,4 +1,5 @@
-﻿using ChromaWave.Models;
+﻿using ChromaWave.Helpers;
+using ChromaWave.Models;
 using NAudio.CoreAudioApi;
 using NAudio.Wave;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ChromaWave.Controller
 {
-    public delegate void LoopbackCaptureControllerEventHandler(IEnumerable<AudioChannelSample> samples);
+    public delegate void LoopbackCaptureControllerEventHandler(AudioSample audioSample);
     public class LoopbackCaptureController
     {
         private WasapiLoopbackCapture loopbackCapture;
@@ -65,6 +66,45 @@ namespace ChromaWave.Controller
                 {
                     if (loopbackCapture.WaveFormat.Channels == 2)
                     {
+
+                        #region Try 04
+                        BufferedWaveProvider bufferedWaveProvider = new BufferedWaveProvider(loopbackCapture.WaveFormat);
+                        bufferedWaveProvider.AddSamples(args.Buffer, 0, args.BytesRecorded);
+
+                        ISampleProvider sampleProvider = bufferedWaveProvider.ToSampleProvider();
+                        int bufferedBytes = bufferedWaveProvider.BufferedBytes;
+                        var allSampleFrames = new float[bufferedBytes];
+                        sampleProvider.Read(allSampleFrames, 0, bufferedBytes); //I need read here to populate the sampleProvider
+
+                        float[] leftFrames = new float[bufferedBytes / loopbackCapture.WaveFormat.Channels];
+                        float[] rightFrames = new float[bufferedBytes / loopbackCapture.WaveFormat.Channels];
+                        for (var i = 0; i < (bufferedBytes / loopbackCapture.WaveFormat.Channels) - loopbackCapture.WaveFormat.Channels; i += loopbackCapture.WaveFormat.Channels)
+                        {
+                            leftFrames[i / 2] = allSampleFrames[i];
+                            rightFrames[i / 2] = allSampleFrames[i + 1];
+                        }
+
+                        //Separating the Channels
+                        AudioSample audioSample = new AudioSample();
+                        audioSample.SampleProvider = sampleProvider;
+                        audioSample.SampleFrames = allSampleFrames;
+                        audioSample.WaveFormat = loopbackCapture.WaveFormat;
+                        audioSample.AudioChannelSamples.Add(new AudioChannelSample()
+                        {
+                            ChannelNumber = 1,
+                            SampleFrames = leftFrames,
+
+                            
+                        });
+                        audioSample.AudioChannelSamples.Add(new AudioChannelSample()
+                        {
+                            ChannelNumber = 2,
+                            SampleFrames = rightFrames
+                        });
+
+                        OnCapture?.Invoke(audioSample);
+                        #endregion
+
 
                         #region Try 03
                         /*
@@ -151,7 +191,7 @@ namespace ChromaWave.Controller
                         #endregion
 
                         #region Try 01
-                        //############################################################ FIRST
+                        /*
                         //Transform the buffer in a WaveProvider
                         BufferedWaveProvider bufferedWaveProvider = new BufferedWaveProvider(loopbackCapture.WaveFormat);
                         bufferedWaveProvider.AddSamples(args.Buffer, 0, args.Buffer.Length);
@@ -177,7 +217,6 @@ namespace ChromaWave.Controller
                             leftFrames[i / 2] = allSampleFrames[i];
                             rightFrames[i / 2] = allSampleFrames[i + 1];
                         }
-                        //############################################################ FIRST
                         
 
                         //Separating the Channels
@@ -193,7 +232,7 @@ namespace ChromaWave.Controller
                             Samples = rightFrames
                         });
 
-                        OnCapture?.Invoke(audioChannelSamples);
+                        OnCapture?.Invoke(audioChannelSamples);*/
                         #endregion
                     }
                 }

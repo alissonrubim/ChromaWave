@@ -62,6 +62,8 @@
     <Compile Include="Controller\LoopbackCaptureController.cs" />
     <Compile Include="Controller\SettingsController.cs" />
     <Compile Include="Helpers\AudioProcessingHelper.cs" />
+    <Compile Include="Helpers\SampleAggregatorHelper.cs" />
+    <Compile Include="Models\AudioSample.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Views\ChromaVisualizer.cs">
       <SubType>UserControl</SubType>

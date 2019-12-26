@@ -13,16 +13,23 @@ using ChromaWave.Models;
 using ChromaWave.Controller;
 using ChromaWave.Views;
 using ChromaWave.Helpers;
+using NAudio.Dsp;
 
 namespace ChromaWave
 {
     public partial class FormMain : Form
     {
+        private class FormCache
+        {
+            public float LastSampleOnChannelLeft;
+            public float LastSampleOnChannelRight;
+            public float LastSampleOnFrequency1000Hz;
+        }
+
         private Settings pSettings;
         private List<AudioDevice> audioDevices = new List<AudioDevice>();
         private LoopbackCaptureController loopbackCaptureController;
-        private float lastSampleChannelLeft;
-        private float lastSampleChannelRight;
+        private FormCache pFormCache;
 
         public float AmplitudePercentageRight;
         public float AmplitudePercentageLeft;
@@ -35,6 +42,8 @@ namespace ChromaWave
             loadComboboxWaveVelocity();
             loadComboboxWaveDirection();
 
+            pFormCache = new FormCache();
+
             loopbackCaptureController = new LoopbackCaptureController();
             loopbackCaptureController.OnCapture += loopbackCaptureController_OnCapture;
 
@@ -44,6 +53,8 @@ namespace ChromaWave
             AmplitudePercentageRight = 100f + trackBarAmplitudeRight.Value;
 
             timerUIUpdate.Interval = 1000 / 30; //fps
+
+            chromaMusicVisualizer.SyncronizeTo = chromaVisualizer; //Syncronize the two ChromaVisualizer
         }
 
         private void loadSettings()
@@ -72,9 +83,14 @@ namespace ChromaWave
 
         private void startCapturing()
         {
+            stopCapturing();
+            loopbackCaptureController.Start(audioDevices[comboBoxAudioDevices.SelectedIndex]);
+        }
+
+        private void stopCapturing()
+        {
             if (loopbackCaptureController.State != CaptureState.Stopped)
                 loopbackCaptureController.Stop();
-            loopbackCaptureController.Start(audioDevices[comboBoxAudioDevices.SelectedIndex]);
         }
 
         private void loadAudioDevices()
@@ -125,10 +141,37 @@ namespace ChromaWave
             startCapturing();
         }
 
-        private void loopbackCaptureController_OnCapture(IEnumerable<AudioChannelSample> samples)
+        private void loopbackCaptureController_OnCapture(AudioSample audioSample)
         {
-            lastSampleChannelLeft = AudioProcessingHelper.CalculateSample_MaxValue(samples.ToArray()[0].Samples);
-            lastSampleChannelRight = AudioProcessingHelper.CalculateSample_MaxValue(samples.ToArray()[1].Samples);
+            pFormCache.LastSampleOnChannelLeft = AudioProcessingHelper.CalculateSampleByMaxValue(audioSample.AudioChannelSamples[0].SampleFrames);
+            pFormCache.LastSampleOnChannelRight = AudioProcessingHelper.CalculateSampleByMaxValue(audioSample.AudioChannelSamples[1].SampleFrames);
+
+            /*Complex[] fftBuffer = new Complex[audioSample.SampleFrames.Length];
+            for(var i =0; i< audioSample.SampleFrames.Length; i++)
+            {
+                fftBuffer[i].X = (float)(audioSample.SampleFrames[i] * FastFourierTransform.HammingWindow(i, audioSample.SampleFrames.Length));
+                fftBuffer[i].Y = i;
+            }
+
+            FastFourierTransform.FFT(true, 10, fftBuffer);*/
+
+
+
+
+            SampleAggregatorHelper sa = new SampleAggregatorHelper(audioSample.SampleProvider, (int)Math.Pow(2, 13));
+            sa.PerformFFT = true;
+            sa.FftCalculated += new EventHandler<FftEventArgs>((object sender, FftEventArgs e) =>
+            {
+                //for (var i = 0; i < e.Result.Length; i++)
+                // {
+                // e.Result[i].X;
+                //e.Result[i].Y;
+                /// }
+                pFormCache.LastSampleOnFrequency1000Hz = e.Result[1024].Y;
+            });
+            float[] buff = new float[audioSample.SampleFrames.Length];
+            sa.Process(audioSample.SampleFrames);
+
         }
 
         private void TimerUIUpdate_Tick(object sender, EventArgs e)
@@ -136,15 +179,19 @@ namespace ChromaWave
             float amplify = 1f;
 
             this.SuspendLayout();
-            int valueLeft = Convert.ToInt32(lastSampleChannelLeft * amplify * AmplitudePercentageLeft);
-            volumeMeterLeft.Value = valueLeft > 100 ? 100 : valueLeft;
+            int valueChannelLeft = Convert.ToInt32(pFormCache.LastSampleOnChannelLeft * amplify * AmplitudePercentageLeft);
+            volumeMeterLeft.Value = valueChannelLeft > 100 ? 100 : valueChannelLeft;
 
-            int valueRight = Convert.ToInt32(lastSampleChannelRight * amplify * AmplitudePercentageRight);
-            volumeMeterRight.Value = valueRight > 100 ? 100 : valueRight;
+            int valueChannelRight = Convert.ToInt32(pFormCache.LastSampleOnChannelRight * amplify * AmplitudePercentageRight);
+            volumeMeterRight.Value = valueChannelRight > 100 ? 100 : valueChannelRight;
+
+            int valueFrequency1000Hz = Convert.ToInt32(Math.Abs(pFormCache.LastSampleOnFrequency1000Hz) * 100000 * amplify * AmplitudePercentageRight);
+            volumeMeterFrequency1K.Value = valueFrequency1000Hz > 100 ? 100 : valueFrequency1000Hz;
 
             //Re-draw controls
             volumeMeterLeft.Update();
             volumeMeterRight.Update();
+            volumeMeterFrequency1K.Update();
             chromaVisualizer.Update();
             chromaMusicVisualizer.Update();
 
@@ -178,6 +225,11 @@ namespace ChromaWave
         {
             chromaVisualizer.Saturation = trackBarSaturation.Value;
             chromaMusicVisualizer.Saturation = chromaVisualizer.Saturation;
+        }
+
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            stopCapturing();
         }
     }
 }

@@ -9,6 +9,6 @@ namespace ChromaWave.Models
     public class AudioChannelSample
     {
         public int ChannelNumber { get; set; }
-        public float[] Samples { get; set; }
+        public float[] SampleFrames { get; set; }
     }
 }

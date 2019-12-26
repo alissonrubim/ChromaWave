@@ -8,7 +8,7 @@ namespace ChromaWave.Helpers
 {
     public class AudioProcessingHelper
     {
-        public static float CalculateSample_AverageValue(float[] sample)
+        public static float CalculateSampleByAverageValue(float[] sample)
         {
             int calutationMesureRate = 1000;
             float masterSum = 0;
@@ -23,7 +23,7 @@ namespace ChromaWave.Helpers
             return masterSum / (Convert.ToInt32(sample.Length / calutationMesureRate) + 1);
         }
 
-        public static float CalculateSample_MaxValue(float[] sample)
+        public static float CalculateSampleByMaxValue(float[] sample)
         {
             float max = 0;
             for (var i = 0; i < sample.Length; i++)

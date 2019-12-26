@@ -23,8 +23,24 @@ namespace ChromaWave.Views
         private ChromaVisualizerDirection pDirection = ChromaVisualizerDirection.Forward;
         private ChromaVisualizerVelocity pVelocity = ChromaVisualizerVelocity.Slow;
         private int pBrightness = 100;
+        private ChromaVisualizer pSyncronizeTo;
 
         #region Properties
+        /// <summary>
+        /// When set, all the parameters as Velocity, Direction and OffSet will be copied from the parent ChromaVisualizer
+        /// </summary>
+        public ChromaVisualizer SyncronizeTo
+        {
+            get
+            {
+                return pSyncronizeTo;
+            }
+            set
+            {
+                this.pSyncronizeTo = value;
+            }
+        }
+
         public float Offset
         {
             get
@@ -127,6 +143,10 @@ namespace ChromaWave.Views
             colorBlend.Positions = positions.ToArray();
 
             colorBlend.Colors = new Color[colorBlend.Positions.Length];
+
+            if (pSyncronizeTo != null) //Copy the OffSet of my parent
+                pOffset = pSyncronizeTo.Offset;
+
             float startOffset = pOffset;
             float colorOffset = 1f / colorBlend.Positions.Length;
             for (int i = 0; i < colorBlend.Positions.Length; i++)
@@ -137,19 +157,22 @@ namespace ChromaWave.Views
                 startOffset += colorOffset;
             }
 
-            float velocity = GetVelocityMultiplier();
-            TimeSpan timeDiff = DateTime.Now - pLastPaintDateTime;
-            if (pDirection == ChromaVisualizerDirection.Forward)
+            if (pSyncronizeTo == null) //Calculate my offSet only if I don't have a parent
             {
-                pOffset -= pStep * velocity * (timeDiff.Milliseconds / 10);
-                if (pOffset < 0)
-                    pOffset = 1;
-            }
-            else
-            {
-                pOffset += pStep * velocity * (timeDiff.Milliseconds / 10);
-                if (pOffset > 1)
-                    pOffset = 0;
+                float velocity = GetVelocityMultiplier();
+                TimeSpan timeDiff = DateTime.Now - pLastPaintDateTime;
+                if (pDirection == ChromaVisualizerDirection.Forward)
+                {
+                    pOffset -= pStep * velocity * (timeDiff.Milliseconds / 10);
+                    if (pOffset < 0)
+                        pOffset = 1;
+                }
+                else
+                {
+                    pOffset += pStep * velocity * (timeDiff.Milliseconds / 10);
+                    if (pOffset > 1)
+                        pOffset = 0;
+                }
             }
             
             gradientBrush.InterpolationColors = colorBlend;
