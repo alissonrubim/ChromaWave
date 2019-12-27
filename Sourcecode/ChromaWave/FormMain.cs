@@ -30,6 +30,8 @@ namespace ChromaWave
         private List<AudioDevice> audioDevices = new List<AudioDevice>();
         private LoopbackCaptureController loopbackCaptureController;
         private FormCache pFormCache;
+        private DevicesController devicesController;
+        private List<DeviceVisualizer> deviceVisualizers = new List<DeviceVisualizer>();
 
         public float AmplitudePercentageRight;
         public float AmplitudePercentageLeft;
@@ -41,6 +43,7 @@ namespace ChromaWave
             loadAudioDevices();
             loadComboboxWaveVelocity();
             loadComboboxWaveDirection();
+            loadDeviceModules();
 
             pFormCache = new FormCache();
 
@@ -55,6 +58,22 @@ namespace ChromaWave
             timerUIUpdate.Interval = 1000 / 30; //fps
 
             chromaMusicVisualizer.SyncronizeTo = chromaVisualizer; //Syncronize the two ChromaVisualizer
+        }
+
+        private void loadDeviceModules()
+        {
+            devicesController = new DevicesController();
+            devicesController.LoadModules(); //Load all the devices modules
+            foreach(DeviceModule deviceModule in devicesController.DeviceModules)
+            {
+                foreach(Device device in deviceModule.Devices)
+                {
+                    DeviceVisualizer deviceVisualizer = new DeviceVisualizer(device);
+                    deviceVisualizer.Location = new Point(10 + deviceVisualizers.Sum(x => x.Size.Width), 30);
+                    groupBoxDevices.Controls.Add(deviceVisualizer);
+                    deviceVisualizers.Add(deviceVisualizer);
+                }
+            }
         }
 
         private void loadSettings()
@@ -77,7 +96,8 @@ namespace ChromaWave
             pSettings.SpectrumDirection = (ChromaVisualizerDirection)comboBoxWaveDirection.SelectedItem;
             pSettings.SpectrumBrightness = trackBarBrightness.Value;
             pSettings.SpectrumSaturation = trackBarSaturation.Value;
-            pSettings.SelectedDeviceName = audioDevices[comboBoxAudioDevices.SelectedIndex].Name;
+            if(comboBoxAudioDevices.SelectedIndex > -1)
+                pSettings.SelectedDeviceName = audioDevices[comboBoxAudioDevices.SelectedIndex].Name;
             SettingsController.Save(pSettings);
         }
 

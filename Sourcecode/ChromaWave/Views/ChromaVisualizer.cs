@@ -12,7 +12,7 @@ using System.Drawing.Drawing2D;
 namespace ChromaWave.Views
 {
     public enum ChromaVisualizerDirection { Forward, Backward }
-    public enum ChromaVisualizerVelocity { SuperFast, Fast, Medium, Slow, SuperSlow };
+    public enum ChromaVisualizerVelocity { Off, SuperFast, Fast, Medium, Slow, SuperSlow };
 
     public partial class ChromaVisualizer : UserControl
     {
@@ -113,6 +113,8 @@ namespace ChromaWave.Views
         {
             switch (this.pVelocity)
             {
+                case ChromaVisualizerVelocity.Off:
+                    return 0;
                 case ChromaVisualizerVelocity.SuperSlow:
                     return 1/10f;
                 case ChromaVisualizerVelocity.Slow:
