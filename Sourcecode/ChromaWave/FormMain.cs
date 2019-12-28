@@ -68,10 +68,11 @@ namespace ChromaWave
             {
                 foreach(Device device in deviceModule.Devices)
                 {
-                    DeviceVisualizer deviceVisualizer = new DeviceVisualizer(device);
+                    DeviceVisualizer deviceVisualizer = new DeviceVisualizer(chromaMusicVisualizer, device);
                     deviceVisualizer.Location = new Point(10 + deviceVisualizers.Sum(x => x.Size.Width), 30);
                     groupBoxDevices.Controls.Add(deviceVisualizer);
                     deviceVisualizers.Add(deviceVisualizer);
+                    deviceVisualizer.BringToFront();
                 }
             }
         }
@@ -214,7 +215,8 @@ namespace ChromaWave
             volumeMeterFrequency1K.Update();
             chromaVisualizer.Update();
             chromaMusicVisualizer.Update();
-
+            foreach (DeviceVisualizer deviceVisualize in deviceVisualizers)
+                deviceVisualize.Update();
             this.ResumeLayout();
         }
 

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 
 namespace ChromaWave.Views
 {
@@ -24,6 +25,8 @@ namespace ChromaWave.Views
         private ChromaVisualizerVelocity pVelocity = ChromaVisualizerVelocity.Slow;
         private int pBrightness = 100;
         private ChromaVisualizer pSyncronizeTo;
+        private float pOpacity = 1.0f;
+        private Bitmap pCacheBitmap;
 
         #region Properties
         /// <summary>
@@ -38,6 +41,18 @@ namespace ChromaWave.Views
             set
             {
                 this.pSyncronizeTo = value;
+            }
+        }
+
+        public float Opactity
+        {
+            get
+            {
+                return this.pOpacity;
+            }
+            set
+            {
+                this.pOpacity = value;
             }
         }
 
@@ -109,6 +124,19 @@ namespace ChromaWave.Views
             this.pLastPaintDateTime = DateTime.Now;
         }
 
+        public Color GetColorAtPosition(Point position)
+        {
+            if (pCacheBitmap != null)
+            {
+                int x = position.X < 0 ? 0 : position.X;
+                x = x > this.Width ? this.Width - 1 : x;
+                int y = position.Y < 0 ? 0 : position.Y;
+                y = y > this.Height ? this.Height - 1: y;
+                return pCacheBitmap.GetPixel(x, y);
+            }
+            return Color.Black;
+        }
+
         private float GetVelocityMultiplier()
         {
             switch (this.pVelocity)
@@ -132,34 +160,49 @@ namespace ChromaWave.Views
 
         private void ChromaVisualizer_Paint(object sender, PaintEventArgs e)
         {
-            Graphics graphics = e.Graphics;
-            Rectangle drawRectangle = new Rectangle(new Point(0, 0), this.ClientSize);
-            LinearGradientBrush gradientBrush = new LinearGradientBrush(drawRectangle, Color.White, Color.Black, 0.0f);
-            ColorBlend colorBlend = new ColorBlend();
+            //Create a bitmap and a graphics to work on
+            Bitmap canvasBitmap = new Bitmap(this.Width, this.Height);
+            Graphics canvasGraphics = Graphics.FromImage(canvasBitmap);
 
+            Rectangle drawRectangle = new Rectangle(new Point(0, 0), this.ClientSize);
+            LinearGradientBrush gradientBrush = new LinearGradientBrush(drawRectangle, Parent.BackColor, Parent.BackColor, 0.0f);
+
+            //Create two colorBlend, one for a real HUE color, other with a opacity applied
+            Dictionary<string, ColorBlend> colorBlends = new Dictionary<string, ColorBlend>();
+            colorBlends.Add("NormalBlends", new ColorBlend());
+            colorBlends.Add("OpacityBlends", new ColorBlend());
+
+            //Calculate the position of each color, it's a number between 0 and 1.
             int numberOfColors = 128;
             List<float> positions = new List<float>();
             for (var i = 0; i < numberOfColors-1; i++)
                 positions.Add(Convert.ToSingle(1f / (numberOfColors - 1)) * i);
             positions.Add(1f);
-            colorBlend.Positions = positions.ToArray();
+            colorBlends["NormalBlends"].Positions = positions.ToArray();
+            colorBlends["OpacityBlends"].Positions = positions.ToArray();
 
-            colorBlend.Colors = new Color[colorBlend.Positions.Length];
-
-            if (pSyncronizeTo != null) //Copy the OffSet of my parent
+            //Copy the OffSet of my parent   
+            if (pSyncronizeTo != null) 
                 pOffset = pSyncronizeTo.Offset;
 
+            //Calculate the colors between each position
+            colorBlends["NormalBlends"].Colors = new Color[colorBlends["NormalBlends"].Positions.Length];
+            colorBlends["OpacityBlends"].Colors = new Color[colorBlends["OpacityBlends"].Positions.Length];
             float startOffset = pOffset;
-            float colorOffset = 1f / colorBlend.Positions.Length;
-            for (int i = 0; i < colorBlend.Positions.Length; i++)
+            float colorOffset = 1f / colorBlends["NormalBlends"].Positions.Length;
+            for (int i = 0; i < colorBlends["NormalBlends"].Positions.Length; i++)
             {
                 if (startOffset > 1)
                     startOffset = 0;
-                colorBlend.Colors[i] = ColorHelper.ColorFromHSL(startOffset, pSaturation / 100f, pBrightness / 100f);
+                //Generate a color from HUE, using a offset
+                Color currentColor = ColorHelper.ColorFromHSL(startOffset, pSaturation / 100f, pBrightness / 100f);
+                colorBlends["NormalBlends"].Colors[i] = currentColor; //without opactity applyed
+                colorBlends["OpacityBlends"].Colors[i] = ColorHelper.BlendColors(currentColor, Parent.BackColor, pOpacity); //with opacity applyed
                 startOffset += colorOffset;
             }
 
-            if (pSyncronizeTo == null) //Calculate my offSet only if I don't have a parent
+            //Calculate my offSet only if I don't have a parent
+            if (pSyncronizeTo == null) 
             {
                 float velocity = GetVelocityMultiplier();
                 TimeSpan timeDiff = DateTime.Now - pLastPaintDateTime;
@@ -177,8 +220,28 @@ namespace ChromaWave.Views
                 }
             }
             
-            gradientBrush.InterpolationColors = colorBlend;
-            graphics.FillRectangle(gradientBrush, drawRectangle);
+            //Sign the colorBlend to the brush
+            gradientBrush.InterpolationColors = colorBlends["NormalBlends"];
+            canvasGraphics.FillRectangle(gradientBrush, drawRectangle);
+
+            //Then cache the canvas
+            pCacheBitmap = canvasBitmap;
+
+            Graphics panelGraphics = e.Graphics;
+            if (pOpacity < 100)
+            {
+                //Draw again but using opacity
+                Bitmap newCanvasBitmap = new Bitmap(canvasBitmap);
+                Graphics newCanvasGraphics = Graphics.FromImage(newCanvasBitmap);
+
+                gradientBrush.InterpolationColors = colorBlends["OpacityBlends"];
+                newCanvasGraphics.FillRectangle(gradientBrush, drawRectangle);
+                panelGraphics.DrawImage(newCanvasBitmap, new Point(0, 0));
+            }
+            else
+            {
+                panelGraphics.DrawImage(canvasBitmap, new Point(0, 0));
+            }
 
             pLastPaintDateTime = DateTime.Now;
         }

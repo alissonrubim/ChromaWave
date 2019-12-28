@@ -1,10 +1,14 @@
 ﻿using Colore;
+using Colore.Effects.Keyboard;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Drawing;
 
-namespace ChromaWave.Module ////The namespace must be ChromaWave.Module
+namespace ChromaWave.Module.Razer
 {
-
     public class DeviceMap
     {
         public byte[] BackgroundImage { get; set; }
@@ -25,10 +29,13 @@ namespace ChromaWave.Module ////The namespace must be ChromaWave.Module
         public List<Device> Devices { get; set; } = new List<Device>();
     }
 
-    public class ChromaWaveDeviceController  ////The class name must be ChromaWaveDeviceController
+    public class ChromaWaveModule 
     {
-        public static DeviceModule Setup()  ///Needs to have a Setup method
+        public static DeviceModule Setup()
         {
+            //IChroma chroma = ColoreProvider.CreateNativeAsync().Result;
+            //chroma.Keyboard.SetKeyAsync(Key.A, Colore.Data.Color.Blue);
+
             DeviceModule module = new DeviceModule()
             {
                 Name = "Razer"
@@ -40,14 +47,14 @@ namespace ChromaWave.Module ////The namespace must be ChromaWave.Module
                 Title = "BlackWidow",
                 Map = new DeviceMap()
                 {
-                    BackgroundImage = Resource.keyboard,
+                    BackgroundImage = ImageToByteArray(Resource.keyboard),
                     Size = new Size(100, 100),
                     Leds = new Point[1, 2]
                     {
                         { new Point(10,10),  new Point(10,40) }
                     }
                 }
-                    
+
                 /*Map = new int[7, 23]
                     {
                         {0,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0},
@@ -66,11 +73,11 @@ namespace ChromaWave.Module ////The namespace must be ChromaWave.Module
                 Title = "Death Adder",
                 Map = new DeviceMap()
                 {
-                    BackgroundImage = Resource.mouse,
+                    BackgroundImage = ImageToByteArray(Resource.mouse),
                     Size = new Size(50, 50),
                     Leds = new Point[1, 2]
                     {
-                        { new Point(24,15),  new Point(24,40) }
+                        { new Point(25,15),  new Point(25,40) }
                     }
                 }
             });
@@ -81,11 +88,11 @@ namespace ChromaWave.Module ////The namespace must be ChromaWave.Module
                 Title = "Chroma 7.1",
                 Map = new DeviceMap()
                 {
-                    BackgroundImage = Resource.headphones,
-                    Size = new Size(50,50),
-                    Leds = new Point[2,1]
+                    BackgroundImage = ImageToByteArray(Resource.headphones),
+                    Size = new Size(50, 50),
+                    Leds = new Point[2, 1]
                     {
-                        { new Point(3,36) }, { new Point(41,36) }
+                        { new Point(5,36) }, { new Point(45,36) }
                     }
                 }
             });
@@ -96,6 +103,12 @@ namespace ChromaWave.Module ////The namespace must be ChromaWave.Module
         public static void OnCallDevice(string Id, dynamic Data)
         {
 
+        }
+
+        private static byte[] ImageToByteArray(Bitmap img)
+        {
+            ImageConverter converter = new ImageConverter();
+            return (byte[])converter.ConvertTo(img, typeof(byte[]));
         }
     }
 }

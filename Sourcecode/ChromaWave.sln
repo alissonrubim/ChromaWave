@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.28803.202
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromaWave", "ChromaWave\ChromaWave.csproj", "{0581209E-E566-41A2-A2D2-371F2DE3C4E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromaWave.Razer", "ChromaWave.Razer\ChromaWave.Razer.csproj", "{89403160-4362-46E7-81B9-32159AB6C768}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromaWave.Module.Razer", "ChromaWave.Module.Razer\ChromaWave.Module.Razer.csproj", "{5F2E3487-4D22-4A72-BC50-F2E2F5644055}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{0581209E-E566-41A2-A2D2-371F2DE3C4E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0581209E-E566-41A2-A2D2-371F2DE3C4E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0581209E-E566-41A2-A2D2-371F2DE3C4E6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{89403160-4362-46E7-81B9-32159AB6C768}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{89403160-4362-46E7-81B9-32159AB6C768}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{89403160-4362-46E7-81B9-32159AB6C768}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{89403160-4362-46E7-81B9-32159AB6C768}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F2E3487-4D22-4A72-BC50-F2E2F5644055}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F2E3487-4D22-4A72-BC50-F2E2F5644055}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F2E3487-4D22-4A72-BC50-F2E2F5644055}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F2E3487-4D22-4A72-BC50-F2E2F5644055}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

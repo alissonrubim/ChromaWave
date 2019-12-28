@@ -19,12 +19,13 @@ namespace ChromaWave.Controller
                 foreach(string file in Directory.GetFiles(directory, "*.dll"))
                 {
                     FileInfo fileInfo = new FileInfo(file);
-                    if (fileInfo.Name.IndexOf("ChromaWave") == 0)
+                    if (fileInfo.Name.IndexOf("ChromaWave.Module") == 0)
                     {
                         Assembly module = Assembly.LoadFile(fileInfo.FullName);
-                        Type deviceControllerType = module.GetType("ChromaWave.Module.ChromaWaveDeviceController");
+                        string moduleControllerName = $"{Path.GetFileNameWithoutExtension(fileInfo.Name)}.ChromaWaveModule";
+                        Type deviceControllerType = module.GetType(moduleControllerName);
                         if (deviceControllerType == null)
-                            throw new Exception("Module needs to have a ChromaWave.Module.ChromaWaveDeviceController class");
+                            throw new Exception($"{moduleControllerName} was not found inside {file}");
                         object deviceController = Activator.CreateInstance(deviceControllerType);
                         MethodInfo method = deviceControllerType.GetMethod("Setup");
                         if (method == null)

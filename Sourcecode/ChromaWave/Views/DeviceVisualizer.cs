@@ -17,22 +17,26 @@ namespace ChromaWave.Views
         private bool isLeftClicked;
         private List<Panel> LedPanels = new List<Panel>();
         private Device device;
+        private ChromaVisualizer chromaVisualizer;
         public DeviceVisualizer()
         {
             InitializeComponent();
             setupEvents();
         }
 
-        public DeviceVisualizer(Device device): base()
+        public DeviceVisualizer(ChromaVisualizer chromaVisualizer,  Device device): base()
         {
+            this.DoubleBuffered = true;
+            this.chromaVisualizer = chromaVisualizer;
+            this.device = device;
+
             InitializeComponent();
-            setupWithDevice(device);
+            setupWithDevice();
             setupEvents();
         }
 
-        private void setupWithDevice(Device device)
+        private void setupWithDevice()
         {
-            this.device = device;
             int borderSize = 6;
             labelTitle.Text = device.Title;
             pictureBoxIcon.Image = Helpers.ImageHelper.ByteArrayToImage(device.Map.BackgroundImage);
@@ -63,10 +67,14 @@ namespace ChromaWave.Views
         {
             foreach (Point led in leds)
             {
-                Panel ledPanel = new Panel();
-                ledPanel.Size = new Size(3, 3);
-                ledPanel.BackColor = Color.Orange;
-                ledPanel.Location = new Point(pictureBoxIcon.Location.X + led.X, pictureBoxIcon.Location.Y + led.Y);
+                Led ledPanel = new Led();
+                ledPanel.OnGetColor += new Led.PixelGetColorHandler(() =>
+                {
+                    Point globalLedLocation = new Point(this.Location.X + led.X, this.Location.Y + led.Y);
+                    return chromaVisualizer.GetColorAtPosition(globalLedLocation);
+                });
+                ledPanel.Size = new Size(8, 8);
+                ledPanel.Location = new Point(pictureBoxIcon.Location.X + led.X - (ledPanel.Size.Width / 2), pictureBoxIcon.Location.Y + led.Y - (ledPanel.Size.Height / 2));
                 this.Controls.Add(ledPanel);
                 ledPanel.BringToFront();
             }
@@ -96,11 +104,6 @@ namespace ChromaWave.Views
             lastAbsoluteCursorPosition = newAbsoluteCursorPosition;
         }
 
-        private Point getAbsolutePosition(Control control)
-        {
-            return control.FindForm().PointToClient(control.Parent.PointToScreen(control.Location));
-        }
-
         private void On_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -108,6 +111,12 @@ namespace ChromaWave.Views
                 Cursor.Current = Cursors.Default;
                 isLeftClicked = false;
             }
+        }
+
+        public new virtual void Update()
+        {
+            if(!isLeftClicked)
+                Invalidate();
         }
     }
 

@@ -1,14 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ChromaWave.Views
 {
-    public class ColorHelper
-    {
+    public static class ColorHelper
+    { 
+        public static Color GetColorAtScreenPosition(Point location)
+        {
+            Bitmap bmp = new Bitmap(1, 1);
+            Rectangle bounds = new Rectangle(location.X, location.Y, 1, 1);
+            using (Graphics g = Graphics.FromImage(bmp)) 
+                g.CopyFromScreen(bounds.Location, Point.Empty, bounds.Size);
+            return bmp.GetPixel(0, 0);
+        }
+
+        public static Color BlendColors(this Color color, Color backColor, double amount)
+        {
+            byte r = (byte)((color.R * amount) + backColor.R * (1 - amount));
+            byte g = (byte)((color.G * amount) + backColor.G * (1 - amount));
+            byte b = (byte)((color.B * amount) + backColor.B * (1 - amount));
+            return Color.FromArgb(r, g, b);
+        }
+
         public static Color ColorFromHSL(double h, double s, double l)
         {
             double r = 0, g = 0, b = 0;
