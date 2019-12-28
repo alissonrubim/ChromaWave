@@ -65,8 +65,8 @@
             this.volumeMeterFrequency1K = new ChromaWave.Views.VolumeMeter();
             this.timerUIUpdate = new System.Windows.Forms.Timer(this.components);
             this.groupBoxChromaVisualizer = new DarkUI.Controls.DarkGroupBox();
-            this.groupBoxDevices = new DarkUI.Controls.DarkGroupBox();
             this.chromaMusicVisualizer = new ChromaWave.Views.ChromaVisualizer();
+            this.groupBoxDevices = new DarkUI.Controls.DarkGroupBox();
             this.labelSaturation = new DarkUI.Controls.DarkLabel();
             this.trackBarSaturation = new System.Windows.Forms.TrackBar();
             this.darkLabel8 = new DarkUI.Controls.DarkLabel();
@@ -557,8 +557,28 @@
             this.groupBoxChromaVisualizer.TabStop = false;
             this.groupBoxChromaVisualizer.Text = "Vizualizer";
             // 
+            // chromaMusicVisualizer
+            // 
+            this.chromaMusicVisualizer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.chromaMusicVisualizer.BackColor = System.Drawing.Color.White;
+            this.chromaMusicVisualizer.Brightness = 100;
+            this.chromaMusicVisualizer.Direction = ChromaWave.Views.ChromaVisualizerDirection.Forward;
+            this.chromaMusicVisualizer.Location = new System.Drawing.Point(11, 19);
+            this.chromaMusicVisualizer.Name = "chromaMusicVisualizer";
+            this.chromaMusicVisualizer.Offset = 0.902F;
+            this.chromaMusicVisualizer.Opactity = 0.1F;
+            this.chromaMusicVisualizer.Saturation = 50;
+            this.chromaMusicVisualizer.Size = new System.Drawing.Size(570, 196);
+            this.chromaMusicVisualizer.SyncronizeTo = null;
+            this.chromaMusicVisualizer.TabIndex = 33;
+            this.chromaMusicVisualizer.Velocity = ChromaWave.Views.ChromaVisualizerVelocity.Slow;
+            // 
             // groupBoxDevices
             // 
+            this.groupBoxDevices.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxDevices.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.groupBoxDevices.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
             this.groupBoxDevices.Controls.Add(this.chromaMusicVisualizer);
@@ -569,21 +589,6 @@
             this.groupBoxDevices.TabIndex = 24;
             this.groupBoxDevices.TabStop = false;
             this.groupBoxDevices.Text = "Devices";
-            // 
-            // chromaMusicVisualizer
-            // 
-            this.chromaMusicVisualizer.BackColor = System.Drawing.Color.White;
-            this.chromaMusicVisualizer.Brightness = 100;
-            this.chromaMusicVisualizer.Direction = ChromaWave.Views.ChromaVisualizerDirection.Forward;
-            this.chromaMusicVisualizer.Location = new System.Drawing.Point(11, 19);
-            this.chromaMusicVisualizer.Name = "chromaMusicVisualizer";
-            this.chromaMusicVisualizer.Offset = 0.4460001F;
-            this.chromaMusicVisualizer.Opactity = 0.1F;
-            this.chromaMusicVisualizer.Saturation = 50;
-            this.chromaMusicVisualizer.Size = new System.Drawing.Size(571, 195);
-            this.chromaMusicVisualizer.SyncronizeTo = null;
-            this.chromaMusicVisualizer.TabIndex = 33;
-            this.chromaMusicVisualizer.Velocity = ChromaWave.Views.ChromaVisualizerVelocity.Slow;
             // 
             // labelSaturation
             // 
@@ -695,12 +700,14 @@
             // 
             // chromaVisualizer
             // 
+            this.chromaVisualizer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.chromaVisualizer.BackColor = System.Drawing.Color.White;
             this.chromaVisualizer.Brightness = 100;
             this.chromaVisualizer.Direction = ChromaWave.Views.ChromaVisualizerDirection.Forward;
             this.chromaVisualizer.Location = new System.Drawing.Point(19, 98);
             this.chromaVisualizer.Name = "chromaVisualizer";
-            this.chromaVisualizer.Offset = 0.688F;
+            this.chromaVisualizer.Offset = 0.07399996F;
             this.chromaVisualizer.Opactity = 1F;
             this.chromaVisualizer.Saturation = 50;
             this.chromaVisualizer.Size = new System.Drawing.Size(593, 27);
@@ -723,7 +730,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.ClientSize = new System.Drawing.Size(660, 835);
+            this.ClientSize = new System.Drawing.Size(658, 835);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.groupBoxChromaVisualizer);
             this.Controls.Add(this.darkGroupBox1);

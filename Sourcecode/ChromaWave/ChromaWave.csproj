@@ -85,27 +85,33 @@
     <Compile Include="Helpers\SampleAggregatorHelper.cs" />
     <Compile Include="Models\AudioSample.cs" />
     <Compile Include="Models\Device.cs" />
-    <Compile Include="Views\Led.cs">
+    <Compile Include="Views\Forms\FormDeviceDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Forms\FormDeviceDetails.Designer.cs">
+      <DependentUpon>FormDeviceDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Visuals\Led.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Models\Settings.cs" />
-    <Compile Include="Views\ChromaVisualizer.cs">
+    <Compile Include="Views\UserControls\ChromaVisualizer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\ChromaVisualizer.Designer.cs">
+    <Compile Include="Views\UserControls\ChromaVisualizer.Designer.cs">
       <DependentUpon>ChromaVisualizer.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ColorHelper.cs" />
-    <Compile Include="Views\DeviceVisualizer.cs">
+    <Compile Include="Views\UserControls\DeviceVisualizer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\DeviceVisualizer.Designer.cs">
+    <Compile Include="Views\UserControls\DeviceVisualizer.Designer.cs">
       <DependentUpon>DeviceVisualizer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\VolumeMeter.cs">
+    <Compile Include="Views\UserControls\VolumeMeter.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\VolumeMeter.Designer.cs">
+    <Compile Include="Views\UserControls\VolumeMeter.Designer.cs">
       <DependentUpon>VolumeMeter.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\AudioChannelSample.cs" />
@@ -121,13 +127,16 @@
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ChromaVisualizer.resx">
+    <EmbeddedResource Include="Views\Forms\FormDeviceDetails.resx">
+      <DependentUpon>FormDeviceDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\ChromaVisualizer.resx">
       <DependentUpon>ChromaVisualizer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\DeviceVisualizer.resx">
+    <EmbeddedResource Include="Views\UserControls\DeviceVisualizer.resx">
       <DependentUpon>DeviceVisualizer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\VolumeMeter.resx">
+    <EmbeddedResource Include="Views\UserControls\VolumeMeter.resx">
       <DependentUpon>VolumeMeter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

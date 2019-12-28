@@ -69,7 +69,9 @@ namespace ChromaWave
                 foreach(Device device in deviceModule.Devices)
                 {
                     DeviceVisualizer deviceVisualizer = new DeviceVisualizer(chromaMusicVisualizer, device);
-                    deviceVisualizer.Location = new Point(10 + deviceVisualizers.Sum(x => x.Size.Width), 30);
+                    //This code put each device side by site, but the problem is: if you have a lot of devices, they will be put out of bound.
+                    //deviceVisualizer.Location = new Point(10 + deviceVisualizers.Sum(x => x.Size.Width), 30);
+                    deviceVisualizer.Location = new Point(10, 30);
                     groupBoxDevices.Controls.Add(deviceVisualizer);
                     deviceVisualizers.Add(deviceVisualizer);
                     deviceVisualizer.BringToFront();
@@ -89,6 +91,14 @@ namespace ChromaWave
             trackBarBrightness.Value = pSettings.SpectrumBrightness;
             trackBarSaturation.Value = pSettings.SpectrumSaturation;
             comboBoxAudioDevices.SelectedIndex = audioDevices.IndexOf(audioDevices.Where(x => x.Name.Equals(this.pSettings.SelectedDeviceName)).FirstOrDefault());
+            foreach (DeviceVisualizer visualizer in deviceVisualizers)
+            {
+                DeviceSettings deviceSetting = pSettings.Devices.Where(x => x.Id == visualizer.Id).FirstOrDefault();
+                if (deviceSetting != null)
+                {
+                    visualizer.Location = deviceSetting.Location;
+                }
+            }
         }
 
         private void saveSettings()
@@ -97,6 +107,21 @@ namespace ChromaWave
             pSettings.SpectrumDirection = (ChromaVisualizerDirection)comboBoxWaveDirection.SelectedItem;
             pSettings.SpectrumBrightness = trackBarBrightness.Value;
             pSettings.SpectrumSaturation = trackBarSaturation.Value;
+            foreach(DeviceVisualizer visualizer in deviceVisualizers)
+            {
+                DeviceSettings deviceSetting = pSettings.Devices.Where(x => x.Id == visualizer.Id).FirstOrDefault();
+                if (deviceSetting != null)
+                {
+                    deviceSetting.Location = visualizer.Location;
+                }
+                else
+                {
+                    deviceSetting = new DeviceSettings();
+                    deviceSetting.Id = visualizer.Id;
+                    deviceSetting.Location = visualizer.Location;
+                    pSettings.Devices.Add(deviceSetting);
+                }
+            }
             if(comboBoxAudioDevices.SelectedIndex > -1)
                 pSettings.SelectedDeviceName = audioDevices[comboBoxAudioDevices.SelectedIndex].Name;
             SettingsController.Save(pSettings);

@@ -48,7 +48,7 @@ namespace ChromaWave.Module.Razer
                 Map = new DeviceMap()
                 {
                     BackgroundImage = ImageToByteArray(Resource.keyboard),
-                    Size = new Size(100, 100),
+                    Size = new Size(100, 30),
                     Leds = new Point[1, 2]
                     {
                         { new Point(10,10),  new Point(10,40) }
@@ -65,6 +65,43 @@ namespace ChromaWave.Module.Razer
                         {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
                         {0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0}
                     }*/
+            });
+
+            module.Devices.Add(new Device()
+            {
+                Id = "LED_STRIP",
+                Title = "LedStrip",
+                Map = new DeviceMap()
+                {
+                    BackgroundImage = null,
+                    Size = new Size(300, 5),
+                    Leds = new Point[1, 21]
+                    {
+                        {
+                            new Point(0, 0),
+                            new Point(15, 0),  
+                            new Point(30, 0),
+                            new Point(45, 0),
+                            new Point(60, 0),
+                            new Point(75, 0),
+                            new Point(90, 0),
+                            new Point(105, 0),
+                            new Point(120, 0),
+                            new Point(135, 0),
+                            new Point(150, 0),
+                            new Point(165, 0),
+                            new Point(180, 0),
+                            new Point(195, 0),
+                            new Point(210, 0),
+                            new Point(225, 0),
+                            new Point(240, 0),
+                            new Point(255, 0),
+                            new Point(270, 0),
+                            new Point(285, 0),
+                            new Point(300, 0)
+                        }
+                    }
+                }
             });
 
             module.Devices.Add(new Device()

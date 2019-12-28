@@ -18,6 +18,7 @@ namespace ChromaWave.Views
         private List<Panel> LedPanels = new List<Panel>();
         private Device device;
         private ChromaVisualizer chromaVisualizer;
+        public readonly string Id;
         public DeviceVisualizer()
         {
             InitializeComponent();
@@ -29,7 +30,7 @@ namespace ChromaWave.Views
             this.DoubleBuffered = true;
             this.chromaVisualizer = chromaVisualizer;
             this.device = device;
-
+            this.Id = device.Id;
             InitializeComponent();
             setupWithDevice();
             setupEvents();
@@ -96,9 +97,21 @@ namespace ChromaWave.Views
             if (isLeftClicked)
             {
                 if (Math.Abs(newAbsoluteCursorPosition.X - lastAbsoluteCursorPosition.X) > 0)
-                    this.Left += newAbsoluteCursorPosition.X - lastAbsoluteCursorPosition.X;
+                {
+                    var x = this.Left;
+                    x += newAbsoluteCursorPosition.X - lastAbsoluteCursorPosition.X;
+                    x = x < 0 ? 0 : x;
+                    x = x > Parent.Width - this.Width ? Parent.Width - this.Width : x;
+                    this.Left = x;
+                }
                 if (Math.Abs(newAbsoluteCursorPosition.Y - lastAbsoluteCursorPosition.Y) > 0)
-                    this.Top += newAbsoluteCursorPosition.Y - lastAbsoluteCursorPosition.Y;
+                {
+                    var y = this.Top;
+                    y += newAbsoluteCursorPosition.Y - lastAbsoluteCursorPosition.Y;
+                    y = y < 0 ? 0 : y;
+                    y = y > Parent.Height - this.Height ? Parent.Height - this.Height : y;
+                    this.Top = y;
+                }
             }
 
             lastAbsoluteCursorPosition = newAbsoluteCursorPosition;
