@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ChromaWave.Models;
+using ChromaWave.Views.Forms;
 
 namespace ChromaWave.Views
 {
@@ -56,11 +57,13 @@ namespace ChromaWave.Views
             this.MouseDown += On_MouseDown;
             this.MouseMove += On_MouseMove;
             this.MouseUp += On_MouseUp;
+            this.DoubleClick += On_DoubleClick;
             foreach (Control control in this.Controls)
             {
                 control.MouseDown += On_MouseDown;
                 control.MouseMove += On_MouseMove;
                 control.MouseUp += On_MouseUp;
+                control.DoubleClick += On_DoubleClick;
             }
         }
 
@@ -124,6 +127,12 @@ namespace ChromaWave.Views
                 Cursor.Current = Cursors.Default;
                 isLeftClicked = false;
             }
+        }
+
+        private void On_DoubleClick(object sender, EventArgs e)
+        {
+            FormDeviceDetails form = new FormDeviceDetails(device);
+            form.Show();
         }
 
         public new virtual void Update()

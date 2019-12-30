@@ -12,7 +12,7 @@ namespace ChromaWave.Models
     {
         public string Name;
         public List<Device> Devices = new List<Device>();
-        public Assembly Module;
+        public Assembly Assembly;
         public object DeviceController;
     }
 
@@ -21,6 +21,7 @@ namespace ChromaWave.Models
         public string Id;
         public string Title;
         public DeviceMap Map;
+        public DeviceModule Module;
     }
 
     public class DeviceMap

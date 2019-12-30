@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChromaWave.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,16 @@ namespace ChromaWave.Views.Forms
         public FormDeviceDetails()
         {
             InitializeComponent();
+        }
+
+        public FormDeviceDetails(Device device)
+        {
+            InitializeComponent();
+
+            textBoxDeviceId.Text = device.Id;
+            textBoxDeviceTitle.Text = device.Title;
+            textBoxModuleName.Text = device.Module.Name;
+            textBoxModuleLocation.Text = device.Module.Assembly.Location;
         }
     }
 }

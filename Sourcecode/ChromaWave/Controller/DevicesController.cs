@@ -36,7 +36,7 @@ namespace ChromaWave.Controller
                         {
                             Name = result.Name,
                             DeviceController = deviceController,
-                            Module = module
+                            Assembly = module
                         };
 
                         List<Device> devices = new List<Device>();
@@ -46,6 +46,7 @@ namespace ChromaWave.Controller
                             {
                                 Id = dynamicResult.Id,
                                 Title = dynamicResult.Title,
+                                Module = devicesModule,
                                 Map = new DeviceMap()
                                 {
                                     BackgroundImage = dynamicResult.Map.BackgroundImage,
