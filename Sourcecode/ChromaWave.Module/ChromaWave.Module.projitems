@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>a79ebda3-60ec-4a78-be72-2db5c24ab7db</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>ChromaWave.Module</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Device.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DeviceMap.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IChromaWaveModule.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Module.cs" />
+  </ItemGroup>
+</Project>

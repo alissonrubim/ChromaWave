@@ -9,34 +9,11 @@ using System.Drawing;
 
 namespace ChromaWave.Module.Razer
 {
-    public class DeviceMap
+    public class ChromaWaveModule: IChromaWaveModule
     {
-        public byte[] BackgroundImage { get; set; }
-        public Size Size { get; set; }
-        public Point[,] Leds { get; set; }
-    }
-
-    public class Device
-    {
-        public string Id { get; set; }
-        public string Title { get; set; }
-        public DeviceMap Map { get; set; }
-    }
-
-    public class DeviceModule
-    {
-        public string Name { get; set; }
-        public List<Device> Devices { get; set; } = new List<Device>();
-    }
-
-    public class ChromaWaveModule 
-    {
-        public static DeviceModule Setup()
+        public Module Setup()
         {
-            //IChroma chroma = ColoreProvider.CreateNativeAsync().Result;
-            //chroma.Keyboard.SetKeyAsync(Key.A, Colore.Data.Color.Blue);
-
-            DeviceModule module = new DeviceModule()
+            Module module = new Module()
             {
                 Name = "Razer"
             };
@@ -137,15 +114,16 @@ namespace ChromaWave.Module.Razer
             return module;
         }
 
-        public static void OnCallDevice(string Id, dynamic Data)
-        {
-
-        }
-
         private static byte[] ImageToByteArray(Bitmap img)
         {
             ImageConverter converter = new ImageConverter();
             return (byte[])converter.ConvertTo(img, typeof(byte[]));
+        }
+
+
+        public void OnProcessDevice(string DeviceId)
+        {
+            throw new NotImplementedException();
         }
     }
 }
