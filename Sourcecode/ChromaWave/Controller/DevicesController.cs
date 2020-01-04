@@ -22,6 +22,17 @@ namespace ChromaWave.Controller
                     if (fileInfo.Name.IndexOf("ChromaWave.Module") == 0)
                     {
                         Assembly module = Assembly.LoadFile(fileInfo.FullName);
+                        AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler((a, b) =>
+                        {
+                            string dllName = b.Name.Split(',')[0].Trim();
+                            dllName += ".dll";
+                            dllName = Path.Combine(fileInfo.DirectoryName, dllName);
+                            if (File.Exists(dllName))
+                                return Assembly.LoadFile(dllName);
+                            else
+                                return null;
+                        }); 
+
                         string moduleControllerName = $"{Path.GetFileNameWithoutExtension(fileInfo.Name)}.ChromaWaveModule";
                         Type deviceControllerType = module.GetType(moduleControllerName);
                         if (deviceControllerType == null)

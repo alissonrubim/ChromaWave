@@ -14,6 +14,7 @@ using ChromaWave.Controller;
 using ChromaWave.Views;
 using ChromaWave.Helpers;
 using NAudio.Dsp;
+using ChromaWave.Views.Forms.Visuals;
 
 namespace ChromaWave
 {
@@ -39,6 +40,9 @@ namespace ChromaWave
         {
             InitializeComponent();
 
+            setupTabs();
+
+
             loadSettings();
             loadAudioDevices();
             loadComboboxWaveVelocity();
@@ -59,6 +63,32 @@ namespace ChromaWave
 
             chromaMusicVisualizer.SyncronizeTo = chromaVisualizer; //Syncronize the two ChromaVisualizer
         }
+
+        private void setupTabs()
+        {
+            //{Setup Tab Devices}
+            TabDevices tabDevices = new TabDevices();
+            tabDevices.Size = panelRenderTab.Size;
+            panelRenderTab.Controls.Add(tabDevices);
+
+            panelRenderTab.Hide();
+
+
+            //{Setup Tab Effects}
+        }
+
+        /*private void showTab(Control tab)
+        {
+            if (panelRenderTab.Controls.IndexOf(tab) < 0)
+                throw new Exception("Tab was not found in the tabControl");
+            foreach (Control childTab in panelRenderTab.Controls)
+            {
+                if (childTab == tab)
+                    childTab.Show();
+                else
+                    childTab.Hide();
+            }
+        }*/
 
         private void loadDeviceModules()
         {
@@ -277,6 +307,11 @@ namespace ChromaWave
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             stopCapturing();
+        }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

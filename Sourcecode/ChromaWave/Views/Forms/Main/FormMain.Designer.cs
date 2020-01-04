@@ -35,38 +35,37 @@
             this.labelSource = new DarkUI.Controls.DarkLabel();
             this.groupBoxVolume = new DarkUI.Controls.DarkGroupBox();
             this.checkBoxSync = new DarkUI.Controls.DarkCheckBox();
-            this.volumeMeterRight = new ChromaWave.Views.VolumeMeter();
+            this.volumeMeterRight = new ChromaWave.Views.VolumeMeterVisualizer();
             this.trackBarAmplitudeRight = new System.Windows.Forms.TrackBar();
             this.labelAmplitude = new DarkUI.Controls.DarkLabel();
             this.trackBarAmplitudeLeft = new System.Windows.Forms.TrackBar();
             this.labelChannelRight = new DarkUI.Controls.DarkLabel();
             this.labelChannelLeft = new DarkUI.Controls.DarkLabel();
-            this.volumeMeterLeft = new ChromaWave.Views.VolumeMeter();
+            this.volumeMeterLeft = new ChromaWave.Views.VolumeMeterVisualizer();
             this.darkGroupBox1 = new DarkUI.Controls.DarkGroupBox();
             this.darkLabel7 = new DarkUI.Controls.DarkLabel();
-            this.volumeMeter8 = new ChromaWave.Views.VolumeMeter();
+            this.panelRenderTab = new System.Windows.Forms.Panel();
+            this.volumeMeter8 = new ChromaWave.Views.VolumeMeterVisualizer();
             this.darkLabel6 = new DarkUI.Controls.DarkLabel();
-            this.volumeMeter7 = new ChromaWave.Views.VolumeMeter();
+            this.volumeMeter7 = new ChromaWave.Views.VolumeMeterVisualizer();
             this.darkLabel5 = new DarkUI.Controls.DarkLabel();
-            this.volumeMeter6 = new ChromaWave.Views.VolumeMeter();
+            this.volumeMeter6 = new ChromaWave.Views.VolumeMeterVisualizer();
             this.darkLabel4 = new DarkUI.Controls.DarkLabel();
             this.darkLabel3 = new DarkUI.Controls.DarkLabel();
             this.darkLabel2 = new DarkUI.Controls.DarkLabel();
             this.darkLabel1 = new DarkUI.Controls.DarkLabel();
             this.labelFrequency2k = new DarkUI.Controls.DarkLabel();
-            this.volumeMeter5 = new ChromaWave.Views.VolumeMeter();
-            this.volumeMeter4 = new ChromaWave.Views.VolumeMeter();
-            this.volumeMeter3 = new ChromaWave.Views.VolumeMeter();
-            this.volumeMeter2 = new ChromaWave.Views.VolumeMeter();
-            this.volumeMeter1 = new ChromaWave.Views.VolumeMeter();
-            this.volumeMeterFrequency500 = new ChromaWave.Views.VolumeMeter();
+            this.volumeMeter5 = new ChromaWave.Views.VolumeMeterVisualizer();
+            this.volumeMeter4 = new ChromaWave.Views.VolumeMeterVisualizer();
+            this.volumeMeter3 = new ChromaWave.Views.VolumeMeterVisualizer();
+            this.volumeMeter2 = new ChromaWave.Views.VolumeMeterVisualizer();
+            this.volumeMeter1 = new ChromaWave.Views.VolumeMeterVisualizer();
+            this.volumeMeterFrequency500 = new ChromaWave.Views.VolumeMeterVisualizer();
             this.labelFrequency500 = new DarkUI.Controls.DarkLabel();
             this.labelFrequency1k = new DarkUI.Controls.DarkLabel();
-            this.volumeMeterFrequency1K = new ChromaWave.Views.VolumeMeter();
+            this.volumeMeterFrequency1K = new ChromaWave.Views.VolumeMeterVisualizer();
             this.timerUIUpdate = new System.Windows.Forms.Timer(this.components);
             this.groupBoxChromaVisualizer = new DarkUI.Controls.DarkGroupBox();
-            this.chromaMusicVisualizer = new ChromaWave.Views.ChromaVisualizer();
-            this.groupBoxDevices = new DarkUI.Controls.DarkGroupBox();
             this.labelSaturation = new DarkUI.Controls.DarkLabel();
             this.trackBarSaturation = new System.Windows.Forms.TrackBar();
             this.darkLabel8 = new DarkUI.Controls.DarkLabel();
@@ -76,15 +75,24 @@
             this.labelWaveDirection = new DarkUI.Controls.DarkLabel();
             this.comboBoxWaveDirection = new DarkUI.Controls.DarkComboBox();
             this.chromaVisualizer = new ChromaWave.Views.ChromaVisualizer();
+            this.chromaMusicVisualizer = new ChromaWave.Views.ChromaVisualizer();
             this.buttonSave = new DarkUI.Controls.DarkButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelMainHeader = new System.Windows.Forms.Panel();
+            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
+            this.groupBoxDevices = new DarkUI.Controls.DarkGroupBox();
+            this.labelBy = new DarkUI.Controls.DarkLabel();
             this.groupBoxVolume.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAmplitudeRight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAmplitudeLeft)).BeginInit();
             this.darkGroupBox1.SuspendLayout();
             this.groupBoxChromaVisualizer.SuspendLayout();
-            this.groupBoxDevices.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSaturation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarBrightness)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.panelMainHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
+            this.groupBoxDevices.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboBoxAudioDevices
@@ -101,7 +109,7 @@
             this.comboBoxAudioDevices.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxAudioDevices.ForeColor = System.Drawing.Color.Gainsboro;
             this.comboBoxAudioDevices.FormattingEnabled = true;
-            this.comboBoxAudioDevices.Location = new System.Drawing.Point(96, 19);
+            this.comboBoxAudioDevices.Location = new System.Drawing.Point(104, 14);
             this.comboBoxAudioDevices.Name = "comboBoxAudioDevices";
             this.comboBoxAudioDevices.Size = new System.Drawing.Size(462, 21);
             this.comboBoxAudioDevices.TabIndex = 16;
@@ -111,7 +119,7 @@
             // 
             // buttonReload
             // 
-            this.buttonReload.Location = new System.Drawing.Point(569, 19);
+            this.buttonReload.Location = new System.Drawing.Point(577, 14);
             this.buttonReload.Name = "buttonReload";
             this.buttonReload.Padding = new System.Windows.Forms.Padding(5);
             this.buttonReload.Size = new System.Drawing.Size(75, 21);
@@ -123,7 +131,7 @@
             // 
             this.labelSource.AutoSize = true;
             this.labelSource.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.labelSource.Location = new System.Drawing.Point(12, 22);
+            this.labelSource.Location = new System.Drawing.Point(20, 17);
             this.labelSource.Name = "labelSource";
             this.labelSource.Size = new System.Drawing.Size(78, 13);
             this.labelSource.TabIndex = 18;
@@ -142,7 +150,7 @@
             this.groupBoxVolume.Controls.Add(this.labelChannelLeft);
             this.groupBoxVolume.Controls.Add(this.volumeMeterLeft);
             this.groupBoxVolume.ForeColor = System.Drawing.Color.Gainsboro;
-            this.groupBoxVolume.Location = new System.Drawing.Point(15, 60);
+            this.groupBoxVolume.Location = new System.Drawing.Point(23, 41);
             this.groupBoxVolume.Name = "groupBoxVolume";
             this.groupBoxVolume.Size = new System.Drawing.Size(166, 345);
             this.groupBoxVolume.TabIndex = 19;
@@ -253,6 +261,7 @@
             this.darkGroupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.darkGroupBox1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
             this.darkGroupBox1.Controls.Add(this.darkLabel7);
+            this.darkGroupBox1.Controls.Add(this.panelRenderTab);
             this.darkGroupBox1.Controls.Add(this.volumeMeter8);
             this.darkGroupBox1.Controls.Add(this.darkLabel6);
             this.darkGroupBox1.Controls.Add(this.volumeMeter7);
@@ -273,7 +282,7 @@
             this.darkGroupBox1.Controls.Add(this.labelFrequency1k);
             this.darkGroupBox1.Controls.Add(this.volumeMeterFrequency1K);
             this.darkGroupBox1.ForeColor = System.Drawing.Color.Gainsboro;
-            this.darkGroupBox1.Location = new System.Drawing.Point(187, 60);
+            this.darkGroupBox1.Location = new System.Drawing.Point(195, 41);
             this.darkGroupBox1.Name = "darkGroupBox1";
             this.darkGroupBox1.Size = new System.Drawing.Size(457, 345);
             this.darkGroupBox1.TabIndex = 23;
@@ -290,6 +299,13 @@
             this.darkLabel7.Size = new System.Drawing.Size(33, 12);
             this.darkLabel7.TabIndex = 19;
             this.darkLabel7.Text = "16KHz";
+            // 
+            // panelRenderTab
+            // 
+            this.panelRenderTab.Location = new System.Drawing.Point(34, 91);
+            this.panelRenderTab.Name = "panelRenderTab";
+            this.panelRenderTab.Size = new System.Drawing.Size(417, 190);
+            this.panelRenderTab.TabIndex = 29;
             // 
             // volumeMeter8
             // 
@@ -539,7 +555,6 @@
             // 
             this.groupBoxChromaVisualizer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.groupBoxChromaVisualizer.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            this.groupBoxChromaVisualizer.Controls.Add(this.groupBoxDevices);
             this.groupBoxChromaVisualizer.Controls.Add(this.labelSaturation);
             this.groupBoxChromaVisualizer.Controls.Add(this.trackBarSaturation);
             this.groupBoxChromaVisualizer.Controls.Add(this.darkLabel8);
@@ -550,45 +565,12 @@
             this.groupBoxChromaVisualizer.Controls.Add(this.comboBoxWaveDirection);
             this.groupBoxChromaVisualizer.Controls.Add(this.chromaVisualizer);
             this.groupBoxChromaVisualizer.ForeColor = System.Drawing.Color.Gainsboro;
-            this.groupBoxChromaVisualizer.Location = new System.Drawing.Point(15, 411);
+            this.groupBoxChromaVisualizer.Location = new System.Drawing.Point(23, 392);
             this.groupBoxChromaVisualizer.Name = "groupBoxChromaVisualizer";
-            this.groupBoxChromaVisualizer.Size = new System.Drawing.Size(629, 383);
+            this.groupBoxChromaVisualizer.Size = new System.Drawing.Size(629, 148);
             this.groupBoxChromaVisualizer.TabIndex = 25;
             this.groupBoxChromaVisualizer.TabStop = false;
             this.groupBoxChromaVisualizer.Text = "Vizualizer";
-            // 
-            // chromaMusicVisualizer
-            // 
-            this.chromaMusicVisualizer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.chromaMusicVisualizer.BackColor = System.Drawing.Color.White;
-            this.chromaMusicVisualizer.Brightness = 100;
-            this.chromaMusicVisualizer.Direction = ChromaWave.Views.ChromaVisualizerDirection.Forward;
-            this.chromaMusicVisualizer.Location = new System.Drawing.Point(11, 19);
-            this.chromaMusicVisualizer.Name = "chromaMusicVisualizer";
-            this.chromaMusicVisualizer.Offset = 0.902F;
-            this.chromaMusicVisualizer.Opactity = 0.1F;
-            this.chromaMusicVisualizer.Saturation = 50;
-            this.chromaMusicVisualizer.Size = new System.Drawing.Size(570, 196);
-            this.chromaMusicVisualizer.SyncronizeTo = null;
-            this.chromaMusicVisualizer.TabIndex = 33;
-            this.chromaMusicVisualizer.Velocity = ChromaWave.Views.ChromaVisualizerVelocity.Slow;
-            // 
-            // groupBoxDevices
-            // 
-            this.groupBoxDevices.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBoxDevices.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.groupBoxDevices.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            this.groupBoxDevices.Controls.Add(this.chromaMusicVisualizer);
-            this.groupBoxDevices.ForeColor = System.Drawing.Color.Gainsboro;
-            this.groupBoxDevices.Location = new System.Drawing.Point(19, 136);
-            this.groupBoxDevices.Name = "groupBoxDevices";
-            this.groupBoxDevices.Size = new System.Drawing.Size(593, 227);
-            this.groupBoxDevices.TabIndex = 24;
-            this.groupBoxDevices.TabStop = false;
-            this.groupBoxDevices.Text = "Devices";
             // 
             // labelSaturation
             // 
@@ -707,7 +689,7 @@
             this.chromaVisualizer.Direction = ChromaWave.Views.ChromaVisualizerDirection.Forward;
             this.chromaVisualizer.Location = new System.Drawing.Point(19, 98);
             this.chromaVisualizer.Name = "chromaVisualizer";
-            this.chromaVisualizer.Offset = 0.07399996F;
+            this.chromaVisualizer.Offset = 0.974F;
             this.chromaVisualizer.Opactity = 1F;
             this.chromaVisualizer.Saturation = 50;
             this.chromaVisualizer.Size = new System.Drawing.Size(593, 27);
@@ -715,9 +697,27 @@
             this.chromaVisualizer.TabIndex = 24;
             this.chromaVisualizer.Velocity = ChromaWave.Views.ChromaVisualizerVelocity.Slow;
             // 
+            // chromaMusicVisualizer
+            // 
+            this.chromaMusicVisualizer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.chromaMusicVisualizer.BackColor = System.Drawing.Color.White;
+            this.chromaMusicVisualizer.Brightness = 100;
+            this.chromaMusicVisualizer.Direction = ChromaWave.Views.ChromaVisualizerDirection.Forward;
+            this.chromaMusicVisualizer.Location = new System.Drawing.Point(6, 13);
+            this.chromaMusicVisualizer.Name = "chromaMusicVisualizer";
+            this.chromaMusicVisualizer.Offset = 1F;
+            this.chromaMusicVisualizer.Opactity = 0.1F;
+            this.chromaMusicVisualizer.Saturation = 50;
+            this.chromaMusicVisualizer.Size = new System.Drawing.Size(729, 560);
+            this.chromaMusicVisualizer.SyncronizeTo = null;
+            this.chromaMusicVisualizer.TabIndex = 33;
+            this.chromaMusicVisualizer.Velocity = ChromaWave.Views.ChromaVisualizerVelocity.Slow;
+            // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(518, 800);
+            this.buttonSave.Location = new System.Drawing.Point(526, 546);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Padding = new System.Windows.Forms.Padding(5);
             this.buttonSave.Size = new System.Drawing.Size(126, 23);
@@ -725,22 +725,77 @@
             this.buttonSave.Text = "Save Settings";
             this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.buttonReload);
+            this.panel1.Controls.Add(this.buttonSave);
+            this.panel1.Controls.Add(this.comboBoxAudioDevices);
+            this.panel1.Controls.Add(this.groupBoxChromaVisualizer);
+            this.panel1.Controls.Add(this.labelSource);
+            this.panel1.Controls.Add(this.darkGroupBox1);
+            this.panel1.Controls.Add(this.groupBoxVolume);
+            this.panel1.Location = new System.Drawing.Point(755, 50);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(666, 579);
+            this.panel1.TabIndex = 27;
+            // 
+            // panelMainHeader
+            // 
+            this.panelMainHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.panelMainHeader.Controls.Add(this.labelBy);
+            this.panelMainHeader.Controls.Add(this.pictureBoxLogo);
+            this.panelMainHeader.Location = new System.Drawing.Point(-4, -3);
+            this.panelMainHeader.Name = "panelMainHeader";
+            this.panelMainHeader.Size = new System.Drawing.Size(1440, 47);
+            this.panelMainHeader.TabIndex = 28;
+            // 
+            // pictureBoxLogo
+            // 
+            this.pictureBoxLogo.Image = global::ChromaWave.Resource.Icon;
+            this.pictureBoxLogo.Location = new System.Drawing.Point(12, 7);
+            this.pictureBoxLogo.Name = "pictureBoxLogo";
+            this.pictureBoxLogo.Size = new System.Drawing.Size(39, 36);
+            this.pictureBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxLogo.TabIndex = 3;
+            this.pictureBoxLogo.TabStop = false;
+            // 
+            // groupBoxDevices
+            // 
+            this.groupBoxDevices.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.groupBoxDevices.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.groupBoxDevices.Controls.Add(this.chromaMusicVisualizer);
+            this.groupBoxDevices.ForeColor = System.Drawing.Color.Gainsboro;
+            this.groupBoxDevices.Location = new System.Drawing.Point(8, 50);
+            this.groupBoxDevices.Name = "groupBoxDevices";
+            this.groupBoxDevices.Size = new System.Drawing.Size(741, 579);
+            this.groupBoxDevices.TabIndex = 34;
+            this.groupBoxDevices.TabStop = false;
+            this.groupBoxDevices.Text = "Devices";
+            // 
+            // labelBy
+            // 
+            this.labelBy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelBy.AutoSize = true;
+            this.labelBy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.labelBy.Location = new System.Drawing.Point(1350, 30);
+            this.labelBy.Name = "labelBy";
+            this.labelBy.Size = new System.Drawing.Size(87, 13);
+            this.labelBy.TabIndex = 4;
+            this.labelBy.Text = "by Alisson Rubim";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.ClientSize = new System.Drawing.Size(658, 835);
-            this.Controls.Add(this.buttonSave);
-            this.Controls.Add(this.groupBoxChromaVisualizer);
-            this.Controls.Add(this.darkGroupBox1);
-            this.Controls.Add(this.groupBoxVolume);
-            this.Controls.Add(this.labelSource);
-            this.Controls.Add(this.buttonReload);
-            this.Controls.Add(this.comboBoxAudioDevices);
+            this.ClientSize = new System.Drawing.Size(1433, 638);
+            this.Controls.Add(this.groupBoxDevices);
+            this.Controls.Add(this.panelMainHeader);
+            this.Controls.Add(this.panel1);
             this.Name = "FormMain";
             this.Text = "ChromaWave";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
+            this.Load += new System.EventHandler(this.FormMain_Load);
             this.groupBoxVolume.ResumeLayout(false);
             this.groupBoxVolume.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAmplitudeRight)).EndInit();
@@ -749,11 +804,15 @@
             this.darkGroupBox1.PerformLayout();
             this.groupBoxChromaVisualizer.ResumeLayout(false);
             this.groupBoxChromaVisualizer.PerformLayout();
-            this.groupBoxDevices.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSaturation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarBrightness)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panelMainHeader.ResumeLayout(false);
+            this.panelMainHeader.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
+            this.groupBoxDevices.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -762,36 +821,36 @@
         private DarkUI.Controls.DarkButton buttonReload;
         private DarkUI.Controls.DarkLabel labelSource;
         private DarkUI.Controls.DarkGroupBox groupBoxVolume;
-        private Views.VolumeMeter volumeMeterLeft;
+        private Views.VolumeMeterVisualizer volumeMeterLeft;
         private System.Windows.Forms.TrackBar trackBarAmplitudeLeft;
         private DarkUI.Controls.DarkLabel labelChannelRight;
-        private Views.VolumeMeter volumeMeterRight;
+        private Views.VolumeMeterVisualizer volumeMeterRight;
         private DarkUI.Controls.DarkLabel labelChannelLeft;
         private DarkUI.Controls.DarkLabel labelAmplitude;
         private System.Windows.Forms.TrackBar trackBarAmplitudeRight;
         private DarkUI.Controls.DarkGroupBox darkGroupBox1;
-        private Views.VolumeMeter volumeMeterFrequency500;
+        private Views.VolumeMeterVisualizer volumeMeterFrequency500;
         private DarkUI.Controls.DarkLabel labelFrequency500;
         private DarkUI.Controls.DarkLabel labelFrequency1k;
-        private Views.VolumeMeter volumeMeterFrequency1K;
+        private Views.VolumeMeterVisualizer volumeMeterFrequency1K;
         private DarkUI.Controls.DarkCheckBox checkBoxSync;
         private Views.ChromaVisualizer chromaVisualizer;
         private DarkUI.Controls.DarkLabel darkLabel7;
-        private Views.VolumeMeter volumeMeter8;
+        private Views.VolumeMeterVisualizer volumeMeter8;
         private DarkUI.Controls.DarkLabel darkLabel6;
-        private Views.VolumeMeter volumeMeter7;
+        private Views.VolumeMeterVisualizer volumeMeter7;
         private DarkUI.Controls.DarkLabel darkLabel5;
-        private Views.VolumeMeter volumeMeter6;
+        private Views.VolumeMeterVisualizer volumeMeter6;
         private DarkUI.Controls.DarkLabel darkLabel4;
         private DarkUI.Controls.DarkLabel darkLabel3;
         private DarkUI.Controls.DarkLabel darkLabel2;
         private DarkUI.Controls.DarkLabel darkLabel1;
         private DarkUI.Controls.DarkLabel labelFrequency2k;
-        private Views.VolumeMeter volumeMeter5;
-        private Views.VolumeMeter volumeMeter4;
-        private Views.VolumeMeter volumeMeter3;
-        private Views.VolumeMeter volumeMeter2;
-        private Views.VolumeMeter volumeMeter1;
+        private Views.VolumeMeterVisualizer volumeMeter5;
+        private Views.VolumeMeterVisualizer volumeMeter4;
+        private Views.VolumeMeterVisualizer volumeMeter3;
+        private Views.VolumeMeterVisualizer volumeMeter2;
+        private Views.VolumeMeterVisualizer volumeMeter1;
         private System.Windows.Forms.Timer timerUIUpdate;
         private DarkUI.Controls.DarkGroupBox groupBoxChromaVisualizer;
         private DarkUI.Controls.DarkComboBox comboBoxWaveVelocity;
@@ -804,7 +863,12 @@
         private System.Windows.Forms.TrackBar trackBarSaturation;
         private Views.ChromaVisualizer chromaMusicVisualizer;
         private DarkUI.Controls.DarkButton buttonSave;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelMainHeader;
+        private System.Windows.Forms.Panel panelRenderTab;
         private DarkUI.Controls.DarkGroupBox groupBoxDevices;
+        private System.Windows.Forms.PictureBox pictureBoxLogo;
+        private DarkUI.Controls.DarkLabel labelBy;
     }
 }
 

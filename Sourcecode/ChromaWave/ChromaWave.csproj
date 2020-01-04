@@ -85,59 +85,74 @@
     <Compile Include="Helpers\SampleAggregatorHelper.cs" />
     <Compile Include="Models\AudioSample.cs" />
     <Compile Include="Models\Device.cs" />
-    <Compile Include="Views\Forms\FormDeviceDetails.cs">
+    <Compile Include="Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Forms\DeviceDetails\FormDeviceDetails.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Forms\FormDeviceDetails.Designer.cs">
+    <Compile Include="Views\Forms\DeviceDetails\FormDeviceDetails.Designer.cs">
       <DependentUpon>FormDeviceDetails.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Visuals\Led.cs">
+    <Compile Include="Views\Components\Visuals\Led.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Models\Settings.cs" />
-    <Compile Include="Views\UserControls\ChromaVisualizer.cs">
+    <Compile Include="Views\Components\ChromaVisualizer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\ChromaVisualizer.Designer.cs">
+    <Compile Include="Views\Components\ChromaVisualizer.Designer.cs">
       <DependentUpon>ChromaVisualizer.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ColorHelper.cs" />
-    <Compile Include="Views\UserControls\DeviceVisualizer.cs">
+    <Compile Include="Views\Components\DeviceVisualizer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\DeviceVisualizer.Designer.cs">
+    <Compile Include="Views\Components\DeviceVisualizer.Designer.cs">
       <DependentUpon>DeviceVisualizer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\VolumeMeter.cs">
+    <Compile Include="Views\Components\VolumeMeterVisualizer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\VolumeMeter.Designer.cs">
-      <DependentUpon>VolumeMeter.cs</DependentUpon>
+    <Compile Include="Views\Components\VolumeMeterVisualizer.Designer.cs">
+      <DependentUpon>VolumeMeterVisualizer.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\AudioChannelSample.cs" />
     <Compile Include="Models\AudioSource.cs" />
-    <Compile Include="FormMain.cs">
+    <Compile Include="Views\Forms\Main\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormMain.Designer.cs">
+    <Compile Include="Views\Forms\Main\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FormMain.resx">
+    <Compile Include="Views\Forms\Main\Visuals\TabDevices.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Forms\Main\Visuals\TabDevices.Designer.cs">
+      <DependentUpon>TabDevices.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Forms\Main\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Forms\FormDeviceDetails.resx">
+    <EmbeddedResource Include="Views\Forms\DeviceDetails\FormDeviceDetails.resx">
       <DependentUpon>FormDeviceDetails.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\ChromaVisualizer.resx">
+    <EmbeddedResource Include="Views\Components\ChromaVisualizer.resx">
       <DependentUpon>ChromaVisualizer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\DeviceVisualizer.resx">
+    <EmbeddedResource Include="Views\Components\DeviceVisualizer.resx">
       <DependentUpon>DeviceVisualizer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\VolumeMeter.resx">
-      <DependentUpon>VolumeMeter.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Components\VolumeMeterVisualizer.resx">
+      <DependentUpon>VolumeMeterVisualizer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -148,6 +163,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\Forms\Main\Visuals\TabDevices.resx">
+      <DependentUpon>TabDevices.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.manifest" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -163,7 +181,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\Images\Icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">

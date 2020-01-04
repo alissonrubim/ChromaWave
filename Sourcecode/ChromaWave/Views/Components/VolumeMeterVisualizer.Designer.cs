@@ -1,6 +1,6 @@
 ﻿namespace ChromaWave.Views
 {
-    partial class VolumeMeter
+    partial class VolumeMeterVisualizer
     {
         /// <summary> 
         /// Variável de designer necessária.

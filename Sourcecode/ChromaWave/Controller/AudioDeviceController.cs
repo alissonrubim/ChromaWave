@@ -34,15 +34,23 @@ namespace ChromaWave.Controller
                 foreach (WaveOutCapabilities capabilitie in capabilities)
                 {
                     //Find the devices that have the same name. Note: impossible of a device has a same name as other, so compare IndexOf it's not so bad.
-                    if (device.FriendlyName.IndexOf(capabilitie.ProductName) == 0)
+                    try
                     {
-                        audioSources.Add(new AudioDevice()
+                        string deviceName = device.FriendlyName;
+                        if (deviceName.IndexOf(capabilitie.ProductName) == 0)
                         {
-                            Name = device.FriendlyName,
-                            Channels = capabilitie.Channels,
-                            Id = device.ID
-                        });
+                            audioSources.Add(new AudioDevice()
+                            {
+                                Name = device.FriendlyName,
+                                Channels = capabilitie.Channels,
+                                Id = device.ID
+                            });
+                        }
                     }
+                    catch
+                    {
+                        //If gets a exception, that means that the device it's blocked, them is not working
+                    }                    
                 }
             }
             

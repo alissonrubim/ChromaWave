@@ -137,8 +137,7 @@ namespace ChromaWave.Views
 
         public new virtual void Update()
         {
-            if(!isLeftClicked)
-                Invalidate();
+            Invalidate();
         }
     }
 

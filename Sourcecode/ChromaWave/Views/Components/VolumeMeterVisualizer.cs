@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace ChromaWave.Views
 {
     public enum VolumeMeterRenderMethod { Linear, Blocks }
-    public partial class VolumeMeter : UserControl
+    public partial class VolumeMeterVisualizer : UserControl
     {
         private Color pBorderColor = Color.White;
         private int pBorderWidth = 1;
@@ -102,7 +102,7 @@ namespace ChromaWave.Views
         }
         #endregion
 
-        public VolumeMeter()
+        public VolumeMeterVisualizer()
         {
             InitializeComponent();
             this.DoubleBuffered = true;
