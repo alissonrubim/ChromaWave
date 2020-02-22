@@ -12,27 +12,27 @@ using System.Drawing.Imaging;
 
 namespace ChromaWave.Views
 {
-    public enum ChromaVisualizerDirection { Forward, Backward }
-    public enum ChromaVisualizerVelocity { Off, SuperFast, Fast, Medium, Slow, SuperSlow };
+    public enum SpectrumVisualizerDirection { Forward, Backward }
+    public enum SpectrumVisualizerVelocity { Off, SuperFast, Fast, Medium, Slow, SuperSlow };
 
-    public partial class ChromaVisualizer : UserControl
+    public partial class SpectrumVisualizer : UserControl
     {
         private DateTime pLastPaintDateTime;
         private float pStep = 0.01f;
         private int pSaturation = 50;
         private float pOffset = 0f;
-        private ChromaVisualizerDirection pDirection = ChromaVisualizerDirection.Forward;
-        private ChromaVisualizerVelocity pVelocity = ChromaVisualizerVelocity.Slow;
+        private SpectrumVisualizerDirection pDirection = SpectrumVisualizerDirection.Forward;
+        private SpectrumVisualizerVelocity pVelocity = SpectrumVisualizerVelocity.Slow;
         private int pBrightness = 100;
-        private ChromaVisualizer pSyncronizeTo;
+        private SpectrumVisualizer pSyncronizeTo;
         private float pOpacity = 1.0f;
         private Bitmap pCacheBitmap;
 
         #region Properties
         /// <summary>
-        /// When set, all the parameters as Velocity, Direction and OffSet will be copied from the parent ChromaVisualizer
+        /// When set, all the parameters as Velocity, Direction and OffSet will be copied from the parent SpectrumVisualizer
         /// </summary>
-        public ChromaVisualizer SyncronizeTo
+        public SpectrumVisualizer SyncronizeTo
         {
             get
             {
@@ -68,7 +68,7 @@ namespace ChromaWave.Views
             }
         }
 
-        public ChromaVisualizerDirection Direction
+        public SpectrumVisualizerDirection Direction
         {
             get
             {
@@ -80,7 +80,7 @@ namespace ChromaWave.Views
             }
         }
 
-        public ChromaVisualizerVelocity Velocity
+        public SpectrumVisualizerVelocity Velocity
         {
             get
             {
@@ -117,45 +117,48 @@ namespace ChromaWave.Views
         }
         #endregion
 
-        public ChromaVisualizer()
+        public SpectrumVisualizer()
         {
             InitializeComponent();
             this.DoubleBuffered = true;
             this.pLastPaintDateTime = DateTime.Now;
         }
 
-        public Color GetColorAtPosition(Point position)
+        public Bitmap GetRenderedBitmap()
         {
-            if (pCacheBitmap != null)
-            {
-                int x = position.X < 0 ? 0 : position.X;
-                x = x > this.Width ? this.Width - 1 : x;
-                int y = position.Y < 0 ? 0 : position.Y;
-                y = y > this.Height ? this.Height - 1: y;
-                return pCacheBitmap.GetPixel(x, y);
-            }
-            return Color.Black;
+            return this.pCacheBitmap;
         }
 
-        private float GetVelocityMultiplier()
+        public new virtual void Update()
+        {
+            Invalidate();
+        }
+
+        #region Private
+        private float getVelocityMultiplier()
         {
             switch (this.pVelocity)
             {
-                case ChromaVisualizerVelocity.Off:
+                case SpectrumVisualizerVelocity.Off:
                     return 0;
-                case ChromaVisualizerVelocity.SuperSlow:
+                case SpectrumVisualizerVelocity.SuperSlow:
                     return 1/10f;
-                case ChromaVisualizerVelocity.Slow:
+                case SpectrumVisualizerVelocity.Slow:
                     return 1/5f;
-                case ChromaVisualizerVelocity.Medium:
+                case SpectrumVisualizerVelocity.Medium:
                     return 1/2f;
-                case ChromaVisualizerVelocity.Fast:
+                case SpectrumVisualizerVelocity.Fast:
                     return 1f;
-                case ChromaVisualizerVelocity.SuperFast:
+                case SpectrumVisualizerVelocity.SuperFast:
                     return 1/0.3f;
                 default:
                     return 1f;
             }
+        }
+
+        private void generateScpectrum()
+        {
+
         }
 
         private void ChromaVisualizer_Paint(object sender, PaintEventArgs e)
@@ -204,9 +207,9 @@ namespace ChromaWave.Views
             //Calculate my offSet only if I don't have a parent
             if (pSyncronizeTo == null) 
             {
-                float velocity = GetVelocityMultiplier();
+                float velocity = getVelocityMultiplier();
                 TimeSpan timeDiff = DateTime.Now - pLastPaintDateTime;
-                if (pDirection == ChromaVisualizerDirection.Forward)
+                if (pDirection == SpectrumVisualizerDirection.Forward)
                 {
                     pOffset -= pStep * velocity * (timeDiff.Milliseconds / 10);
                     if (pOffset < 0)
@@ -245,10 +248,6 @@ namespace ChromaWave.Views
 
             pLastPaintDateTime = DateTime.Now;
         }
-
-        public new virtual void Update()
-        {
-            Invalidate();
-        }
+        #endregion
     }
 }

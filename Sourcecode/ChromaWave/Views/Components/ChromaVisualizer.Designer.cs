@@ -1,6 +1,6 @@
 ﻿namespace ChromaWave.Views
 {
-    partial class ChromaVisualizer
+    partial class SpectrumVisualizer
     {
         /// <summary> 
         /// Variável de designer necessária.
@@ -35,7 +35,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "ChromaVisualizer";
-            this.Size = new System.Drawing.Size(679, 189);
+            this.Size = new System.Drawing.Size(277, 162);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.ChromaVisualizer_Paint);
             this.ResumeLayout(false);
 

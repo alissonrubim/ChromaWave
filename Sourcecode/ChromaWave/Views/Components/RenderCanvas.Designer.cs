@@ -1,6 +1,6 @@
-﻿namespace ChromaWave.Views.Forms.Visuals
+﻿namespace ChromaWave
 {
-    partial class TabDevices
+    partial class RenderCanvas
     {
         /// <summary> 
         /// Variável de designer necessária.
@@ -28,34 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.renderCanvas = new ChromaWave.RenderCanvas();
             this.SuspendLayout();
             // 
-            // renderCanvas
-            // 
-            this.renderCanvas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.renderCanvas.BackColor = System.Drawing.Color.White;
-            this.renderCanvas.Location = new System.Drawing.Point(3, 3);
-            this.renderCanvas.Name = "renderCanvas";
-            this.renderCanvas.Size = new System.Drawing.Size(657, 467);
-            this.renderCanvas.TabIndex = 0;
-            // 
-            // TabDevices
+            // RenderCanvas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.Controls.Add(this.renderCanvas);
-            this.Name = "TabDevices";
-            this.Size = new System.Drawing.Size(663, 473);
+            this.BackColor = System.Drawing.Color.White;
+            this.Name = "RenderCanvas";
+            this.Size = new System.Drawing.Size(355, 265);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private RenderCanvas renderCanvas;
     }
 }

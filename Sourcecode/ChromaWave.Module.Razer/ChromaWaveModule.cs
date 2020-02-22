@@ -13,6 +13,10 @@ namespace ChromaWave.Module.Razer
     {
         public Module Setup()
         {
+            IChroma chroma = ColoreProvider.CreateNativeAsync().Result;
+            chroma.SetAllAsync(Colore.Data.Color.Red);
+            chroma.Keyboard[Key.A] = Colore.Data.Color.Red;
+            
             Module module = new Module()
             {
                 Name = "Razer"

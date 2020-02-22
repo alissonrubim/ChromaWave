@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ChromaWave.Controller
 {
-    public class DevicesController
+    public class DevicesModulesController
     {
         public List<DeviceModule> DeviceModules = new List<DeviceModule>();
         public void LoadModules()

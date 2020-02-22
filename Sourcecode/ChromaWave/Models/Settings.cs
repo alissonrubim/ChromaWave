@@ -10,8 +10,8 @@ namespace ChromaWave.Models
 {
     public class Settings
     {
-        public ChromaVisualizerVelocity SpectrumVelocity { get; set; } = ChromaVisualizerVelocity.Slow;
-        public ChromaVisualizerDirection SpectrumDirection { get; set; } = ChromaVisualizerDirection.Forward;
+        public SpectrumVisualizerVelocity SpectrumVelocity { get; set; } = SpectrumVisualizerVelocity.Slow;
+        public SpectrumVisualizerDirection SpectrumDirection { get; set; } = SpectrumVisualizerDirection.Forward;
 
         public int SpectrumBrightness { get; set; } = 50;
 

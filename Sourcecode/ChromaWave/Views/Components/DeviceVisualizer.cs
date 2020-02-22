@@ -18,7 +18,7 @@ namespace ChromaWave.Views
         private bool isLeftClicked;
         private List<Panel> LedPanels = new List<Panel>();
         private Device device;
-        private ChromaVisualizer chromaVisualizer;
+        private RenderCanvas renderCanvas;
         public readonly string Id;
         public DeviceVisualizer()
         {
@@ -26,10 +26,10 @@ namespace ChromaWave.Views
             setupEvents();
         }
 
-        public DeviceVisualizer(ChromaVisualizer chromaVisualizer,  Device device): base()
+        public DeviceVisualizer(RenderCanvas renderCanvas,  Device device): base()
         {
             this.DoubleBuffered = true;
-            this.chromaVisualizer = chromaVisualizer;
+            this.renderCanvas = renderCanvas;
             this.device = device;
             this.Id = device.Id;
             InitializeComponent();
@@ -75,7 +75,7 @@ namespace ChromaWave.Views
                 ledPanel.OnGetColor += new Led.PixelGetColorHandler(() =>
                 {
                     Point globalLedLocation = new Point(this.Location.X + led.X, this.Location.Y + led.Y);
-                    return chromaVisualizer.GetColorAtPosition(globalLedLocation);
+                    return renderCanvas.GetColorAtPosition(globalLedLocation);
                 });
                 ledPanel.Size = new Size(8, 8);
                 ledPanel.Location = new Point(pictureBoxIcon.Location.X + led.X - (ledPanel.Size.Width / 2), pictureBoxIcon.Location.Y + led.Y - (ledPanel.Size.Height / 2));

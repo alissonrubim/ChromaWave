@@ -90,6 +90,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Components\RenderCanvas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Components\RenderCanvas.Designer.cs">
+      <DependentUpon>RenderCanvas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\Visuals\Tab.cs" />
     <Compile Include="Views\Forms\DeviceDetails\FormDeviceDetails.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,9 +142,18 @@
     <Compile Include="Views\Forms\Main\Visuals\TabDevices.Designer.cs">
       <DependentUpon>TabDevices.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Forms\Main\Visuals\TabEffects.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Forms\Main\Visuals\TabEffects.Designer.cs">
+      <DependentUpon>TabEffects.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Resource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Components\RenderCanvas.resx">
+      <DependentUpon>RenderCanvas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Forms\Main\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
@@ -165,6 +181,9 @@
     </Compile>
     <EmbeddedResource Include="Views\Forms\Main\Visuals\TabDevices.resx">
       <DependentUpon>TabDevices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Forms\Main\Visuals\TabEffects.resx">
+      <DependentUpon>TabEffects.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.manifest" />
     <None Include="packages.config" />
